@@ -30,7 +30,7 @@ export class StatisticsModal extends Modal {
     contentEl.addClass('p2p-share-statistics-modal');
 
     // Header
-    contentEl.createEl('h2', { text: 'Transfer Statistics' });
+    contentEl.createEl('h2', { text: 'Transfer statistics' });
 
     // Overall stats
     const overallSection = contentEl.createDiv({ cls: 'p2p-share-stats-section' });
@@ -46,7 +46,7 @@ export class StatisticsModal extends Modal {
     // Top peers
     if (this.stats.topPeers.length > 0) {
       const peersSection = contentEl.createDiv({ cls: 'p2p-share-stats-section' });
-      peersSection.createEl('h3', { text: 'Top Peers' });
+      peersSection.createEl('h3', { text: 'Top peers' });
 
       const peersList = peersSection.createDiv({ cls: 'p2p-share-stats-peers' });
       for (const peer of this.stats.topPeers) {

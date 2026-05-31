@@ -72,9 +72,9 @@ export default class P2PSharePlugin extends Plugin {
 
       // Add command to open history
       this.addCommand({
-        id: 'p2p-share-open-history',
+        id: 'open-history',
         name: 'Open share history',
-        callback: () => this.activateHistoryView(),
+        callback: () => void this.activateHistoryView(),
       });
     } catch (error) {
       console.error('[P2P Share] Fatal error during plugin load:', error);
@@ -99,13 +99,13 @@ export default class P2PSharePlugin extends Plugin {
 
     // Add commands
     this.addCommand({
-      id: 'p2p-share-show-peers',
+      id: 'show-peers',
       name: t('command.show-peers'),
       callback: () => this.showPeerModal(),
     });
 
     this.addCommand({
-      id: 'p2p-share-current-file',
+      id: 'share-current-file',
       name: t('command.share-current-file'),
       checkCallback: (checking: boolean) => {
         const file = this.app.workspace.getActiveFile();
@@ -120,27 +120,27 @@ export default class P2PSharePlugin extends Plugin {
     });
 
     this.addCommand({
-      id: 'p2p-share-files',
+      id: 'share-files',
       name: t('command.share-files'),
       callback: () => this.showFilePicker(),
     });
 
     this.addCommand({
-      id: 'p2p-share-reconnect',
+      id: 'reconnect',
       name: t('command.reconnect'),
-      callback: () => this.reconnect(),
+      callback: () => void this.reconnect(),
     });
 
     this.addCommand({
-      id: 'p2p-share-pair-device',
+      id: 'pair-device',
       name: t('command.pair-device'),
       callback: () => this.showPairingModal(),
     });
 
     this.addCommand({
-      id: 'p2p-share-toggle-connection',
+      id: 'toggle-connection',
       name: t('command.toggle-connection'),
-      callback: () => this.toggleConnection(),
+      callback: () => void this.toggleConnection(),
     });
 
     // Register context menu for files
@@ -169,11 +169,11 @@ export default class P2PSharePlugin extends Plugin {
 
     // Connect to server if auto-connect is enabled
     if (this.settings.autoConnect) {
-      this.connectToServer();
+      void this.connectToServer();
     }
   }
 
-  async onunload(): Promise<void> {
+  onunload(): void {
     this.peerManager?.disconnect();
   }
 
@@ -215,7 +215,7 @@ export default class P2PSharePlugin extends Plugin {
 
       // Complete all active transfers
       for (const [peerId] of this.activeTransfers) {
-        this.completeTransfer(peerId, 'completed');
+        void this.completeTransfer(peerId, 'completed');
       }
     });
 
@@ -237,13 +237,13 @@ export default class P2PSharePlugin extends Plugin {
       this.activePairingModal?.setPairKey(data.pairKey, data.roomSecret);
     });
 
-    this.peerManager.on('pair-device-joined', async (data: { roomSecret: string; peerId: string }) => {
+    this.peerManager.on('pair-device-joined', (data: { roomSecret: string; peerId: string }) => {
       // Try to get the peer's display name, fall back to 'Paired device' if not available yet
-      const peerInfo = this.peerManager.getPeerInfo(data.peerId);
-      const displayName = peerInfo?.displayName || 'Paired device';
+      const peerInfo = this.peerManager?.getPeerInfo(data.peerId);
+      const displayName = peerInfo?.name.displayName || peerInfo?.name.deviceName || 'Paired device';
 
       // Save the pairing
-      await this.addPairedDevice(data.roomSecret, displayName);
+      void this.addPairedDevice(data.roomSecret, displayName);
 
       this.activePairingModal?.setPairingSuccess(data.roomSecret, displayName);
       new Notice(t('notice.device-paired'));
@@ -257,15 +257,15 @@ export default class P2PSharePlugin extends Plugin {
       this.activePairingModal?.setPairingCanceled();
     });
 
-    this.peerManager.on('secret-room-deleted', async (roomSecret: string) => {
+    this.peerManager.on('secret-room-deleted', (roomSecret: string) => {
       // Other device unpaired - remove from our list
-      await this.removePairedDevice(roomSecret);
+      void this.removePairedDevice(roomSecret);
       new Notice(t('notice.device-removed'));
     });
 
-    this.peerManager.on('paired-device-identified', async (data: { roomSecret: string; displayName: string }) => {
+    this.peerManager.on('paired-device-identified', (data: { roomSecret: string; displayName: string }) => {
       // Update the paired device name now that we know it
-      await this.updatePairedDeviceName(data.roomSecret, data.displayName);
+      void this.updatePairedDeviceName(data.roomSecret, data.displayName);
 
       // Also update the pairing modal if it's still open showing this device
       if (this.activePairingModal) {
@@ -273,11 +273,11 @@ export default class P2PSharePlugin extends Plugin {
       }
     });
 
-    this.peerManager.on('peer-name-changed', async (data: { peerId: string; displayName: string }) => {
+    this.peerManager.on('peer-name-changed', (data: { peerId: string; displayName: string }) => {
       logger.debug('Peer name changed', data);
 
       // Update paired device name if applicable
-      await this.updatePairedDeviceNameIfMatched(data.peerId, data.displayName);
+      void this.updatePairedDeviceNameIfMatched(data.peerId, data.displayName);
 
       // Update active modals if they exist
       this.activeTransferModal?.updatePeerName?.(data.displayName);
@@ -293,8 +293,6 @@ export default class P2PSharePlugin extends Plugin {
     this.peerManager.on('transfer-canceled', (peerId: string) => {
       logger.debug('Transfer canceled by sender');
 
-      const wasShowingIncomingModal = !!this.activeIncomingTransferModal;
-
       // Close the incoming transfer modal (accept/decline) if it's open
       if (this.activeIncomingTransferModal) {
         this.activeIncomingTransferModal.close();
@@ -309,7 +307,7 @@ export default class P2PSharePlugin extends Plugin {
 
       // Complete the transfer as cancelled by sender
       if (this.activeTransfers.has(peerId)) {
-        this.completeTransfer(peerId, 'cancelled', 'Transfer cancelled by sender');
+        void this.completeTransfer(peerId, 'cancelled', 'Transfer cancelled by sender');
       }
 
       new Notice(t('notice.transfer-cancelled-by-sender'));
@@ -360,9 +358,9 @@ export default class P2PSharePlugin extends Plugin {
 
     // Set icon color based on connection status
     if (isConnected) {
-      iconContainer.style.color = 'var(--text-success)';
+      iconContainer.addClass('p2p-share-status-connected');
     } else {
-      iconContainer.style.color = 'var(--text-error)';
+      iconContainer.addClass('p2p-share-status-disconnected');
     }
 
     // Add peer count text
@@ -389,7 +387,7 @@ export default class P2PSharePlugin extends Plugin {
   private showFilePicker(targetPeerId?: string): void {
     new FilePickerModal(this.app, (files, folders) => {
       if (targetPeerId) {
-        this.sendToPeer(targetPeerId, files, folders);
+        void this.sendToPeer(targetPeerId, files, folders);
       } else {
         this.shareFiles(files, folders);
       }
@@ -403,9 +401,9 @@ export default class P2PSharePlugin extends Plugin {
       this.app,
       this.peerManager,
       (peerId) => {
-        this.sendToPeer(peerId, files, folders);
+        void this.sendToPeer(peerId, files, folders);
       },
-      () => this.toggleConnection(),
+      () => void this.toggleConnection(),
       this.settings.pairedDevices
     ).open();
   }
@@ -417,9 +415,9 @@ export default class P2PSharePlugin extends Plugin {
       this.app,
       this.peerManager,
       (peerId) => {
-        this.sendToPeer(peerId, [], [folder]);
+        void this.sendToPeer(peerId, [], [folder]);
       },
-      () => this.toggleConnection(),
+      () => void this.toggleConnection(),
       this.settings.pairedDevices
     ).open();
   }
@@ -474,7 +472,7 @@ export default class P2PSharePlugin extends Plugin {
       () => {
         // Cancel callback - notify the receiver
         this.peerManager?.cancelTransfer(peerId);
-        this.completeTransfer(peerId, 'cancelled');
+        void this.completeTransfer(peerId, 'cancelled');
         new Notice(t('notice.transfer-cancelled'));
       }
     );
@@ -487,10 +485,11 @@ export default class P2PSharePlugin extends Plugin {
       await this.peerManager.sendFilesToPeer(peerId, nonEmptyFiles);
       // Success is tracked by transfer-complete event
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       logger.error('Error sending files', error);
-      this.activeTransferModal?.setError((error as Error).message);
-      this.completeTransfer(peerId, 'failed', (error as Error).message);
-      new Notice(t('notice.error-sending', (error as Error).message));
+      this.activeTransferModal?.setError(errorMessage);
+      void this.completeTransfer(peerId, 'failed', errorMessage);
+      new Notice(t('notice.error-sending', errorMessage));
     }
   }
 
@@ -513,7 +512,7 @@ export default class P2PSharePlugin extends Plugin {
     // Show system notification if enabled (and not auto-accepting)
     if (this.settings.useSystemNotifications && !pairedDevice?.autoAccept) {
       const totalSizeFormatted = this.formatSize(data.totalSize);
-      this.showSystemNotification(peerName, data.files.length, totalSizeFormatted);
+      void this.showSystemNotification(peerName, data.files.length, totalSizeFormatted);
     }
 
     // Option C: If auto-accept is enabled, skip the accept modal and go straight to progress
@@ -531,7 +530,7 @@ export default class P2PSharePlugin extends Plugin {
         peerName,
         () => {
           this.peerManager?.rejectTransfer(data.peerId);
-          this.completeTransfer(data.peerId, 'cancelled');
+          void this.completeTransfer(data.peerId, 'cancelled');
         }
       );
       this.activeTransferModal.open();
@@ -546,7 +545,7 @@ export default class P2PSharePlugin extends Plugin {
       data.files,
       peerName,
       data.totalSize,
-      async (enableAutoAccept: boolean) => {
+      (enableAutoAccept: boolean) => {
         // Clear the incoming modal reference
         this.activeIncomingTransferModal = null;
 
@@ -555,7 +554,7 @@ export default class P2PSharePlugin extends Plugin {
 
         // Update auto-accept setting if checkbox was checked
         if (enableAutoAccept && pairedDevice) {
-          await this.updatePairedDeviceAutoAccept(pairedDevice.roomSecret, true);
+          void this.updatePairedDeviceAutoAccept(pairedDevice.roomSecret, true);
         }
 
         // Show progress modal
@@ -566,7 +565,7 @@ export default class P2PSharePlugin extends Plugin {
           peerName,
           () => {
             this.peerManager?.rejectTransfer(data.peerId);
-            this.completeTransfer(data.peerId, 'cancelled');
+            void this.completeTransfer(data.peerId, 'cancelled');
           }
         );
         this.activeTransferModal.open();
@@ -579,7 +578,7 @@ export default class P2PSharePlugin extends Plugin {
         this.peerManager?.rejectTransfer(data.peerId);
 
         // Complete transfer as failed
-        this.completeTransfer(data.peerId, 'failed', 'Transfer declined');
+        void this.completeTransfer(data.peerId, 'failed', 'Transfer declined');
       },
       pairedDevice?.roomSecret || null,
       pairedDevice?.autoAccept || false
@@ -697,8 +696,8 @@ export default class P2PSharePlugin extends Plugin {
       onCancel: () => {
         this.peerManager?.pairDeviceCancel();
       },
-      onSuccess: async (roomSecret: string, peerDisplayName: string) => {
-        await this.addPairedDevice(roomSecret, peerDisplayName);
+      onSuccess: (roomSecret: string, peerDisplayName: string) => {
+        void this.addPairedDevice(roomSecret, peerDisplayName);
       },
     });
     this.activePairingModal.open();
@@ -819,13 +818,14 @@ export default class P2PSharePlugin extends Plugin {
     );
 
     // Add custom class to scope CSS styling
-    menu.dom.addClass('p2p-share-status-bar-menu');
+    (menu as Menu & { dom: HTMLElement }).dom.addClass('p2p-share-status-bar-menu');
 
     menu.showAtMouseEvent(e);
   }
 
   async loadSettings(): Promise<void> {
-    this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+    const loaded = await this.loadData() as Partial<P2PShareSettings> | null;
+    this.settings = Object.assign({}, DEFAULT_SETTINGS, loaded ?? {});
 
     // Migration: Add autoAccept field to existing paired devices
     let needsSave = false;
@@ -865,7 +865,7 @@ export default class P2PSharePlugin extends Plugin {
 
     // Reveal the leaf (expand sidebar if needed)
     if (leaf) {
-      workspace.revealLeaf(leaf);
+      workspace.setActiveLeaf(leaf);
     }
   }
 

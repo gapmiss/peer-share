@@ -101,7 +101,7 @@ export class SignalingClient extends Events {
           resolve();
         };
 
-        this.ws.onmessage = (event) => {
+        this.ws.onmessage = (event: MessageEvent<string>) => {
           this.handleMessage(event.data);
         };
 
@@ -123,7 +123,7 @@ export class SignalingClient extends Events {
           reject(new Error('WebSocket connection failed - check server URL and ensure the server accepts external connections'));
         };
       } catch (error) {
-        reject(error);
+        reject(error instanceof Error ? error : new Error(String(error)));
       }
     });
   }
@@ -264,10 +264,10 @@ export class SignalingClient extends Events {
 
         case 'peer-left':
           // A peer left the room
-          this.trigger('peer-left', message.peerId as string);
+          this.trigger('peer-left', String(message.peerId));
           break;
 
-        case 'signal':
+        case 'signal': {
           // WebRTC signaling message from another peer
           // sender is an object with id and rtcSupported
           const sender = message.sender as { id: string; rtcSupported: boolean } | undefined;
@@ -276,6 +276,7 @@ export class SignalingClient extends Events {
             ...message,
           });
           break;
+        }
 
         case 'ping':
           // Server keepalive - must respond immediately with pong
@@ -306,12 +307,12 @@ export class SignalingClient extends Events {
 
         case 'pair-device-canceled':
           // Pairing was canceled
-          this.trigger('pair-device-canceled', message.pairKey as string);
+          this.trigger('pair-device-canceled', String(message.pairKey));
           break;
 
         case 'secret-room-deleted':
           // A paired room was deleted (other device unpaired)
-          this.trigger('secret-room-deleted', message.roomSecret as string);
+          this.trigger('secret-room-deleted', String(message.roomSecret));
           break;
 
         default:

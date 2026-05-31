@@ -1,6 +1,19 @@
-import { Events, normalizePath } from 'obsidian';
+import { App, Events } from 'obsidian';
 import type { ShareHistoryEntry, ShareHistoryFile, ShareHistoryDirection, ShareHistoryStatus, ShareHistorySettings } from './types';
 import { logger } from './logger';
+
+interface HistoryData {
+  entries: ShareHistoryEntry[];
+}
+
+interface HistoryImportEntry {
+  id?: string;
+  timestamp?: number;
+  direction?: ShareHistoryDirection;
+  peerName?: string;
+  files?: ShareHistoryFile[];
+  [key: string]: unknown;
+}
 
 /**
  * Manages share history tracking and persistence
@@ -9,9 +22,9 @@ export class ShareHistory extends Events {
   private entries: ShareHistoryEntry[] = [];
   private settings: ShareHistorySettings;
   private dataFilePath: string;
-  private app: any; // Obsidian App type
+  private app: App;
 
-  constructor(app: any, dataFilePath: string, settings: ShareHistorySettings) {
+  constructor(app: App, dataFilePath: string, settings: ShareHistorySettings) {
     super();
     this.app = app;
     this.dataFilePath = dataFilePath;
@@ -26,7 +39,7 @@ export class ShareHistory extends Events {
       const adapter = this.app.vault.adapter;
       if (await adapter.exists(this.dataFilePath)) {
         const data = await adapter.read(this.dataFilePath);
-        const parsed = JSON.parse(data);
+        const parsed = JSON.parse(data) as HistoryData;
         this.entries = parsed.entries || [];
         logger.debug(`Loaded ${this.entries.length} history entries from ${this.dataFilePath}`);
 
@@ -210,8 +223,8 @@ export class ShareHistory extends Events {
    */
   async importFromJson(json: string): Promise<{ success: boolean; imported: number; errors: number }> {
     try {
-      const data = JSON.parse(json);
-      const entries = data.entries || [];
+      const data = JSON.parse(json) as { entries?: HistoryImportEntry[] };
+      const entries = data.entries ?? [];
 
       let imported = 0;
       let errors = 0;
@@ -221,7 +234,7 @@ export class ShareHistory extends Events {
         if (entry.id && entry.timestamp && entry.direction && entry.peerName && entry.files) {
           // Check for duplicates by ID
           if (!this.entries.find(e => e.id === entry.id)) {
-            this.entries.push(entry);
+            this.entries.push(entry as ShareHistoryEntry);
             imported++;
           }
         } else {

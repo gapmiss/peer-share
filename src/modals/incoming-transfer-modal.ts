@@ -73,10 +73,9 @@ export class IncomingTransferModal extends Modal {
 
       if (!showingAll && this.files.length > maxDisplay) {
         const moreButton = fileList.createDiv({
-          cls: 'p2p-share-incoming-more',
+          cls: 'p2p-share-incoming-more clickable',
           text: t('incoming-modal.more-files', this.files.length - maxDisplay),
         });
-        moreButton.style.cursor = 'pointer';
         moreButton.onclick = () => {
           showingAll = true;
           renderFileList();

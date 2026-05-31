@@ -49,8 +49,8 @@ export function t(key: TranslationKey, ...args: (string | number)[]): string {
 
 	// Simple template replacement for {0}, {1}, etc.
 	if (args.length > 0) {
-		return translation.replace(/\{(\d+)\}/g, (match, index) => {
-			const argIndex = parseInt(index);
+		return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
+			const argIndex = parseInt(index, 10);
 			return args[argIndex] !== undefined ? String(args[argIndex]) : match;
 		});
 	}
@@ -99,8 +99,8 @@ export function tp(key: TranslationKey, count: number, ...args: (string | number
 	const allArgs = [count, pluralSuffix, ...args];
 
 	// Replace template variables {0}, {1}, etc.
-	return translation.replace(/\{(\d+)\}/g, (match, index) => {
-		const argIndex = parseInt(index);
+	return translation.replace(/\{(\d+)\}/g, (match: string, index: string) => {
+		const argIndex = parseInt(index, 10);
 		return allArgs[argIndex] !== undefined ? String(allArgs[argIndex]) : match;
 	});
 }

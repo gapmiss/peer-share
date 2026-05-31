@@ -139,7 +139,7 @@ export class PeerManager extends Events {
         this.connections.set(senderId, connection);
       }
 
-      await connection.handleSignal(rest as { sdp?: RTCSessionDescriptionInit; ice?: RTCIceCandidateInit });
+      await connection.handleSignal(rest);
     });
 
     // Device pairing events
@@ -272,7 +272,7 @@ export class PeerManager extends Events {
     if (!connection.isReady()) {
       await new Promise<void>((resolve, reject) => {
         const timeout = window.setTimeout(() => reject(new Error('Connection timeout')), 120000); // 2 minutes
-        connection!.on('channel-open', () => {
+        connection.on('channel-open', () => {
           window.clearTimeout(timeout);
           resolve();
         });

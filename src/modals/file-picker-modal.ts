@@ -77,15 +77,16 @@ export class FilePickerModal extends Modal {
     if (!this.contentContainer) return;
     this.contentContainer.empty();
 
-    const folder =
-      this.currentPath === '/'
-        ? this.app.vault.getRoot()
-        : (this.app.vault.getAbstractFileByPath(this.currentPath.slice(1)) as TFolder);
+    const abstractFile = this.currentPath === '/'
+      ? this.app.vault.getRoot()
+      : this.app.vault.getAbstractFileByPath(this.currentPath.slice(1));
 
-    if (!folder || !(folder instanceof TFolder)) {
+    if (!abstractFile || !(abstractFile instanceof TFolder)) {
       this.contentContainer.createEl('p', { text: 'Folder not found' });
       return;
     }
+
+    const folder = abstractFile;
 
     // Sort: folders first, then files
     const children = [...folder.children].sort((a, b) => {
@@ -114,8 +115,11 @@ export class FilePickerModal extends Modal {
 
     // Checkbox
     const checkbox = label.createEl('input', { type: 'checkbox' });
-    checkbox.checked =
-      file instanceof TFile ? this.selectedFiles.has(file) : this.selectedFolders.has(file as TFolder);
+    checkbox.checked = file instanceof TFile
+      ? this.selectedFiles.has(file)
+      : file instanceof TFolder
+        ? this.selectedFolders.has(file)
+        : false;
 
     checkbox.onchange = () => {
       if (file instanceof TFile) {
@@ -138,8 +142,10 @@ export class FilePickerModal extends Modal {
     const iconContainer = label.createDiv({ cls: 'p2p-share-file-icon' });
     if (file instanceof TFolder) {
       setIcon(iconContainer, 'folder');
+    } else if (file instanceof TFile) {
+      setIcon(iconContainer, this.getFileIcon(file.extension));
     } else {
-      setIcon(iconContainer, this.getFileIcon((file as TFile).extension));
+      setIcon(iconContainer, 'file');
     }
 
     // Name (clickable for folders to navigate)
@@ -230,12 +236,12 @@ export class FilePickerModal extends Modal {
   }
 
   private selectAll(): void {
-    const folder =
-      this.currentPath === '/'
-        ? this.app.vault.getRoot()
-        : (this.app.vault.getAbstractFileByPath(this.currentPath.slice(1)) as TFolder);
+    const abstractFile = this.currentPath === '/'
+      ? this.app.vault.getRoot()
+      : this.app.vault.getAbstractFileByPath(this.currentPath.slice(1));
 
-    if (!folder) return;
+    if (!abstractFile || !(abstractFile instanceof TFolder)) return;
+    const folder = abstractFile;
 
     for (const child of folder.children) {
       if (child instanceof TFile) {

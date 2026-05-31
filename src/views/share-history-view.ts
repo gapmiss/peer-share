@@ -2,7 +2,6 @@ import { ItemView, WorkspaceLeaf, Menu, Notice, TFile, setIcon } from 'obsidian'
 import type { ShareHistoryEntry, ShareHistoryDirection, ShareHistoryStatus } from '../types';
 import type { ShareHistory } from '../share-history';
 import type P2PSharePlugin from '../main';
-import { t } from '../i18n';
 import { ConfirmModal } from '../modals/confirm-modal';
 import { StatisticsModal } from '../modals/statistics-modal';
 
@@ -198,7 +197,7 @@ export class ShareHistoryView extends ItemView {
     clearBtn.onclick = () => {
       this.searchTerm = '';
       searchInput.value = '';
-      clearBtn.style.display = 'none';
+      clearBtn.addClass('p2p-share-hidden');
       searchInput.focus();
       this.updateEntries();
     };
@@ -385,10 +384,10 @@ export class ShareHistoryView extends ItemView {
         e.stopPropagation();
         if (this.expandedEntries.has(entry.id)) {
           this.expandedEntries.delete(entry.id);
-          filesList.style.display = 'none';
+          filesList.addClass('p2p-share-hidden');
         } else {
           this.expandedEntries.add(entry.id);
-          filesList.style.display = 'block';
+          filesList.removeClass('p2p-share-hidden');
         }
       };
 
@@ -672,13 +671,13 @@ export class ShareHistoryView extends ItemView {
       const json = this.history.exportAsJson();
       const blob = new Blob([json], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
+      const a = activeDocument.createElement('a');
       a.href = url;
       a.download = `p2p-share-history-${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(url);
       new Notice('History exported successfully');
-    } catch (error) {
+    } catch {
       new Notice('Failed to export history');
     }
   }
@@ -687,24 +686,26 @@ export class ShareHistoryView extends ItemView {
    * Import history from JSON file
    */
   private async importHistory(): Promise<void> {
-    const input = document.createElement('input');
+    const input = activeDocument.createElement('input');
     input.type = 'file';
     input.accept = 'application/json';
-    input.onchange = async (e) => {
+    input.onchange = (e) => {
       const file = (e.target as HTMLInputElement).files?.[0];
       if (!file) return;
 
-      try {
-        const text = await file.text();
-        const result = await this.history.importFromJson(text);
-        if (result.success) {
-          new Notice(`Imported ${result.imported} entries${result.errors > 0 ? `, ${result.errors} errors` : ''}`);
-        } else {
-          new Notice('Failed to import history');
+      void (async () => {
+        try {
+          const text = await file.text();
+          const result = await this.history.importFromJson(text);
+          if (result.success) {
+            new Notice(`Imported ${result.imported} entries${result.errors > 0 ? `, ${result.errors} errors` : ''}`);
+          } else {
+            new Notice('Failed to import history');
+          }
+        } catch {
+          new Notice('Failed to read history file');
         }
-      } catch (error) {
-        new Notice('Failed to read history file');
-      }
+      })();
     };
     input.click();
   }
@@ -712,14 +713,16 @@ export class ShareHistoryView extends ItemView {
   /**
    * Clear all history with confirmation
    */
-  private async clearAllHistory(): Promise<void> {
+  private clearAllHistory(): void {
     new ConfirmModal(
       this.app,
       'Clear all history?',
       'This will permanently delete all transfer history. This cannot be undone.',
-      async () => {
-        await this.history.clearAll();
-        new Notice('History cleared');
+      () => {
+        void (async () => {
+          await this.history.clearAll();
+          new Notice('History cleared');
+        })();
       },
       'Clear'
     ).open();
@@ -728,7 +731,7 @@ export class ShareHistoryView extends ItemView {
   /**
    * Share files again from a history entry
    */
-  private async shareAgain(entry: ShareHistoryEntry): Promise<void> {
+  private shareAgain(_entry: ShareHistoryEntry): void {
     // TODO: Implement share again functionality
     // This will require access to the vault and file picker
     new Notice('Share again feature coming soon');
@@ -747,7 +750,7 @@ export class ShareHistoryView extends ItemView {
     // Reveal first file
     const file = this.app.vault.getAbstractFileByPath(filesWithPaths[0].path!);
     if (file instanceof TFile) {
-      this.app.workspace.getLeaf(false).openFile(file);
+      void this.app.workspace.getLeaf(false).openFile(file);
     } else {
       new Notice('File not found in vault');
     }

@@ -276,18 +276,19 @@ export class RTCPeer extends Events {
       this.trigger('channel-closed');
     };
 
-    channel.onerror = (error) => {
+    channel.onerror = (error: Event) => {
       // Ignore expected errors from user-initiated connection closures
-      const rtcError = error as RTCErrorEvent;
-      if (rtcError.error?.message?.includes('User-Initiated Abort')) {
-        logger.debug('Data channel closed by user');
-        return;
+      if ('error' in error && error.error instanceof RTCError) {
+        if (error.error.message?.includes('User-Initiated Abort')) {
+          logger.debug('Data channel closed by user');
+          return;
+        }
       }
       logger.error('Data channel error', error);
       this.trigger('error', error);
     };
 
-    channel.onmessage = (event) => {
+    channel.onmessage = (event: MessageEvent<ArrayBuffer | string>) => {
       this.handleIncomingData(event.data);
     };
   }
@@ -373,7 +374,7 @@ export class RTCPeer extends Events {
 
     this.busy = true;
     const file = this.filesQueue.shift()!;
-    this.sendFile(file);
+    void this.sendFile(file);
   }
 
   private async sendFile(file: { metadata: FileMetadata; data: ArrayBuffer }): Promise<void> {
@@ -396,7 +397,7 @@ export class RTCPeer extends Events {
     // Create chunker and start sending
     this.chunker = new FileChunker(
       file.data,
-      (chunk) => this.sendChunk(chunk),
+      (chunk) => void this.sendChunk(chunk),
       (offset) => this.onPartitionEnd(offset)
     );
     this.chunker.nextPartition();
@@ -508,7 +509,7 @@ export class RTCPeer extends Events {
     this.sendJSON(cancelMessage);
   }
 
-  private onFileReceived(data: ArrayBuffer, name: string, mime: string): void {
+  private onFileReceived(data: ArrayBuffer, name: string, _mime: string): void {
     logger.debug(`onFileReceived called for ${name} (${data.byteLength} bytes)`);
 
     if (!this.requestAccepted) {
@@ -569,7 +570,8 @@ export class RTCPeer extends Events {
 
   private handleIncomingData(data: ArrayBuffer | string): void {
     if (typeof data === 'string') {
-      this.handleControlMessage(JSON.parse(data));
+      const parsed = JSON.parse(data) as { type: string; [key: string]: unknown };
+      this.handleControlMessage(parsed);
     } else {
       this.handleChunk(data);
     }

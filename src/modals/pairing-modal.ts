@@ -127,11 +127,11 @@ export class PairingModal extends Modal {
       codeEl.setText(this.formatPairKey(this.pairKey));
 
       // Make code copyable on click
-      codeEl.onclick = () => this.copyPairKey();
+      codeEl.onclick = () => void this.copyPairKey();
       codeEl.onkeydown = (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
-          this.copyPairKey();
+          void this.copyPairKey();
         }
       };
 

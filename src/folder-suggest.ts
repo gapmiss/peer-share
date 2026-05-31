@@ -6,18 +6,18 @@ export class FolderSuggest extends AbstractInputSuggest<string> {
     private folders: string[];
     protected inputEl: HTMLInputElement;
 
-    /**
-     * @param app - App instance
-     * @param inputEl - Input element
-     */
     constructor(app: App, inputEl: HTMLInputElement) {
         super(app, inputEl);
         this.inputEl = inputEl;
 
-        // Get all folders from the vault, including root
-        this.folders = this.app.vault.getAllFolders()
-            .map(folder => folder.path)
-            .sort();
+        // Get all folders from the vault using a compatible method
+        const allFolders: string[] = [];
+        for (const file of this.app.vault.getAllLoadedFiles()) {
+            if (file instanceof TFolder) {
+                allFolders.push(file.path);
+            }
+        }
+        this.folders = allFolders.sort();
 
         // Add root folder option
         if (!this.folders.includes('/')) {

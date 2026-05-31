@@ -55,7 +55,7 @@ export class TransferModal extends Modal {
     const overallContainer = contentEl.createDiv({ cls: 'p2p-share-progress-overall' });
     this.overallProgress = overallContainer.createDiv({ cls: 'p2p-share-progress-bar' });
     const overallFill = this.overallProgress.createDiv({ cls: 'p2p-share-progress-fill' });
-    overallFill.style.width = '0%';
+    overallFill.setCssProps({ '--progress-width': '0%' });
 
     // Status text
     this.statusText = contentEl.createDiv({
@@ -95,9 +95,9 @@ export class TransferModal extends Modal {
 
     const progressBar = item.createDiv({ cls: 'p2p-share-progress-bar' });
     const fill = progressBar.createDiv({ cls: 'p2p-share-progress-fill' });
-    fill.style.width = '0%';
+    fill.setCssProps({ '--progress-width': '0%' });
 
-    const status = item.createDiv({ cls: 'p2p-share-file-progress-status', text: t('transfer-modal.file.pending') });
+    item.createDiv({ cls: 'p2p-share-file-progress-status', text: t('transfer-modal.file.pending') });
   }
 
   updateProgress(progress: TransferProgress): void {
@@ -110,7 +110,7 @@ export class TransferModal extends Modal {
       const fill = item.querySelector('.p2p-share-progress-fill') as HTMLElement;
       const status = item.querySelector('.p2p-share-file-progress-status') as HTMLElement;
       if (fill) {
-        fill.style.width = `${progress.progress * 100}%`;
+        fill.setCssProps({ '--progress-width': `${progress.progress * 100}%` });
       }
       if (status) {
         if (progress.progress >= 1) {
@@ -155,7 +155,7 @@ export class TransferModal extends Modal {
     items?.forEach((item) => {
       const fill = item.querySelector('.p2p-share-progress-fill') as HTMLElement;
       const status = item.querySelector('.p2p-share-file-progress-status') as HTMLElement;
-      if (fill) fill.style.width = '100%';
+      if (fill) fill.setCssProps({ '--progress-width': '100%' });
       if (status) {
         status.setText(t('transfer-modal.file.complete'));
         status.addClass('complete');
@@ -166,7 +166,7 @@ export class TransferModal extends Modal {
     if (this.overallProgress) {
       const fill = this.overallProgress.querySelector('.p2p-share-progress-fill') as HTMLElement;
       if (fill) {
-        fill.style.width = '100%';
+        fill.setCssProps({ '--progress-width': '100%' });
       }
     }
 

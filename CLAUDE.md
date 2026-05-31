@@ -132,7 +132,26 @@ Over the WebRTC data channel, using PairDrop's protocol for compatibility with w
 npm install      # Install dependencies
 npm run dev      # Watch mode for development
 npm run build    # Production build
+npx eslint src/  # Run ESLint (must pass before submission)
 ```
+
+## ESLint Configuration
+
+The project uses `eslint-plugin-obsidianmd` with TypeScript type-checked rules for Obsidian community plugin submission compliance.
+
+**Config**: `eslint.config.mjs` includes:
+- `typescript-eslint` recommendedTypeChecked rules
+- `obsidianmd` recommended rules
+- Custom rules for console usage and unused vars
+
+**Key lint rules to be aware of:**
+- No `console.log` - use `console.debug`, `console.warn`, or `console.error`
+- No floating promises - use `void` or `await`
+- No inline styles - use `setCssProps()` for dynamic styles or CSS classes
+- No TFile/TFolder casts - use `instanceof` checks
+- Command IDs must not include plugin ID (Obsidian adds it automatically)
+- UI text must use sentence case
+- Use `activeDocument`/`activeWindow` instead of `document`/`window`
 
 ## Code Conventions
 
@@ -144,8 +163,33 @@ npm run build    # Production build
 
 ### TypeScript
 - Strict mode enabled
-- Use `instanceof` checks for Obsidian types (TFile, TFolder)
+- Use `instanceof` checks for Obsidian types (TFile, TFolder) - never cast
 - Handle optional chaining for nullable values
+- Prefix unused parameters with `_` (e.g., `_event`)
+- Type `JSON.parse()` results explicitly (e.g., `as MyType`)
+
+### Promises & Async
+- Fire-and-forget promises must use `void` operator: `void this.doAsync()`
+- Async callbacks in event handlers need IIFE wrapper:
+  ```typescript
+  button.onclick = () => {
+    void (async () => {
+      await doSomething();
+    })();
+  };
+  ```
+- Never use async directly in callbacks that expect void return
+
+### Styles & DOM
+- Use `setCssProps()` for dynamic styles: `el.setCssProps({ '--width': '50%' })`
+- Use CSS classes for static styles, not inline `style.property`
+- Use `activeDocument` and `activeWindow` instead of global `document`/`window`
+- Use Obsidian DOM helpers: `createDiv()`, `createSpan()`, `createEl()`
+
+### Commands
+- Command IDs must NOT include plugin ID (Obsidian prefixes automatically)
+- Good: `id: 'show-peers'` → becomes `p2p-share:show-peers`
+- Bad: `id: 'p2p-share-show-peers'` → becomes `p2p-share:p2p-share-show-peers`
 
 ### Logging
 - Use `logger` from `src/logger.ts` (not console.log directly)
@@ -252,6 +296,21 @@ When sender cancels at any point, the receiver's modal automatically closes and 
 
 **Files**: `src/types.ts`, `src/rtc-peer.ts`, `src/peer-manager.ts`, `src/main.ts`, `src/modals/transfer-modal.ts`, `src/i18n/locales/*.ts`
 
+### Command IDs changed (v0.1.25)
+**Breaking Change**: Command IDs were updated to comply with Obsidian plugin guidelines. Users with custom hotkeys will need to reassign them.
+
+| Old ID | New ID |
+|--------|--------|
+| `p2p-share:p2p-share-show-peers` | `p2p-share:show-peers` |
+| `p2p-share:p2p-share-current-file` | `p2p-share:share-current-file` |
+| `p2p-share:p2p-share-files` | `p2p-share:share-files` |
+| `p2p-share:p2p-share-reconnect` | `p2p-share:reconnect` |
+| `p2p-share:p2p-share-pair-device` | `p2p-share:pair-device` |
+| `p2p-share:p2p-share-toggle-connection` | `p2p-share:toggle-connection` |
+| `p2p-share:p2p-share-open-history` | `p2p-share:open-history` |
+
+**Files**: `src/main.ts`
+
 ### Display name not updating on reconnect
 **Problem**: The "You appear as..." text in the peer modal would show stale data when disconnected and wouldn't update when reconnecting to the server.
 
@@ -291,6 +350,11 @@ For detailed security information, see **SECURITY.md**.
 
 ## Testing
 
+### Pre-flight Checks
+1. `npm run build` - must succeed
+2. `npx eslint src/` - must pass with zero errors
+
+### Functional Testing
 1. Run two Obsidian vaults on the same machine
 2. Both should connect to the same signaling server
 3. Peers should appear in each other's peer list
@@ -436,6 +500,7 @@ Each history entry tracks:
 - [x] Share history tracking with search/filter
 - [x] Display name shown in status bar menu
 - [x] Display name updates on reconnect
+- [x] ESLint with obsidianmd plugin for community submission compliance
 - [ ] Share Again feature (re-send files from history)
 - [ ] TURN server support for restrictive networks
 - [ ] Transfer queue for multiple files

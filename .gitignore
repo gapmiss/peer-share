@@ -6,5 +6,4 @@ main.js
 data.json
 share-history.json
 .claude
-.hotreload
 ignore/*

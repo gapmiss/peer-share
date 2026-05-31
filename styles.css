@@ -1,5 +1,10 @@
 /* P2P Share Plugin Styles */
 
+/* Utility classes */
+.p2p-share-hidden {
+  display: none !important;
+}
+
 /* Server Notice */
 .p2p-share-server-notice {
   background-color: var(--background-modifier-error);
@@ -357,6 +362,7 @@
   background-color: var(--interactive-accent);
   border-radius: 4px;
   transition: width 0.2s ease;
+  width: var(--progress-width, 0%);
 }
 
 .p2p-share-transfer-status {
@@ -470,6 +476,7 @@
   font-size: 0.85rem;
   transition: background-color 0.15s ease, color 0.15s ease;
   border-radius: 4px;
+  cursor: pointer;
 }
 
 .p2p-share-incoming-more:hover {

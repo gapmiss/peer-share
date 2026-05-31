@@ -8,8 +8,8 @@ import { t } from './i18n';
 
 export class P2PShareSettingTab extends PluginSettingTab {
   plugin: P2PSharePlugin;
-  private boundRefreshHandler = this.refreshDisplay.bind(this);
-  private boundUpdateConnectionStatus = this.updateConnectionStatus.bind(this);
+  private boundRefreshHandler: () => void;
+  private boundUpdateConnectionStatus: () => void;
   private statusIconEl: HTMLElement | null = null;
   private statusTextEl: HTMLElement | null = null;
   private connectionButton: HTMLButtonElement | null = null;
@@ -17,6 +17,8 @@ export class P2PShareSettingTab extends PluginSettingTab {
   constructor(app: App, plugin: P2PSharePlugin) {
     super(app, plugin);
     this.plugin = plugin;
+    this.boundRefreshHandler = () => this.refreshDisplay();
+    this.boundUpdateConnectionStatus = () => this.updateConnectionStatus();
   }
 
   private refreshDisplay(): void {
@@ -195,11 +197,13 @@ export class P2PShareSettingTab extends PluginSettingTab {
                   this.app,
                   t('settings.paired-devices.remove-all-confirm.title'),
                   t('settings.paired-devices.remove-all-confirm.message', pairedDevices.length),
-                  async () => {
-                    for (const device of [...this.plugin.settings.pairedDevices]) {
-                      await this.plugin.removePairedDevice(device.roomSecret);
-                    }
-                    this.display(); // Refresh
+                  () => {
+                    void (async () => {
+                      for (const device of [...this.plugin.settings.pairedDevices]) {
+                        await this.plugin.removePairedDevice(device.roomSecret);
+                      }
+                      this.display(); // Refresh
+                    })();
                   },
                   t('confirm-modal.remove')
                 ).open();
@@ -284,11 +288,11 @@ export class P2PShareSettingTab extends PluginSettingTab {
       .addDropdown((dropdown) =>
         dropdown
           .addOption('0', 'Forever')
-          .addOption('7', '7 days')
-          .addOption('30', '30 days')
-          .addOption('90', '90 days')
-          .addOption('180', '180 days')
-          .addOption('365', '1 year')
+          .addOption('7', '7 Days')
+          .addOption('30', '30 Days')
+          .addOption('90', '90 Days')
+          .addOption('180', '180 Days')
+          .addOption('365', '1 Year')
           .setValue(this.plugin.settings.history.retentionDays.toString())
           .onChange(async (value) => {
             this.plugin.settings.history.retentionDays = parseInt(value);
@@ -305,16 +309,16 @@ export class P2PShareSettingTab extends PluginSettingTab {
       .addButton((button) =>
         button
           .setButtonText('Open history')
-          .onClick(async () => {
+          .onClick(() => {
             // Check if history view is already open
             const existingLeaf = this.app.workspace.getLeavesOfType('p2p-share-history')[0];
             if (existingLeaf) {
               // Activate existing view
-              this.app.workspace.revealLeaf(existingLeaf);
+              this.app.workspace.setActiveLeaf(existingLeaf);
             } else {
               // Create new view
               const leaf = this.app.workspace.getRightLeaf(false);
-              await leaf?.setViewState({
+              void leaf?.setViewState({
                 type: 'p2p-share-history',
                 active: true,
               });
@@ -334,11 +338,13 @@ export class P2PShareSettingTab extends PluginSettingTab {
               this.app,
               'Clear all history?',
               'This will permanently delete all transfer history. This cannot be undone.',
-              async () => {
-                if (this.plugin.shareHistory) {
-                  await this.plugin.shareHistory.clearAll();
-                  new Notice('History cleared');
-                }
+              () => {
+                void (async () => {
+                  if (this.plugin.shareHistory) {
+                    await this.plugin.shareHistory.clearAll();
+                    new Notice('History cleared');
+                  }
+                })();
               },
               'Clear'
             ).open();
@@ -383,9 +389,11 @@ export class P2PShareSettingTab extends PluginSettingTab {
         this.app,
         t('settings.paired-devices.remove-confirm.title'),
         t('settings.paired-devices.remove-confirm.message', device.displayName),
-        async () => {
-          await this.plugin.removePairedDevice(device.roomSecret);
-          this.display(); // Refresh
+        () => {
+          void (async () => {
+            await this.plugin.removePairedDevice(device.roomSecret);
+            this.display(); // Refresh
+          })();
         },
         t('confirm-modal.remove')
       ).open();

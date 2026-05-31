@@ -32,7 +32,7 @@ class Logger {
 
   info(...args: unknown[]): void {
     if (this.shouldLog('info')) {
-      console.log(this.prefix, ...args);
+      console.debug(this.prefix, ...args);
     }
   }
 
