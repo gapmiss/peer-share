@@ -1,8 +1,8 @@
 /* Peer Share Plugin Styles */
 
-/* Utility classes */
-.peer-share-hidden {
-  display: none !important;
+/* Utility classes - doubled selector for specificity without !important */
+.peer-share-hidden.peer-share-hidden {
+  display: none;
 }
 
 /* Server Notice */
@@ -584,13 +584,14 @@
   margin: 1.5rem 0;
 }
 
-.peer-share-pairing-input {
-  font-size: 2rem !important;
+/* Higher specificity selector to override Obsidian input defaults */
+.peer-share-pairing-modal .peer-share-pairing-input-container input.peer-share-pairing-input {
+  font-size: 2rem;
   font-weight: 600;
   font-family: var(--font-monospace);
   letter-spacing: 0.3em;
-  padding: 1rem 1.5rem !important;
-  min-height: 70px !important;
+  padding: 1rem 1.5rem;
+  min-height: 70px;
   border-radius: 8px;
   background-color: var(--background-secondary);
   border: 2px solid var(--background-modifier-border);
@@ -600,7 +601,7 @@
   max-width: 100%;
 }
 
-.peer-share-pairing-input:focus-visible {
+.peer-share-pairing-modal .peer-share-pairing-input-container input.peer-share-pairing-input:focus-visible {
   background-color: var(--background-modifier-hover);
   border-color: var(--background-modifier-border-focus);
   outline: none;
@@ -725,8 +726,8 @@
 }
 
 /* Status bar menu - make disabled display name item more visible */
-.peer-share-status-bar-menu .menu-item.is-disabled {
-  color: var(--text-muted) !important;
+.peer-share-status-bar-menu .menu-item.is-disabled.is-disabled {
+  color: var(--text-muted);
 }
 
 /* ============================================================================
@@ -1139,12 +1140,11 @@
 
 .peer-share-stats-section h3 {
   margin: 0 0 0.75rem 0;
-  font-size: 1rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  font-size: 0.85rem;
 }
 
 .peer-share-stats-grid {
