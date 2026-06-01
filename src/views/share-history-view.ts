@@ -1,11 +1,11 @@
 import { ItemView, WorkspaceLeaf, Menu, Notice, TFile, setIcon } from 'obsidian';
 import type { ShareHistoryEntry, ShareHistoryDirection, ShareHistoryStatus } from '../types';
 import type { ShareHistory } from '../share-history';
-import type P2PSharePlugin from '../main';
+import type PeerSharePlugin from '../main';
 import { ConfirmModal } from '../modals/confirm-modal';
 import { StatisticsModal } from '../modals/statistics-modal';
 
-export const SHARE_HISTORY_VIEW_TYPE = 'p2p-share-history';
+export const SHARE_HISTORY_VIEW_TYPE = 'peer-share-history';
 
 /**
  * Time period for grouping history entries
@@ -25,7 +25,7 @@ interface GroupedEntries {
  * Share history sidebar view
  */
 export class ShareHistoryView extends ItemView {
-  private plugin: P2PSharePlugin;
+  private plugin: PeerSharePlugin;
   private history: ShareHistory;
   private searchTerm: string = '';
   private filterDirection: ShareHistoryDirection | 'all' = 'all';
@@ -38,7 +38,7 @@ export class ShareHistoryView extends ItemView {
   private entriesContainer: HTMLElement | null = null;
   private filterIndicator: HTMLElement | null = null;
 
-  constructor(leaf: WorkspaceLeaf, plugin: P2PSharePlugin, history: ShareHistory) {
+  constructor(leaf: WorkspaceLeaf, plugin: PeerSharePlugin, history: ShareHistory) {
     super(leaf);
     this.plugin = plugin;
     this.history = history;
@@ -77,7 +77,7 @@ export class ShareHistoryView extends ItemView {
   private render(): void {
     const container = this.containerEl.children[1] as HTMLElement;
     container.empty();
-    container.addClass('p2p-share-history-view');
+    container.addClass('peer-share-history-view');
 
     // Header
     this.headerContainer = container.createDiv();
@@ -124,22 +124,22 @@ export class ShareHistoryView extends ItemView {
    * Render the header with title and action buttons
    */
   private renderHeader(container: HTMLElement): void {
-    const header = container.createDiv({ cls: 'p2p-share-history-header' });
+    const header = container.createDiv({ cls: 'peer-share-history-header' });
 
-    const titleContainer = header.createDiv({ cls: 'p2p-share-history-title-container' });
-    titleContainer.createEl('h4', { text: 'Share history', cls: 'p2p-share-history-title' });
+    const titleContainer = header.createDiv({ cls: 'peer-share-history-title-container' });
+    titleContainer.createEl('h4', { text: 'Share history', cls: 'peer-share-history-title' });
 
     // Create filter indicator (keep reference for updates)
     this.filterIndicator = titleContainer.createSpan({
-      cls: 'p2p-share-history-filter-indicator'
+      cls: 'peer-share-history-filter-indicator'
     });
     this.updateFilterIndicator();
 
-    const actions = header.createDiv({ cls: 'p2p-share-history-actions' });
+    const actions = header.createDiv({ cls: 'peer-share-history-actions' });
 
     // Menu button (settings, clear, export/import)
     const menuBtn = actions.createDiv({
-      cls: 'clickable-icon p2p-share-history-action-btn',
+      cls: 'clickable-icon peer-share-history-action-btn',
       attr: { 'aria-label': 'Options', title: 'Options', tabindex: '0' }
     });
     setIcon(menuBtn, 'more-vertical');
@@ -166,21 +166,21 @@ export class ShareHistoryView extends ItemView {
    * Render search and filter controls
    */
   private renderSearchAndFilters(container: HTMLElement): void {
-    const filtersContainer = container.createDiv({ cls: 'p2p-share-history-filters' });
+    const filtersContainer = container.createDiv({ cls: 'peer-share-history-filters' });
 
     // Search input container with clear button
-    const searchContainer = filtersContainer.createDiv({ cls: 'p2p-share-history-search' });
-    const searchInputWrapper = searchContainer.createDiv({ cls: 'p2p-share-history-search-wrapper' });
+    const searchContainer = filtersContainer.createDiv({ cls: 'peer-share-history-search' });
+    const searchInputWrapper = searchContainer.createDiv({ cls: 'peer-share-history-search-wrapper' });
 
     const searchInput = searchInputWrapper.createEl('input', {
       type: 'text',
       placeholder: 'Search files, peers...',
       value: this.searchTerm,
-      cls: 'p2p-share-history-search-input'
+      cls: 'peer-share-history-search-input'
     });
 
     const clearBtn = searchInputWrapper.createDiv({
-      cls: 'p2p-share-history-search-clear',
+      cls: 'peer-share-history-search-clear',
       attr: { 'aria-label': 'Clear search', title: 'Clear search' }
     });
     setIcon(clearBtn, 'x');
@@ -197,7 +197,7 @@ export class ShareHistoryView extends ItemView {
     clearBtn.onclick = () => {
       this.searchTerm = '';
       searchInput.value = '';
-      clearBtn.addClass('p2p-share-hidden');
+      clearBtn.addClass('peer-share-hidden');
       searchInput.focus();
       this.updateEntries();
     };
@@ -208,7 +208,7 @@ export class ShareHistoryView extends ItemView {
    */
   private renderEntriesContent(): void {
     if (!this.entriesContainer) return;
-    const entriesContainer = this.entriesContainer.createDiv({ cls: 'p2p-share-history-entries' });
+    const entriesContainer = this.entriesContainer.createDiv({ cls: 'peer-share-history-entries' });
 
     // Get filtered entries
     let entries = this.history.filterEntries({
@@ -236,13 +236,13 @@ export class ShareHistoryView extends ItemView {
    * Render empty state when no entries match filters
    */
   private renderEmptyState(container: HTMLElement): void {
-    const empty = container.createDiv({ cls: 'p2p-share-history-empty' });
-    empty.createDiv({ text: 'No transfer history', cls: 'p2p-share-history-empty-title' });
+    const empty = container.createDiv({ cls: 'peer-share-history-empty' });
+    empty.createDiv({ text: 'No transfer history', cls: 'peer-share-history-empty-title' });
     empty.createDiv({
       text: this.searchTerm || this.filterDirection !== 'all' || this.filterStatus !== 'all'
         ? 'Try adjusting your filters'
         : 'Transfers will appear here once you start sharing',
-      cls: 'p2p-share-history-empty-hint'
+      cls: 'peer-share-history-empty-hint'
     });
   }
 
@@ -250,23 +250,23 @@ export class ShareHistoryView extends ItemView {
    * Render a time period group
    */
   private renderGroup(container: HTMLElement, group: GroupedEntries): void {
-    const groupContainer = container.createDiv({ cls: 'p2p-share-history-group' });
+    const groupContainer = container.createDiv({ cls: 'peer-share-history-group' });
 
     // Group header (collapsible)
-    const groupHeader = groupContainer.createDiv({ cls: 'p2p-share-history-group-header' });
+    const groupHeader = groupContainer.createDiv({ cls: 'peer-share-history-group-header' });
     const isExpanded = this.expandedGroups.has(group.period);
 
-    const toggleIcon = groupHeader.createDiv({ cls: 'p2p-share-history-group-toggle' });
+    const toggleIcon = groupHeader.createDiv({ cls: 'peer-share-history-group-toggle' });
     setIcon(toggleIcon, isExpanded ? 'chevron-down' : 'chevron-right');
 
     groupHeader.createSpan({
       text: group.label,
-      cls: 'p2p-share-history-group-label'
+      cls: 'peer-share-history-group-label'
     });
 
     groupHeader.createSpan({
       text: `(${group.entries.length})`,
-      cls: 'p2p-share-history-group-count'
+      cls: 'peer-share-history-group-count'
     });
 
     groupHeader.onclick = () => {
@@ -280,7 +280,7 @@ export class ShareHistoryView extends ItemView {
 
     // Group entries (if expanded)
     if (isExpanded) {
-      const groupEntries = groupContainer.createDiv({ cls: 'p2p-share-history-group-entries' });
+      const groupEntries = groupContainer.createDiv({ cls: 'peer-share-history-group-entries' });
       for (const entry of group.entries) {
         this.renderEntry(groupEntries, entry);
       }
@@ -291,34 +291,34 @@ export class ShareHistoryView extends ItemView {
    * Render a single history entry
    */
   private renderEntry(container: HTMLElement, entry: ShareHistoryEntry): void {
-    const entryEl = container.createDiv({ cls: 'p2p-share-history-entry' });
+    const entryEl = container.createDiv({ cls: 'peer-share-history-entry' });
     entryEl.dataset.entryId = entry.id;
 
     // Add status class
     entryEl.addClass(`status-${entry.status}`);
 
     // Direction icon
-    const iconContainer = entryEl.createDiv({ cls: 'p2p-share-history-entry-icon' });
+    const iconContainer = entryEl.createDiv({ cls: 'peer-share-history-entry-icon' });
     const icon = entry.direction === 'sent' ? 'arrow-up-right' : 'arrow-down-left';
     setIcon(iconContainer, icon);
 
     // Entry content
-    const content = entryEl.createDiv({ cls: 'p2p-share-history-entry-content' });
+    const content = entryEl.createDiv({ cls: 'peer-share-history-entry-content' });
 
     // First line: peer name and status
-    const firstLine = content.createDiv({ cls: 'p2p-share-history-entry-first-line' });
+    const firstLine = content.createDiv({ cls: 'peer-share-history-entry-first-line' });
     firstLine.createSpan({
       text: `${entry.direction === 'sent' ? 'Sent to' : 'Received from'} `,
-      cls: 'p2p-share-history-entry-direction-text'
+      cls: 'peer-share-history-entry-direction-text'
     });
     firstLine.createSpan({
       text: entry.peerName,
-      cls: 'p2p-share-history-entry-peer-name'
+      cls: 'peer-share-history-entry-peer-name'
     });
 
     // Peer OS/App info
     if (entry.peerOs || entry.peerApp) {
-      const peerInfo = firstLine.createSpan({ cls: 'p2p-share-history-entry-peer-info' });
+      const peerInfo = firstLine.createSpan({ cls: 'peer-share-history-entry-peer-info' });
       const parts = [entry.peerOs, entry.peerApp].filter(Boolean);
       peerInfo.setText(` (${parts.join(' • ')})`);
     }
@@ -326,7 +326,7 @@ export class ShareHistoryView extends ItemView {
     // Status indicator
     if (entry.status !== 'completed') {
       const statusIcon = firstLine.createSpan({
-        cls: `p2p-share-history-entry-status ${entry.status}`,
+        cls: `peer-share-history-entry-status ${entry.status}`,
         attr: {
           'aria-label': entry.status === 'failed'
             ? (entry.error || 'Transfer failed')
@@ -341,24 +341,24 @@ export class ShareHistoryView extends ItemView {
     }
 
     // Second line: file info
-    const secondLine = content.createDiv({ cls: 'p2p-share-history-entry-second-line' });
+    const secondLine = content.createDiv({ cls: 'peer-share-history-entry-second-line' });
     const isExpanded = this.expandedEntries.has(entry.id);
 
     if (entry.files.length === 1) {
       // Single file - show name and size
       secondLine.createSpan({
         text: entry.files[0].name,
-        cls: 'p2p-share-history-entry-file-name'
+        cls: 'peer-share-history-entry-file-name'
       });
       secondLine.createSpan({
         text: ` (${this.formatFileSize(entry.files[0].size)})`,
-        cls: 'p2p-share-history-entry-file-size'
+        cls: 'peer-share-history-entry-file-size'
       });
     } else {
       // Multiple files - show count and total size
       const filesText = secondLine.createSpan({
         text: `${entry.files.length} files (${this.formatFileSize(entry.totalSize)})`,
-        cls: 'p2p-share-history-entry-files-summary clickable',
+        cls: 'peer-share-history-entry-files-summary clickable',
         attr: {
           tabindex: '0',
           role: 'button',
@@ -367,15 +367,15 @@ export class ShareHistoryView extends ItemView {
       });
 
       // Create file list container (always render it)
-      const filesList = content.createDiv({ cls: 'p2p-share-history-entry-files-list' });
+      const filesList = content.createDiv({ cls: 'peer-share-history-entry-files-list' });
       filesList.style.display = isExpanded ? 'block' : 'none';
 
       for (const file of entry.files) {
-        const fileItem = filesList.createDiv({ cls: 'p2p-share-history-entry-file-item' });
-        fileItem.createSpan({ text: file.name, cls: 'p2p-share-history-entry-file-name' });
+        const fileItem = filesList.createDiv({ cls: 'peer-share-history-entry-file-item' });
+        fileItem.createSpan({ text: file.name, cls: 'peer-share-history-entry-file-name' });
         fileItem.createSpan({
           text: ` (${this.formatFileSize(file.size)})`,
-          cls: 'p2p-share-history-entry-file-size'
+          cls: 'peer-share-history-entry-file-size'
         });
       }
 
@@ -384,10 +384,10 @@ export class ShareHistoryView extends ItemView {
         e.stopPropagation();
         if (this.expandedEntries.has(entry.id)) {
           this.expandedEntries.delete(entry.id);
-          filesList.addClass('p2p-share-hidden');
+          filesList.addClass('peer-share-hidden');
         } else {
           this.expandedEntries.add(entry.id);
-          filesList.removeClass('p2p-share-hidden');
+          filesList.removeClass('peer-share-hidden');
         }
       };
 
@@ -401,15 +401,15 @@ export class ShareHistoryView extends ItemView {
     }
 
     // Third line: timestamp and duration
-    const thirdLine = content.createDiv({ cls: 'p2p-share-history-entry-third-line' });
+    const thirdLine = content.createDiv({ cls: 'peer-share-history-entry-third-line' });
     thirdLine.createSpan({
       text: this.formatTime(entry.timestamp),
-      cls: 'p2p-share-history-entry-time'
+      cls: 'peer-share-history-entry-time'
     });
     if (entry.duration !== undefined) {
       thirdLine.createSpan({
         text: ` • ${this.formatDuration(entry.duration)}`,
-        cls: 'p2p-share-history-entry-duration'
+        cls: 'peer-share-history-entry-duration'
       });
     }
 
@@ -673,7 +673,7 @@ export class ShareHistoryView extends ItemView {
       const url = URL.createObjectURL(blob);
       const a = activeDocument.createElement('a');
       a.href = url;
-      a.download = `p2p-share-history-${Date.now()}.json`;
+      a.download = `peer-share-history-${Date.now()}.json`;
       a.click();
       URL.revokeObjectURL(url);
       new Notice('History exported successfully');

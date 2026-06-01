@@ -11,7 +11,7 @@ export const es = {
 	'common.offline': 'Desconectado',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': 'Mostrar dispositivos disponibles',
@@ -22,8 +22,8 @@ export const es = {
 	'command.toggle-connection': 'Alternar conexión',
 
 	// Context menu
-	'context-menu.share-file': 'Compartir mediante P2P Share',
-	'context-menu.share-folder': 'Compartir carpeta mediante P2P Share',
+	'context-menu.share-file': 'Compartir mediante Peer Share',
+	'context-menu.share-folder': 'Compartir carpeta mediante Peer Share',
 
 	// Status bar
 	'status-bar.peers': '{0} dispositivo{1}',
@@ -33,23 +33,23 @@ export const es = {
 	'status-bar.menu.pair-device': 'Emparejar con dispositivo',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: Conectado',
-	'notice.disconnected': 'P2P Share: Desconectado',
-	'notice.configure-server': 'P2P Share: Por favor, configura una URL de servidor en los ajustes',
-	'notice.failed-to-connect': 'P2P Share: Error al conectar con el servidor. Verifica la URL y asegúrate de que el servidor acepte conexiones externas.',
-	'notice.transfer-rejected': 'P2P Share: Transferencia rechazada',
-	'notice.transfer-cancelled': 'P2P Share: Transferencia cancelada',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: Transferencia cancelada por el remitente',
-	'notice.no-files': 'P2P Share: No hay archivos para enviar',
-	'notice.error-sending': 'P2P Share: Error al enviar archivos - {0}',
-	'notice.device-paired': 'P2P Share: ¡Dispositivo emparejado correctamente!',
-	'notice.device-removed': 'P2P Share: Se eliminó un dispositivo emparejado',
-	'notice.not-connected': 'P2P Share: No conectado al servidor. Por favor, reconecta primero.',
-	'notice.transfer-declined': 'P2P Share: Transferencia rechazada',
-	'notice.auto-accepting': 'P2P Share: Aceptando automáticamente transferencia de {0}',
+	'notice.connected': 'Peer Share: Conectado',
+	'notice.disconnected': 'Peer Share: Desconectado',
+	'notice.configure-server': 'Peer Share: Por favor, configura una URL de servidor en los ajustes',
+	'notice.failed-to-connect': 'Peer Share: Error al conectar con el servidor. Verifica la URL y asegúrate de que el servidor acepte conexiones externas.',
+	'notice.transfer-rejected': 'Peer Share: Transferencia rechazada',
+	'notice.transfer-cancelled': 'Peer Share: Transferencia cancelada',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: Transferencia cancelada por el remitente',
+	'notice.no-files': 'Peer Share: No hay archivos para enviar',
+	'notice.error-sending': 'Peer Share: Error al enviar archivos - {0}',
+	'notice.device-paired': 'Peer Share: ¡Dispositivo emparejado correctamente!',
+	'notice.device-removed': 'Peer Share: Se eliminó un dispositivo emparejado',
+	'notice.not-connected': 'Peer Share: No conectado al servidor. Por favor, reconecta primero.',
+	'notice.transfer-declined': 'Peer Share: Transferencia rechazada',
+	'notice.auto-accepting': 'Peer Share: Aceptando automáticamente transferencia de {0}',
 
 	// Peer Modal
 	'peer-modal.title': 'Seleccionar dispositivo',
@@ -58,8 +58,8 @@ export const es = {
 	'peer-modal.disconnected.hint': 'Conéctate para descubrir dispositivos en tu red.',
 	'peer-modal.empty.title': 'No se encontraron dispositivos en tu red.',
 	'peer-modal.empty.hint': 'Asegúrate de que otros dispositivos estén conectados al mismo servidor PairDrop.',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': 'Conexión directa peer-to-peer compatible',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': 'Conexión directa peer-to-peer compatible',
 	'peer-modal.paired-tooltip': 'Dispositivo emparejado',
 	'peer-modal.share-with': 'Compartir con {0}',
 
@@ -127,7 +127,7 @@ export const es = {
 	'confirm-modal.remove': 'Eliminar',
 
 	// Settings
-	'settings.title': 'Ajustes de P2P Share',
+	'settings.title': 'Ajustes de Peer Share',
 	'settings.server.title': 'Configuración del servidor',
 	'settings.server.url.name': 'URL del servidor de señalización',
 	'settings.server.url.desc': 'URL de WebSocket para tu servidor PairDrop auto-alojado (ej., wss://tu-servidor.com o ws://localhost:3000)',
@@ -136,7 +136,7 @@ export const es = {
 	'settings.files.title': 'Ajustes de archivos',
 	'settings.files.location.name': 'Ubicación de guardado',
 	'settings.files.location.desc': 'Carpeta en tu bóveda donde se guardarán los archivos recibidos',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': 'Ajustes de descubrimiento',
 	'settings.discovery.mode.name': 'Modo de descubrimiento',

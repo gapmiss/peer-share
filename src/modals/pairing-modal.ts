@@ -51,7 +51,7 @@ export class PairingModal extends Modal {
   private render(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-pairing-modal');
+    contentEl.addClass('peer-share-pairing-modal');
 
     switch (this.state) {
       case 'choose':
@@ -75,17 +75,17 @@ export class PairingModal extends Modal {
   private renderChoose(): void {
     const { contentEl } = this;
 
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const iconContainer = header.createDiv({ cls: 'p2p-share-pairing-icon' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const iconContainer = header.createDiv({ cls: 'peer-share-pairing-icon' });
     setIcon(iconContainer, 'link');
     header.createEl('h2', { text: t('pairing-modal.title') });
 
-    const description = contentEl.createDiv({ cls: 'p2p-share-pairing-description' });
+    const description = contentEl.createDiv({ cls: 'peer-share-pairing-description' });
     description.createEl('p', {
       text: t('pairing-modal.description'),
     });
 
-    const buttons = contentEl.createDiv({ cls: 'p2p-share-pairing-buttons' });
+    const buttons = contentEl.createDiv({ cls: 'peer-share-pairing-buttons' });
 
     const initiateBtn = buttons.createEl('button', {
       text: t('pairing-modal.show-code'),
@@ -105,7 +105,7 @@ export class PairingModal extends Modal {
       this.render();
     };
 
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
     const cancelBtn = footer.createEl('button', { text: t('common.cancel') });
     cancelBtn.onclick = () => this.close();
   }
@@ -113,15 +113,15 @@ export class PairingModal extends Modal {
   private renderShowCode(): void {
     const { contentEl } = this;
 
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const iconContainer = header.createDiv({ cls: 'p2p-share-pairing-icon' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const iconContainer = header.createDiv({ cls: 'peer-share-pairing-icon' });
     setIcon(iconContainer, 'link');
     header.createEl('h2', { text: t('pairing-modal.code-title') });
 
     if (this.pairKey) {
-      const codeContainer = contentEl.createDiv({ cls: 'p2p-share-pairing-code-container' });
+      const codeContainer = contentEl.createDiv({ cls: 'peer-share-pairing-code-container' });
       const codeEl = codeContainer.createDiv({
-        cls: 'p2p-share-pairing-code',
+        cls: 'peer-share-pairing-code',
         attr: { role: 'button', 'aria-label': t('pairing-modal.code-click-to-copy') }
       });
       codeEl.setText(this.formatPairKey(this.pairKey));
@@ -135,21 +135,21 @@ export class PairingModal extends Modal {
         }
       };
 
-      const instruction = contentEl.createDiv({ cls: 'p2p-share-pairing-instruction' });
+      const instruction = contentEl.createDiv({ cls: 'peer-share-pairing-instruction' });
       instruction.createEl('p', {
         text: t('pairing-modal.code-instruction'),
       });
 
       this.countdownEl = instruction.createEl('p', {
-        cls: 'p2p-share-pairing-warning',
+        cls: 'peer-share-pairing-warning',
       });
       this.startCountdown();
     } else {
-      const loading = contentEl.createDiv({ cls: 'p2p-share-pairing-loading' });
+      const loading = contentEl.createDiv({ cls: 'peer-share-pairing-loading' });
       loading.createEl('p', { text: t('pairing-modal.code-generating') });
     }
 
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
     const cancelBtn = footer.createEl('button', { text: t('common.cancel') });
     cancelBtn.onclick = () => {
       this.onCancel();
@@ -160,21 +160,21 @@ export class PairingModal extends Modal {
   private renderEnterCode(): void {
     const { contentEl } = this;
 
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const iconContainer = header.createDiv({ cls: 'p2p-share-pairing-icon' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const iconContainer = header.createDiv({ cls: 'peer-share-pairing-icon' });
     setIcon(iconContainer, 'link');
     header.createEl('h2', { text: t('pairing-modal.enter-code') });
 
-    const instruction = contentEl.createDiv({ cls: 'p2p-share-pairing-instruction' });
+    const instruction = contentEl.createDiv({ cls: 'peer-share-pairing-instruction' });
     instruction.createEl('p', {
       text: t('pairing-modal.enter-instruction'),
     });
 
-    const inputContainer = contentEl.createDiv({ cls: 'p2p-share-pairing-input-container' });
+    const inputContainer = contentEl.createDiv({ cls: 'peer-share-pairing-input-container' });
     this.inputEl = inputContainer.createEl('input', {
       type: 'text',
       placeholder: '000000',
-      cls: 'p2p-share-pairing-input',
+      cls: 'peer-share-pairing-input',
     });
     this.inputEl.maxLength = 6;
     this.inputEl.pattern = '[0-9]*';
@@ -199,7 +199,7 @@ export class PairingModal extends Modal {
     // Focus input
     window.setTimeout(() => this.inputEl?.focus(), 50);
 
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
 
     const backBtn = footer.createEl('button', { text: t('common.back') });
     backBtn.onclick = () => {
@@ -225,12 +225,12 @@ export class PairingModal extends Modal {
   private renderSuccess(): void {
     const { contentEl } = this;
 
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const iconContainer = header.createDiv({ cls: 'p2p-share-pairing-icon p2p-share-success' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const iconContainer = header.createDiv({ cls: 'peer-share-pairing-icon peer-share-success' });
     setIcon(iconContainer, 'check');
     header.createEl('h2', { text: t('pairing-modal.success.title') });
 
-    const message = contentEl.createDiv({ cls: 'p2p-share-pairing-success-message' });
+    const message = contentEl.createDiv({ cls: 'peer-share-pairing-success-message' });
     message.createEl('p', {
       text: t('pairing-modal.success.message', this.peerDisplayName),
     });
@@ -238,7 +238,7 @@ export class PairingModal extends Modal {
       text: t('pairing-modal.success.hint'),
     });
 
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
     const doneBtn = footer.createEl('button', { text: t('common.done'), cls: 'mod-cta' });
     doneBtn.onclick = () => this.close();
   }
@@ -246,17 +246,17 @@ export class PairingModal extends Modal {
   private renderError(): void {
     const { contentEl } = this;
 
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const iconContainer = header.createDiv({ cls: 'p2p-share-pairing-icon p2p-share-error' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const iconContainer = header.createDiv({ cls: 'peer-share-pairing-icon peer-share-error' });
     setIcon(iconContainer, 'x');
     header.createEl('h2', { text: t('pairing-modal.error.title') });
 
-    const message = contentEl.createDiv({ cls: 'p2p-share-pairing-error-message' });
+    const message = contentEl.createDiv({ cls: 'peer-share-pairing-error-message' });
     message.createEl('p', {
       text: this.errorMessage || t('pairing-modal.error.unknown'),
     });
 
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
 
     const retryBtn = footer.createEl('button', { text: t('pairing-modal.try-again') });
     retryBtn.onclick = () => {
@@ -280,7 +280,7 @@ export class PairingModal extends Modal {
     try {
       await navigator.clipboard.writeText(this.pairKey);
       // Show brief feedback
-      const codeEl = this.contentEl.querySelector('.p2p-share-pairing-code') as HTMLElement;
+      const codeEl = this.contentEl.querySelector('.peer-share-pairing-code') as HTMLElement;
       if (codeEl) {
         const originalText = codeEl.textContent;
         codeEl.textContent = t('pairing-modal.code-copied');

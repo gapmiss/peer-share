@@ -17,26 +17,26 @@ export class FilePickerModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-file-picker');
+    contentEl.addClass('peer-share-file-picker');
 
     // Header
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
     header.createEl('h2', { text: t('file-picker.title') });
 
     // Breadcrumb / path
-    const pathContainer = contentEl.createDiv({ cls: 'p2p-share-path-container' });
+    const pathContainer = contentEl.createDiv({ cls: 'peer-share-path-container' });
     this.renderBreadcrumb(pathContainer);
 
     // Content area
-    this.contentContainer = contentEl.createDiv({ cls: 'p2p-share-file-list' });
+    this.contentContainer = contentEl.createDiv({ cls: 'peer-share-file-list' });
     this.renderFileList();
 
     // Selection info
-    this.selectionInfo = contentEl.createDiv({ cls: 'p2p-share-selection-info' });
+    this.selectionInfo = contentEl.createDiv({ cls: 'peer-share-selection-info' });
     this.updateSelectionInfo();
 
     // Footer with actions
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
 
     const selectAllBtn = footer.createEl('button', { text: t('file-picker.select-all') });
     selectAllBtn.onclick = () => this.selectAll();
@@ -52,7 +52,7 @@ export class FilePickerModal extends Modal {
     container.empty();
 
     const parts = this.currentPath.split('/').filter((p) => p);
-    const homeBtn = container.createEl('button', { text: t('file-picker.vault'), cls: 'p2p-share-breadcrumb-item' });
+    const homeBtn = container.createEl('button', { text: t('file-picker.vault'), cls: 'peer-share-breadcrumb-item' });
     homeBtn.onclick = () => {
       this.currentPath = '/';
       this.renderFileList();
@@ -62,9 +62,9 @@ export class FilePickerModal extends Modal {
     let path = '';
     for (const part of parts) {
       path += `/${part}`;
-      container.createSpan({ text: ' / ', cls: 'p2p-share-breadcrumb-sep' });
+      container.createSpan({ text: ' / ', cls: 'peer-share-breadcrumb-sep' });
       const partPath = path;
-      const btn = container.createEl('button', { text: part, cls: 'p2p-share-breadcrumb-item' });
+      const btn = container.createEl('button', { text: part, cls: 'peer-share-breadcrumb-item' });
       btn.onclick = () => {
         this.currentPath = partPath;
         this.renderFileList();
@@ -96,7 +96,7 @@ export class FilePickerModal extends Modal {
     });
 
     if (children.length === 0) {
-      this.contentContainer.createEl('p', { text: t('file-picker.empty-folder'), cls: 'p2p-share-empty-folder' });
+      this.contentContainer.createEl('p', { text: t('file-picker.empty-folder'), cls: 'peer-share-empty-folder' });
       return;
     }
 
@@ -108,10 +108,10 @@ export class FilePickerModal extends Modal {
   private renderFileItem(file: TAbstractFile): void {
     if (!this.contentContainer) return;
 
-    const item = this.contentContainer.createDiv({ cls: 'p2p-share-file-item' });
+    const item = this.contentContainer.createDiv({ cls: 'peer-share-file-item' });
 
     // Create label wrapper for checkbox and content
-    const label = item.createEl('label', { cls: 'p2p-share-file-label' });
+    const label = item.createEl('label', { cls: 'peer-share-file-label' });
 
     // Checkbox
     const checkbox = label.createEl('input', { type: 'checkbox' });
@@ -139,7 +139,7 @@ export class FilePickerModal extends Modal {
     };
 
     // Icon
-    const iconContainer = label.createDiv({ cls: 'p2p-share-file-icon' });
+    const iconContainer = label.createDiv({ cls: 'peer-share-file-icon' });
     if (file instanceof TFolder) {
       setIcon(iconContainer, 'folder');
     } else if (file instanceof TFile) {
@@ -149,15 +149,15 @@ export class FilePickerModal extends Modal {
     }
 
     // Name (clickable for folders to navigate)
-    const nameEl = label.createDiv({ cls: 'p2p-share-file-name', text: file.name });
+    const nameEl = label.createDiv({ cls: 'peer-share-file-name', text: file.name });
     if (file instanceof TFolder) {
-      nameEl.addClass('p2p-share-folder-name');
+      nameEl.addClass('peer-share-folder-name');
       nameEl.onclick = (e) => {
         e.preventDefault();
         e.stopPropagation();
         this.currentPath = `/${file.path}`;
         this.renderFileList();
-        const pathContainer = this.contentEl.querySelector('.p2p-share-path-container');
+        const pathContainer = this.contentEl.querySelector('.peer-share-path-container');
         if (pathContainer) this.renderBreadcrumb(pathContainer as HTMLElement);
       };
     }
@@ -165,7 +165,7 @@ export class FilePickerModal extends Modal {
     // Size (for files) - outside of label so it doesn't trigger checkbox
     if (file instanceof TFile) {
       const size = this.formatSize(file.stat.size);
-      item.createDiv({ cls: 'p2p-share-file-size', text: size });
+      item.createDiv({ cls: 'peer-share-file-size', text: size });
     }
   }
 

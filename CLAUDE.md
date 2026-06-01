@@ -1,10 +1,10 @@
-# CLAUDE.md - Development Guidelines for P2P Share
+# CLAUDE.md - Development Guidelines for Peer Share
 
 This file provides context for AI assistants (Claude, etc.) working on this codebase.
 
 ## Project Overview
 
-P2P Share is an Obsidian plugin that enables peer-to-peer file sharing between vaults using WebRTC. It uses the PairDrop protocol for signaling/peer discovery.
+Peer Share is an Obsidian plugin that enables peer-to-peer file sharing between vaults using WebRTC. It uses the PairDrop protocol for signaling/peer discovery.
 
 ## Architecture
 
@@ -188,14 +188,14 @@ The project uses `eslint-plugin-obsidianmd` with TypeScript type-checked rules f
 
 ### Commands
 - Command IDs must NOT include plugin ID (Obsidian prefixes automatically)
-- Good: `id: 'show-peers'` → becomes `p2p-share:show-peers`
-- Bad: `id: 'p2p-share-show-peers'` → becomes `p2p-share:p2p-share-show-peers`
+- Good: `id: 'show-peers'` → becomes `peer-share:show-peers`
+- Bad: `id: 'peer-share-show-peers'` → becomes `peer-share:peer-share-show-peers`
 
 ### Logging
 - Use `logger` from `src/logger.ts` (not console.log directly)
 - Log levels: `debug`, `info`, `warn`, `error`, `none`
 - User configurable in settings
-- Show user-facing errors with `new Notice('P2P Share: ...')`
+- Show user-facing errors with `new Notice('Peer Share: ...')`
 - Use timeouts for async operations that may hang
 
 ### Internationalization (i18n)
@@ -301,13 +301,13 @@ When sender cancels at any point, the receiver's modal automatically closes and 
 
 | Old ID | New ID |
 |--------|--------|
-| `p2p-share:p2p-share-show-peers` | `p2p-share:show-peers` |
-| `p2p-share:p2p-share-current-file` | `p2p-share:share-current-file` |
-| `p2p-share:p2p-share-files` | `p2p-share:share-files` |
-| `p2p-share:p2p-share-reconnect` | `p2p-share:reconnect` |
-| `p2p-share:p2p-share-pair-device` | `p2p-share:pair-device` |
-| `p2p-share:p2p-share-toggle-connection` | `p2p-share:toggle-connection` |
-| `p2p-share:p2p-share-open-history` | `p2p-share:open-history` |
+| `peer-share:peer-share-show-peers` | `peer-share:show-peers` |
+| `peer-share:peer-share-current-file` | `peer-share:share-current-file` |
+| `peer-share:peer-share-files` | `peer-share:share-files` |
+| `peer-share:peer-share-reconnect` | `peer-share:reconnect` |
+| `peer-share:peer-share-pair-device` | `peer-share:pair-device` |
+| `peer-share:peer-share-toggle-connection` | `peer-share:toggle-connection` |
+| `peer-share:peer-share-open-history` | `peer-share:open-history` |
 
 **Files**: `src/main.ts`
 
@@ -328,7 +328,7 @@ The display name now updates correctly when connecting, disconnecting, or reconn
 
 ## Security & Encryption
 
-P2P Share uses WebRTC's built-in encryption for secure peer-to-peer transfers:
+Peer Share uses WebRTC's built-in encryption for secure peer-to-peer transfers:
 
 ### Encryption Layers
 - **Signaling Channel**: WSS (WebSocket Secure) - TLS encrypted connection to PairDrop server
@@ -419,7 +419,7 @@ The plugin includes a comprehensive transfer history system that tracks all sent
 - `src/share-history.ts` - ShareHistory class with persistence and data management
 - `src/views/share-history-view.ts` - ShareHistoryView sidebar UI component
 - `src/types.ts` - ShareHistoryEntry, ShareHistoryFile, ShareHistorySettings types
-- `.obsidian/plugins/p2p-share/share-history.json` - Persistent storage file
+- `.obsidian/plugins/peer-share/share-history.json` - Persistent storage file
 
 ### Data Model
 

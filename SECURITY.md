@@ -1,6 +1,6 @@
 # Security and Encryption
 
-This document explains how P2P Share keeps your file transfers secure and private.
+This document explains how Peer Share keeps your file transfers secure and private.
 
 ## TL;DR - Is It Secure?
 
@@ -13,7 +13,7 @@ This document explains how P2P Share keeps your file transfers secure and privat
 
 ## How It Works
 
-P2P Share uses a two-layer architecture that separates peer discovery from file transfer:
+Peer Share uses a two-layer architecture that separates peer discovery from file transfer:
 
 ```
 Your Vault ──WSS (TLS)──> PairDrop Server <──WSS (TLS)── Peer's Vault
@@ -84,7 +84,7 @@ WebRTC provides enterprise-grade encryption automatically:
 - Must trust server operator with your files
 - Server stores files (potential data breach risk)
 
-### P2P Share (WebRTC)
+### Peer Share (WebRTC)
 - Sender → **Direct** → Receiver
 - Server facilitates connection only
 - Server never sees file data
@@ -94,7 +94,7 @@ WebRTC provides enterprise-grade encryption automatically:
 
 ## Trust Model
 
-When using P2P Share, you are trusting:
+When using Peer Share, you are trusting:
 
 1. **The Signaling Server Operator** (default: pairdrop.net)
    - Can see connection metadata (peer IDs, timing)
@@ -127,7 +127,7 @@ When using P2P Share, you are trusting:
 
 ## What About End-to-End Encryption?
 
-P2P Share uses **transport encryption** (encrypts data during transfer) but not **end-to-end encryption** (application-layer encryption where only sender/receiver can decrypt).
+Peer Share uses **transport encryption** (encrypts data during transfer) but not **end-to-end encryption** (application-layer encryption where only sender/receiver can decrypt).
 
 **Current Security Model:**
 - Files are encrypted in transit via WebRTC (DTLS-SRTP)
@@ -151,7 +151,7 @@ This is not currently implemented but could be added as an optional feature for 
 
 ## Reporting Security Issues
 
-If you discover a security vulnerability in P2P Share, please report it responsibly:
+If you discover a security vulnerability in Peer Share, please report it responsibly:
 
 1. **Do not** open a public GitHub issue
 2. Contact the maintainer privately (see repository for contact info)
@@ -210,7 +210,7 @@ For complete control over your data:
    - Docker: `docker run -p 3000:3000 linuxserver/pairdrop`
    - Self-hosted deployment gives you full control
 
-2. **Configure P2P Share to use your server**
+2. **Configure Peer Share to use your server**
    - Settings → Server URL → `https://your-server.com`
    - Or `wss://your-server.com` for direct WebSocket
 
@@ -222,7 +222,7 @@ For complete control over your data:
 
 ## Conclusion
 
-P2P Share is designed with privacy in mind:
+Peer Share is designed with privacy in mind:
 - **Transport encryption is automatic** - no configuration needed
 - **Server never sees your files** - only facilitates peer discovery
 - **Direct peer-to-peer transfers** - no intermediary storage

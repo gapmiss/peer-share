@@ -2,18 +2,18 @@ import { Events, TFile, TFolder, Vault } from 'obsidian';
 import { SignalingClient } from './signaling';
 import { RTCPeer } from './rtc-peer';
 import { logger } from './logger';
-import type { PeerInfo, FileMetadata, P2PShareSettings } from './types';
+import type { PeerInfo, FileMetadata, PeerShareSettings } from './types';
 
 export class PeerManager extends Events {
   private signaling: SignalingClient;
   private peers: Map<string, PeerInfo> = new Map();
   private connections: Map<string, RTCPeer> = new Map();
   private vault: Vault;
-  private settings: P2PShareSettings;
+  private settings: PeerShareSettings;
   private peerRoomSecrets: Map<string, string> = new Map(); // Track peerId -> roomSecret mapping
   private peerRooms: Map<string, { roomType: string; roomId: string }> = new Map(); // Track peerId -> room info
 
-  constructor(vault: Vault, settings: P2PShareSettings) {
+  constructor(vault: Vault, settings: PeerShareSettings) {
     super();
     this.vault = vault;
     this.settings = settings;
@@ -440,7 +440,7 @@ export class PeerManager extends Events {
     return mimeTypes[extension.toLowerCase()] || 'application/octet-stream';
   }
 
-  updateSettings(settings: P2PShareSettings): void {
+  updateSettings(settings: PeerShareSettings): void {
     this.settings = settings;
     this.signaling.updateServerUrl(settings.serverUrl);
     this.signaling.setRoomSecrets(settings.pairedDevices.map((d) => d.roomSecret));

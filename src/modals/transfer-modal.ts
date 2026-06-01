@@ -31,46 +31,46 @@ export class TransferModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-transfer-modal');
+    contentEl.addClass('peer-share-transfer-modal');
 
     // Header
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const icon = header.createDiv({ cls: 'p2p-share-transfer-icon' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const icon = header.createDiv({ cls: 'peer-share-transfer-icon' });
     setIcon(icon, this.direction === 'send' ? 'upload' : 'download');
     header.createEl('h2', {
       text: this.direction === 'send' ? t('transfer-modal.sending') : t('transfer-modal.receiving'),
     });
 
     // Peer info
-    const peerInfo = contentEl.createDiv({ cls: 'p2p-share-transfer-peer' });
+    const peerInfo = contentEl.createDiv({ cls: 'peer-share-transfer-peer' });
     peerInfo.createSpan({ text: this.direction === 'send' ? t('transfer-modal.to') : t('transfer-modal.from') });
-    peerInfo.createSpan({ text: this.peerName, cls: 'p2p-share-peer-name-highlight' });
+    peerInfo.createSpan({ text: this.peerName, cls: 'peer-share-peer-name-highlight' });
 
     // File list summary
-    const summary = contentEl.createDiv({ cls: 'p2p-share-transfer-summary' });
+    const summary = contentEl.createDiv({ cls: 'peer-share-transfer-summary' });
     const totalSize = this.files.reduce((sum, f) => sum + f.size, 0);
     summary.setText(tp('transfer-modal.files-summary', this.files.length, this.formatSize(totalSize)));
 
     // Overall progress bar
-    const overallContainer = contentEl.createDiv({ cls: 'p2p-share-progress-overall' });
-    this.overallProgress = overallContainer.createDiv({ cls: 'p2p-share-progress-bar' });
-    const overallFill = this.overallProgress.createDiv({ cls: 'p2p-share-progress-fill' });
+    const overallContainer = contentEl.createDiv({ cls: 'peer-share-progress-overall' });
+    this.overallProgress = overallContainer.createDiv({ cls: 'peer-share-progress-bar' });
+    const overallFill = this.overallProgress.createDiv({ cls: 'peer-share-progress-fill' });
     overallFill.setCssProps({ '--progress-width': '0%' });
 
     // Status text
     this.statusText = contentEl.createDiv({
-      cls: 'p2p-share-transfer-status',
+      cls: 'peer-share-transfer-status',
       text: this.direction === 'send' ? t('transfer-modal.status.connecting') : t('transfer-modal.status.waiting')
     });
 
     // Individual file progress
-    this.progressContainer = contentEl.createDiv({ cls: 'p2p-share-file-progress-list' });
+    this.progressContainer = contentEl.createDiv({ cls: 'peer-share-file-progress-list' });
     for (const file of this.files) {
       this.renderFileProgress(file);
     }
 
     // Cancel button
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
     const cancelBtn = footer.createEl('button', { text: t('common.cancel') });
     cancelBtn.onclick = () => {
       if (!this.isComplete && !this.isCancelled) {
@@ -85,19 +85,19 @@ export class TransferModal extends Modal {
     if (this.progressContainer === null) return;
 
     const item = this.progressContainer.createDiv({
-      cls: 'p2p-share-file-progress-item',
+      cls: 'peer-share-file-progress-item',
       attr: { 'data-file': file.name },
     });
 
-    const info = item.createDiv({ cls: 'p2p-share-file-progress-info' });
-    info.createDiv({ cls: 'p2p-share-file-progress-name', text: file.name });
-    info.createDiv({ cls: 'p2p-share-file-progress-size', text: this.formatSize(file.size) });
+    const info = item.createDiv({ cls: 'peer-share-file-progress-info' });
+    info.createDiv({ cls: 'peer-share-file-progress-name', text: file.name });
+    info.createDiv({ cls: 'peer-share-file-progress-size', text: this.formatSize(file.size) });
 
-    const progressBar = item.createDiv({ cls: 'p2p-share-progress-bar' });
-    const fill = progressBar.createDiv({ cls: 'p2p-share-progress-fill' });
+    const progressBar = item.createDiv({ cls: 'peer-share-progress-bar' });
+    const fill = progressBar.createDiv({ cls: 'peer-share-progress-fill' });
     fill.setCssProps({ '--progress-width': '0%' });
 
-    item.createDiv({ cls: 'p2p-share-file-progress-status', text: t('transfer-modal.file.pending') });
+    item.createDiv({ cls: 'peer-share-file-progress-status', text: t('transfer-modal.file.pending') });
   }
 
   updateProgress(progress: TransferProgress): void {
@@ -107,8 +107,8 @@ export class TransferModal extends Modal {
     const escapedName = CSS.escape(progress.fileName);
     const item = this.progressContainer?.querySelector(`[data-file="${escapedName}"]`);
     if (item) {
-      const fill = item.querySelector('.p2p-share-progress-fill') as HTMLElement;
-      const status = item.querySelector('.p2p-share-file-progress-status') as HTMLElement;
+      const fill = item.querySelector('.peer-share-progress-fill') as HTMLElement;
+      const status = item.querySelector('.peer-share-file-progress-status') as HTMLElement;
       if (fill) {
         fill.setCssProps({ '--progress-width': `${progress.progress * 100}%` });
       }
@@ -128,7 +128,7 @@ export class TransferModal extends Modal {
       this.files.length;
 
     if (this.overallProgress) {
-      const fill = this.overallProgress.querySelector('.p2p-share-progress-fill') as HTMLElement;
+      const fill = this.overallProgress.querySelector('.peer-share-progress-fill') as HTMLElement;
       if (fill) {
         fill.style.width = `${totalProgress * 100}%`;
       }
@@ -151,10 +151,10 @@ export class TransferModal extends Modal {
     }
 
     // Update all file statuses and progress bars to 100%
-    const items = this.progressContainer?.querySelectorAll('.p2p-share-file-progress-item');
+    const items = this.progressContainer?.querySelectorAll('.peer-share-file-progress-item');
     items?.forEach((item) => {
-      const fill = item.querySelector('.p2p-share-progress-fill') as HTMLElement;
-      const status = item.querySelector('.p2p-share-file-progress-status') as HTMLElement;
+      const fill = item.querySelector('.peer-share-progress-fill') as HTMLElement;
+      const status = item.querySelector('.peer-share-file-progress-status') as HTMLElement;
       if (fill) fill.setCssProps({ '--progress-width': '100%' });
       if (status) {
         status.setText(t('transfer-modal.file.complete'));
@@ -164,7 +164,7 @@ export class TransferModal extends Modal {
 
     // Always set overall progress to 100% on complete
     if (this.overallProgress) {
-      const fill = this.overallProgress.querySelector('.p2p-share-progress-fill') as HTMLElement;
+      const fill = this.overallProgress.querySelector('.peer-share-progress-fill') as HTMLElement;
       if (fill) {
         fill.setCssProps({ '--progress-width': '100%' });
       }
@@ -176,7 +176,7 @@ export class TransferModal extends Modal {
     }
 
     // Change cancel to close
-    const cancelBtn = this.contentEl.querySelector('.p2p-share-modal-footer button');
+    const cancelBtn = this.contentEl.querySelector('.peer-share-modal-footer button');
     if (cancelBtn) {
       cancelBtn.textContent = t('common.close');
     }
@@ -189,7 +189,7 @@ export class TransferModal extends Modal {
     const escapedName = CSS.escape(originalName);
     const item = this.progressContainer?.querySelector(`[data-file="${escapedName}"]`);
     if (item) {
-      const status = item.querySelector('.p2p-share-file-progress-status') as HTMLElement;
+      const status = item.querySelector('.peer-share-file-progress-status') as HTMLElement;
       if (status) {
         status.setText(`Saved as: ${savedName}`);
         status.addClass('renamed');
@@ -206,7 +206,7 @@ export class TransferModal extends Modal {
 
   updatePeerName(newName: string): void {
     this.peerName = newName;
-    const peerEl = this.contentEl.querySelector('.p2p-share-peer-name-highlight');
+    const peerEl = this.contentEl.querySelector('.peer-share-peer-name-highlight');
     if (peerEl) {
       peerEl.textContent = newName;
     }

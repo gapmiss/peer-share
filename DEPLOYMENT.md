@@ -1,6 +1,6 @@
-# P2P Share Server Deployment Guide
+# Peer Share Server Deployment Guide
 
-This guide covers deploying your own PairDrop signaling server for use with the P2P Share Obsidian plugin.
+This guide covers deploying your own PairDrop signaling server for use with the Peer Share Obsidian plugin.
 
 ## Why Self-Host?
 
@@ -285,7 +285,7 @@ Set `RTC_CONFIG=./rtc_config.json` environment variable.
 ## Testing Your Deployment
 
 1. Open your server URL in a browser - you should see the PairDrop web UI
-2. In Obsidian, update Settings → P2P Share → Signaling Server URL
+2. In Obsidian, update Settings → Peer Share → Signaling Server URL
 3. Open two vaults and verify peer discovery works
 4. Test a file transfer
 

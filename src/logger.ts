@@ -10,7 +10,7 @@ const LOG_LEVELS: Record<LogLevel, number> = {
 
 class Logger {
   private level: LogLevel = 'info';
-  private prefix = 'P2P Share:';
+  private prefix = 'Peer Share:';
 
   setLevel(level: LogLevel): void {
     this.level = level;

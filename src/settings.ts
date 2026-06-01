@@ -1,20 +1,20 @@
 import { App, Notice, PluginSettingTab, Setting, setIcon } from 'obsidian';
-import type P2PSharePlugin from './main';
+import type PeerSharePlugin from './main';
 import type { PairedDevice } from './types';
 import type { LogLevel } from './logger';
 import { ConfirmModal } from './modals';
 import { FolderSuggest } from './folder-suggest';
 import { t } from './i18n';
 
-export class P2PShareSettingTab extends PluginSettingTab {
-  plugin: P2PSharePlugin;
+export class PeerShareSettingTab extends PluginSettingTab {
+  plugin: PeerSharePlugin;
   private boundRefreshHandler: () => void;
   private boundUpdateConnectionStatus: () => void;
   private statusIconEl: HTMLElement | null = null;
   private statusTextEl: HTMLElement | null = null;
   private connectionButton: HTMLButtonElement | null = null;
 
-  constructor(app: App, plugin: P2PSharePlugin) {
+  constructor(app: App, plugin: PeerSharePlugin) {
     super(app, plugin);
     this.plugin = plugin;
     this.boundRefreshHandler = () => this.refreshDisplay();
@@ -39,8 +39,8 @@ export class P2PShareSettingTab extends PluginSettingTab {
     if (this.statusTextEl) {
       this.statusTextEl.setText(isConnected ? t('common.connected') : t('common.disconnected'));
       this.statusTextEl.className = isConnected
-        ? 'p2p-share-status-connected'
-        : 'p2p-share-status-disconnected';
+        ? 'peer-share-status-connected'
+        : 'peer-share-status-disconnected';
     }
 
     // Update button text
@@ -92,10 +92,10 @@ export class P2PShareSettingTab extends PluginSettingTab {
           })
       );
 
-    const statusContainer = containerEl.createDiv({ cls: 'p2p-share-status' });
+    const statusContainer = containerEl.createDiv({ cls: 'peer-share-status' });
 
     // Status icon (link/unlink)
-    this.statusIconEl = statusContainer.createDiv({ cls: 'p2p-share-status-icon' });
+    this.statusIconEl = statusContainer.createDiv({ cls: 'peer-share-status-icon' });
     const isConnected = this.plugin.isConnected();
     setIcon(this.statusIconEl, isConnected ? 'link' : 'unlink');
     this.statusIconEl.style.color = isConnected ? 'var(--text-success)' : 'var(--text-error)';
@@ -103,7 +103,7 @@ export class P2PShareSettingTab extends PluginSettingTab {
     // Status text
     this.statusTextEl = statusContainer.createSpan({
       text: isConnected ? t('common.connected') : t('common.disconnected'),
-      cls: isConnected ? 'p2p-share-status-connected' : 'p2p-share-status-disconnected'
+      cls: isConnected ? 'peer-share-status-connected' : 'peer-share-status-disconnected'
     });
 
     new Setting(containerEl)
@@ -171,13 +171,13 @@ export class P2PShareSettingTab extends PluginSettingTab {
     const pairedDevices = this.plugin.settings.pairedDevices;
 
     if (pairedDevices.length === 0) {
-      const emptyState = containerEl.createDiv({ cls: 'p2p-share-paired-empty' });
+      const emptyState = containerEl.createDiv({ cls: 'peer-share-paired-empty' });
       emptyState.createEl('p', {
         text: t('settings.paired-devices.empty'),
-        cls: 'p2p-share-paired-empty-text',
+        cls: 'peer-share-paired-empty-text',
       });
     } else {
-      const pairedList = containerEl.createDiv({ cls: 'p2p-share-paired-list' });
+      const pairedList = containerEl.createDiv({ cls: 'peer-share-paired-list' });
 
       for (const device of pairedDevices) {
         this.renderPairedDevice(pairedList, device);
@@ -311,7 +311,7 @@ export class P2PShareSettingTab extends PluginSettingTab {
           .setButtonText('Open history')
           .onClick(() => {
             // Check if history view is already open
-            const existingLeaf = this.app.workspace.getLeavesOfType('p2p-share-history')[0];
+            const existingLeaf = this.app.workspace.getLeavesOfType('peer-share-history')[0];
             if (existingLeaf) {
               // Activate existing view
               this.app.workspace.setActiveLeaf(existingLeaf);
@@ -319,7 +319,7 @@ export class P2PShareSettingTab extends PluginSettingTab {
               // Create new view
               const leaf = this.app.workspace.getRightLeaf(false);
               void leaf?.setViewState({
-                type: 'p2p-share-history',
+                type: 'peer-share-history',
                 active: true,
               });
             }
@@ -353,18 +353,18 @@ export class P2PShareSettingTab extends PluginSettingTab {
   }
 
   private renderPairedDevice(container: HTMLElement, device: PairedDevice): void {
-    const item = container.createDiv({ cls: 'p2p-share-paired-item' });
+    const item = container.createDiv({ cls: 'peer-share-paired-item' });
 
-    const info = item.createDiv({ cls: 'p2p-share-paired-info' });
+    const info = item.createDiv({ cls: 'peer-share-paired-info' });
 
-    const details = info.createDiv({ cls: 'p2p-share-paired-details' });
-    details.createDiv({ cls: 'p2p-share-paired-name', text: device.displayName });
+    const details = info.createDiv({ cls: 'peer-share-paired-details' });
+    details.createDiv({ cls: 'peer-share-paired-name', text: device.displayName });
     details.createDiv({
-      cls: 'p2p-share-paired-date',
+      cls: 'peer-share-paired-date',
       text: t('settings.paired-devices.paired-at', new Date(device.pairedAt).toLocaleString()),
     });
 
-    const controls = item.createDiv({ cls: 'p2p-share-paired-controls' });
+    const controls = item.createDiv({ cls: 'peer-share-paired-controls' });
 
     // Auto-accept toggle
     new Setting(controls)
@@ -380,7 +380,7 @@ export class P2PShareSettingTab extends PluginSettingTab {
       );
 
     const removeBtn = item.createEl('button', {
-      cls: 'p2p-share-paired-remove',
+      cls: 'peer-share-paired-remove',
       attr: { 'aria-label': t('settings.paired-devices.remove.label') },
     });
     setIcon(removeBtn, 'x');

@@ -24,12 +24,12 @@ export class ConfirmModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-confirm-modal');
+    contentEl.addClass('peer-share-confirm-modal');
 
     contentEl.createEl('h3', { text: this.title });
     contentEl.createEl('p', { text: this.message });
 
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
 
     const cancelBtn = footer.createEl('button', { text: t('common.cancel') });
     cancelBtn.onclick = () => this.close();

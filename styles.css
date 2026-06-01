@@ -1,12 +1,12 @@
-/* P2P Share Plugin Styles */
+/* Peer Share Plugin Styles */
 
 /* Utility classes */
-.p2p-share-hidden {
+.peer-share-hidden {
   display: none !important;
 }
 
 /* Server Notice */
-.p2p-share-server-notice {
+.peer-share-server-notice {
   background-color: var(--background-modifier-error);
   border: 1px solid var(--background-modifier-error-hover);
   border-radius: 6px;
@@ -14,17 +14,17 @@
   margin-bottom: 1rem;
 }
 
-.p2p-share-notice-text {
+.peer-share-notice-text {
   margin: 0 0 0.5rem 0;
   color: var(--text-normal);
 }
 
-.p2p-share-server-notice a {
+.peer-share-server-notice a {
   color: var(--text-accent);
 }
 
 /* Status Bar */
-.p2p-share-status-icon {
+.peer-share-status-icon {
   display: inline-flex;
   align-items: center;
   vertical-align: middle;
@@ -32,23 +32,23 @@
 }
 
 /* Modal Common Styles */
-.p2p-share-modal {
+.peer-share-modal {
   padding: 1rem;
 }
 
-.p2p-share-modal-header {
+.peer-share-modal-header {
   display: flex;
   align-items: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
 
-.p2p-share-modal-header h2 {
+.peer-share-modal-header h2 {
   margin: 0;
   font-size: 1.25rem;
 }
 
-.p2p-share-modal-footer {
+.peer-share-modal-footer {
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
@@ -58,14 +58,14 @@
 }
 
 /* Connection Status */
-.p2p-share-status-container {
+.peer-share-status-container {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   margin-left: auto;
 }
 
-.p2p-share-connection-status {
+.peer-share-connection-status {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -73,21 +73,21 @@
   color: var(--text-muted);
 }
 
-.p2p-share-status-dot {
+.peer-share-status-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
 
-.p2p-share-status-dot.connected {
+.peer-share-status-dot.connected {
   background-color: var(--color-green);
 }
 
-.p2p-share-status-dot.disconnected {
+.peer-share-status-dot.disconnected {
   background-color: var(--color-red);
 }
 
-.p2p-share-menu-btn {
+.peer-share-menu-btn {
   padding: 4px;
   border-radius: 4px;
   cursor: pointer;
@@ -95,25 +95,25 @@
   transition: opacity 0.15s ease, background-color 0.15s ease;
 }
 
-.p2p-share-menu-btn:hover,
-.p2p-share-menu-btn:focus-visible {
+.peer-share-menu-btn:hover,
+.peer-share-menu-btn:focus-visible {
   opacity: 1;
   background-color: var(--background-modifier-hover);
   outline: none;
 }
 
-.p2p-share-menu-btn svg {
+.peer-share-menu-btn svg {
   width: 16px;
   height: 16px;
 }
 
 /* Peer List */
-.p2p-share-peers-container {
+.peer-share-peers-container {
   max-height: 400px;
   overflow-y: auto;
 }
 
-.p2p-share-peer-item {
+.peer-share-peer-item {
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -123,17 +123,17 @@
   transition: background-color 0.15s ease;
 }
 
-.p2p-share-peer-item:hover {
+.peer-share-peer-item:hover {
   background-color: var(--background-modifier-hover);
 }
 
-.p2p-share-peer-item:focus-visible {
+.peer-share-peer-item:focus-visible {
   background-color: var(--background-modifier-hover);
   outline: 2px solid var(--background-modifier-border-focus);
   outline-offset: -2px;
 }
 
-.p2p-share-peer-icon {
+.peer-share-peer-icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,31 +143,31 @@
   background-color: var(--background-modifier-border);
 }
 
-.p2p-share-peer-icon svg {
+.peer-share-peer-icon svg {
   width: 20px;
   height: 20px;
 }
 
-.p2p-share-peer-info {
+.peer-share-peer-info {
   flex: 1;
 }
 
-.p2p-share-peer-name {
+.peer-share-peer-name {
   font-weight: 500;
 }
 
-.p2p-share-peer-details {
+.peer-share-peer-details {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.p2p-share-peer-badges {
+.peer-share-peer-badges {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.p2p-share-paired-badge {
+.peer-share-paired-badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -180,16 +180,16 @@
   transition: opacity 0.15s ease;
 }
 
-.p2p-share-paired-badge:hover {
+.peer-share-paired-badge:hover {
   opacity: 1;
 }
 
-.p2p-share-paired-badge svg {
+.peer-share-paired-badge svg {
   width: 14px;
   height: 14px;
 }
 
-.p2p-share-rtc-badge {
+.peer-share-rtc-badge {
   font-size: 0.7rem;
   padding: 2px 6px;
   border-radius: 4px;
@@ -198,26 +198,26 @@
   font-weight: 500;
 }
 
-.p2p-share-empty-state {
+.peer-share-empty-state {
   text-align: center;
   padding: 2rem;
   color: var(--text-muted);
 }
 
-.p2p-share-empty-state p {
+.peer-share-empty-state p {
   margin: 0.5rem 0;
 }
 
-.p2p-share-hint {
+.peer-share-hint {
   font-size: 0.85rem;
 }
 
 /* File Picker */
-.p2p-share-file-picker {
+.peer-share-file-picker {
   min-width: 500px;
 }
 
-.p2p-share-path-container {
+.peer-share-path-container {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -228,7 +228,7 @@
   margin-bottom: 1rem;
 }
 
-.p2p-share-breadcrumb-item {
+.peer-share-breadcrumb-item {
   background: none;
   border: none;
   padding: 0.25rem 0.5rem;
@@ -237,22 +237,22 @@
   color: var(--text-accent);
 }
 
-.p2p-share-breadcrumb-item:hover {
+.peer-share-breadcrumb-item:hover {
   background-color: var(--background-modifier-hover);
 }
 
-.p2p-share-breadcrumb-sep {
+.peer-share-breadcrumb-sep {
   color: var(--text-muted);
 }
 
-.p2p-share-file-list {
+.peer-share-file-list {
   max-height: 350px;
   overflow-y: auto;
   border: 1px solid var(--background-modifier-border);
   border-radius: 6px;
 }
 
-.p2p-share-file-item {
+.peer-share-file-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -260,11 +260,11 @@
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.p2p-share-file-item:last-child {
+.peer-share-file-item:last-child {
   border-bottom: none;
 }
 
-.p2p-share-file-label {
+.peer-share-file-label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -272,92 +272,92 @@
   cursor: default;
 }
 
-.p2p-share-file-item input[type="checkbox"] {
+.peer-share-file-item input[type="checkbox"] {
   margin: 0;
   cursor: default;
 }
 
-.p2p-share-file-icon {
+.peer-share-file-icon {
   display: flex;
   color: var(--text-muted);
 }
 
-.p2p-share-file-icon svg {
+.peer-share-file-icon svg {
   width: 16px;
   height: 16px;
 }
 
-.p2p-share-file-name {
+.peer-share-file-name {
   flex: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.p2p-share-folder-name {
+.peer-share-folder-name {
   color: var(--text-accent);
   cursor: pointer;
 }
 
-.p2p-share-folder-name:hover {
+.peer-share-folder-name:hover {
   text-decoration: underline;
 }
 
-.p2p-share-file-size {
+.peer-share-file-size {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.p2p-share-selection-info {
+.peer-share-selection-info {
   padding: 0.5rem;
   font-size: 0.9rem;
   color: var(--text-muted);
 }
 
-.p2p-share-empty-folder {
+.peer-share-empty-folder {
   text-align: center;
   padding: 2rem;
   color: var(--text-muted);
 }
 
 /* Transfer Modal */
-.p2p-share-transfer-modal {
+.peer-share-transfer-modal {
   min-width: 400px;
 }
 
-.p2p-share-transfer-icon svg {
+.peer-share-transfer-icon svg {
   width: 24px;
   height: 24px;
 }
 
-.p2p-share-transfer-peer {
+.peer-share-transfer-peer {
   margin-bottom: 0.5rem;
   color: var(--text-muted);
 }
 
-.p2p-share-peer-name-highlight {
+.peer-share-peer-name-highlight {
   color: var(--text-normal);
   font-weight: 500;
 }
 
-.p2p-share-transfer-summary {
+.peer-share-transfer-summary {
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: var(--text-muted);
 }
 
-.p2p-share-progress-overall {
+.peer-share-progress-overall {
   margin-bottom: 1rem;
 }
 
-.p2p-share-progress-bar {
+.peer-share-progress-bar {
   height: 8px;
   background-color: var(--background-modifier-border);
   border-radius: 4px;
   overflow: hidden;
 }
 
-.p2p-share-progress-fill {
+.peer-share-progress-fill {
   height: 100%;
   background-color: var(--interactive-accent);
   border-radius: 4px;
@@ -365,26 +365,26 @@
   width: var(--progress-width, 0%);
 }
 
-.p2p-share-transfer-status {
+.peer-share-transfer-status {
   text-align: center;
   margin-bottom: 1rem;
   font-weight: 500;
 }
 
-.p2p-share-transfer-status.complete {
+.peer-share-transfer-status.complete {
   color: var(--color-green);
 }
 
-.p2p-share-transfer-status.error {
+.peer-share-transfer-status.error {
   color: var(--color-red);
 }
 
-.p2p-share-file-progress-list {
+.peer-share-file-progress-list {
   max-height: 200px;
   overflow-y: auto;
 }
 
-.p2p-share-file-progress-item {
+.peer-share-file-progress-item {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -392,17 +392,17 @@
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.p2p-share-file-progress-item:last-child {
+.peer-share-file-progress-item:last-child {
   border-bottom: none;
 }
 
-.p2p-share-file-progress-info {
+.peer-share-file-progress-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.p2p-share-file-progress-name {
+.peer-share-file-progress-name {
   font-size: 0.9rem;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -410,46 +410,46 @@
   max-width: 250px;
 }
 
-.p2p-share-file-progress-size {
+.peer-share-file-progress-size {
   font-size: 0.8rem;
   color: var(--text-muted);
 }
 
-.p2p-share-file-progress-status {
+.peer-share-file-progress-status {
   font-size: 0.8rem;
   color: var(--text-muted);
   text-align: right;
 }
 
-.p2p-share-file-progress-status.complete {
+.peer-share-file-progress-status.complete {
   color: var(--color-green);
 }
 
-.p2p-share-file-progress-status.renamed {
+.peer-share-file-progress-status.renamed {
   color: var(--color-orange);
   font-style: italic;
 }
 
 /* Incoming Transfer Modal */
-.p2p-share-incoming-modal {
+.peer-share-incoming-modal {
   min-width: 350px;
 }
 
-.p2p-share-incoming-icon svg {
+.peer-share-incoming-icon svg {
   width: 24px;
   height: 24px;
   color: var(--interactive-accent);
 }
 
-.p2p-share-incoming-peer {
+.peer-share-incoming-peer {
   margin-bottom: 1rem;
 }
 
-.p2p-share-incoming-summary {
+.peer-share-incoming-summary {
   margin-bottom: 0.5rem;
 }
 
-.p2p-share-incoming-file-list {
+.peer-share-incoming-file-list {
   max-height: 200px;
   overflow-y: auto;
   border: 1px solid var(--background-modifier-border);
@@ -457,7 +457,7 @@
   margin-bottom: 0.5rem;
 }
 
-.p2p-share-incoming-file-item {
+.peer-share-incoming-file-item {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -465,11 +465,11 @@
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.p2p-share-incoming-file-item:last-child {
+.peer-share-incoming-file-item:last-child {
   border-bottom: none;
 }
 
-.p2p-share-incoming-more {
+.peer-share-incoming-more {
   padding: 0.5rem;
   text-align: center;
   color: var(--text-accent);
@@ -479,65 +479,65 @@
   cursor: pointer;
 }
 
-.p2p-share-incoming-more:hover {
+.peer-share-incoming-more:hover {
   background-color: var(--background-modifier-hover);
   color: var(--text-accent-hover);
 }
 
-.p2p-share-incoming-actions {
+.peer-share-incoming-actions {
   justify-content: space-between;
 }
 
-.p2p-share-btn-reject {
+.peer-share-btn-reject {
   background-color: var(--background-modifier-error);
   color: var(--text-on-accent);
 }
 
-.p2p-share-btn-reject:hover {
+.peer-share-btn-reject:hover {
   background-color: var(--background-modifier-error-hover);
 }
 
 /* Settings */
-.p2p-share-status-connected {
+.peer-share-status-connected {
   color: var(--color-green);
 }
 
-.p2p-share-status-disconnected {
+.peer-share-status-disconnected {
   color: var(--color-red);
 }
 
 /* Pairing Modal */
-.p2p-share-pairing-modal {
+.peer-share-pairing-modal {
   min-width: 350px;
 }
 
-.p2p-share-pairing-icon svg {
+.peer-share-pairing-icon svg {
   width: 24px;
   height: 24px;
 }
 
-.p2p-share-pairing-description {
+.peer-share-pairing-description {
   margin-bottom: 1.5rem;
   color: var(--text-muted);
 }
 
-.p2p-share-pairing-buttons {
+.peer-share-pairing-buttons {
   display: flex;
   gap: 1rem;
   margin-bottom: 1rem;
 }
 
-.p2p-share-pairing-buttons button {
+.peer-share-pairing-buttons button {
   flex: 1;
 }
 
-.p2p-share-pairing-code-container {
+.peer-share-pairing-code-container {
   display: flex;
   justify-content: center;
   margin: 1.5rem 0;
 }
 
-.p2p-share-pairing-code {
+.peer-share-pairing-code {
   font-size: 2rem;
   font-weight: 600;
   font-family: var(--font-monospace);
@@ -551,40 +551,40 @@
   user-select: all;
 }
 
-.p2p-share-pairing-code:hover,
-.p2p-share-pairing-code:focus-visible {
+.peer-share-pairing-code:hover,
+.peer-share-pairing-code:focus-visible {
   background-color: var(--background-modifier-hover);
   border-color: var(--background-modifier-border-focus);
   outline: none;
 }
 
-.p2p-share-pairing-instruction {
+.peer-share-pairing-instruction {
   text-align: center;
   margin-bottom: 1rem;
 }
 
-.p2p-share-pairing-instruction p {
+.peer-share-pairing-instruction p {
   margin: 0.5rem 0;
 }
 
-.p2p-share-pairing-warning {
+.peer-share-pairing-warning {
   color: var(--text-warning);
   font-weight: 500;
 }
 
-.p2p-share-pairing-loading {
+.peer-share-pairing-loading {
   text-align: center;
   padding: 2rem;
   color: var(--text-muted);
 }
 
-.p2p-share-pairing-input-container {
+.peer-share-pairing-input-container {
   display: flex;
   justify-content: center;
   margin: 1.5rem 0;
 }
 
-.p2p-share-pairing-input {
+.peer-share-pairing-input {
   font-size: 2rem !important;
   font-weight: 600;
   font-family: var(--font-monospace);
@@ -600,33 +600,33 @@
   max-width: 100%;
 }
 
-.p2p-share-pairing-input:focus-visible {
+.peer-share-pairing-input:focus-visible {
   background-color: var(--background-modifier-hover);
   border-color: var(--background-modifier-border-focus);
   outline: none;
 }
 
-.p2p-share-pairing-success-message,
-.p2p-share-pairing-error-message {
+.peer-share-pairing-success-message,
+.peer-share-pairing-error-message {
   text-align: center;
   margin: 1rem 0;
 }
 
-.p2p-share-pairing-success-message p,
-.p2p-share-pairing-error-message p {
+.peer-share-pairing-success-message p,
+.peer-share-pairing-error-message p {
   margin: 0.5rem 0;
 }
 
-.p2p-share-pairing-icon.p2p-share-success svg {
+.peer-share-pairing-icon.peer-share-success svg {
   color: var(--color-green);
 }
 
-.p2p-share-pairing-icon.p2p-share-error svg {
+.peer-share-pairing-icon.peer-share-error svg {
   color: var(--color-red);
 }
 
 /* Settings - Paired Devices */
-.p2p-share-paired-item {
+.peer-share-paired-item {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -639,24 +639,24 @@
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.p2p-share-paired-item:hover {
+.peer-share-paired-item:hover {
   border-color: var(--background-modifier-border-hover);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.p2p-share-paired-info {
+.peer-share-paired-info {
   display: flex;
   align-items: flex-start;
   gap: 1rem;
   padding-right: 2.5rem;
 }
 
-.p2p-share-paired-details {
+.peer-share-paired-details {
   flex: 1;
   min-width: 0;
 }
 
-.p2p-share-paired-name {
+.peer-share-paired-name {
   font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-normal);
@@ -666,37 +666,37 @@
   white-space: nowrap;
 }
 
-.p2p-share-paired-date {
+.peer-share-paired-date {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.p2p-share-paired-controls {
+.peer-share-paired-controls {
   display: flex;
   align-items: center;
 }
 
-.p2p-share-paired-controls .setting-item {
+.peer-share-paired-controls .setting-item {
   border: none;
   padding: 0;
   margin: 0;
 }
 
-.p2p-share-paired-controls .setting-item-info {
+.peer-share-paired-controls .setting-item-info {
   flex-grow: 1;
 }
 
-.p2p-share-paired-controls .setting-item-name {
+.peer-share-paired-controls .setting-item-name {
   font-weight: 500;
   font-size: 0.95rem;
 }
 
-.p2p-share-paired-controls .setting-item-description {
+.peer-share-paired-controls .setting-item-description {
   font-size: 0.85rem;
   color: var(--text-muted);
 }
 
-.p2p-share-paired-remove {
+.peer-share-paired-remove {
   position: absolute;
   top: 1rem;
   right: 1rem;
@@ -714,18 +714,18 @@
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
-.p2p-share-paired-remove:hover {
+.peer-share-paired-remove:hover {
   background-color: var(--background-modifier-error);
   color: var(--text-on-accent);
 }
 
-.p2p-share-paired-remove svg {
+.peer-share-paired-remove svg {
   width: 18px;
   height: 18px;
 }
 
 /* Status bar menu - make disabled display name item more visible */
-.p2p-share-status-bar-menu .menu-item.is-disabled {
+.peer-share-status-bar-menu .menu-item.is-disabled {
   color: var(--text-muted) !important;
 }
 
@@ -733,7 +733,7 @@
    Share History View
    ============================================================================ */
 
-.p2p-share-history-view {
+.peer-share-history-view {
   padding: 0;
   height: 100%;
   display: flex;
@@ -742,7 +742,7 @@
 }
 
 /* Header */
-.p2p-share-history-header {
+.peer-share-history-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -750,22 +750,22 @@
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
-.p2p-share-history-title-container {
+.peer-share-history-title-container {
   flex: 1;
 }
 
-.p2p-share-history-title {
+.peer-share-history-title {
   margin: 0;
   font-size: 1.1rem;
   font-weight: 600;
 }
 
-.p2p-share-history-actions {
+.peer-share-history-actions {
   display: flex;
   gap: 0.25rem;
 }
 
-.p2p-share-history-action-btn {
+.peer-share-history-action-btn {
   padding: 0.25rem;
   cursor: pointer;
   border-radius: 4px;
@@ -773,12 +773,12 @@
   transition: opacity 0.15s ease, background-color 0.15s ease;
 }
 
-.p2p-share-history-action-btn:hover {
+.peer-share-history-action-btn:hover {
   opacity: 1;
   background-color: var(--background-modifier-hover);
 }
 
-.p2p-share-history-action-btn:focus-visible {
+.peer-share-history-action-btn:focus-visible {
   opacity: 1;
   background-color: var(--background-modifier-hover);
   outline: 2px solid var(--background-modifier-border-focus);
@@ -786,7 +786,7 @@
 }
 
 /* Filters */
-.p2p-share-history-filters {
+.peer-share-history-filters {
   padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--background-modifier-border);
   display: flex;
@@ -794,18 +794,18 @@
   gap: 0.5rem;
 }
 
-.p2p-share-history-search {
+.peer-share-history-search {
   width: 100%;
 }
 
-.p2p-share-history-search-wrapper {
+.peer-share-history-search-wrapper {
   position: relative;
   width: 100%;
   display: flex;
   align-items: center;
 }
 
-.p2p-share-history-search-input {
+.peer-share-history-search-input {
   width: 100%;
   padding: 0.5rem 2rem 0.5rem 0.5rem;
   border: 1px solid var(--background-modifier-border);
@@ -815,12 +815,12 @@
   font-size: 0.875rem;
 }
 
-.p2p-share-history-search-input:focus-visible {
+.peer-share-history-search-input:focus-visible {
   border-color: var(--background-modifier-border-focus);
   outline: none;
 }
 
-.p2p-share-history-search-clear {
+.peer-share-history-search-clear {
   position: absolute;
   right: 0.25rem;
   display: flex;
@@ -834,42 +834,42 @@
   transition: opacity 0.15s ease, background-color 0.15s ease;
 }
 
-.p2p-share-history-search-clear:hover {
+.peer-share-history-search-clear:hover {
   opacity: 1;
   background-color: var(--background-modifier-hover);
 }
 
-.p2p-share-history-search-clear svg {
+.peer-share-history-search-clear svg {
   width: 14px;
   height: 14px;
   color: var(--text-muted);
 }
 
-.p2p-share-history-filter-group {
+.peer-share-history-filter-group {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
 }
 
-.p2p-share-history-filter-label {
+.peer-share-history-filter-label {
   color: var(--text-muted);
   font-weight: 500;
 }
 
-.p2p-share-history-filter-group select {
+.peer-share-history-filter-group select {
   flex: 1;
 }
 
 /* Entries Container */
-.p2p-share-history-entries {
+.peer-share-history-entries {
   flex: 1;
   overflow-y: auto;
   padding: 0.5rem 0;
 }
 
 /* Empty State */
-.p2p-share-history-empty {
+.peer-share-history-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -878,24 +878,24 @@
   text-align: center;
 }
 
-.p2p-share-history-empty-title {
+.peer-share-history-empty-title {
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-muted);
   margin-bottom: 0.5rem;
 }
 
-.p2p-share-history-empty-hint {
+.peer-share-history-empty-hint {
   font-size: 0.875rem;
   color: var(--text-faint);
 }
 
 /* Time Period Groups */
-.p2p-share-history-group {
+.peer-share-history-group {
   margin-bottom: 0.5rem;
 }
 
-.p2p-share-history-group-header {
+.peer-share-history-group-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -912,11 +912,11 @@
   transition: background-color 0.15s ease;
 }
 
-.p2p-share-history-group-header:hover {
+.peer-share-history-group-header:hover {
   background-color: var(--background-modifier-hover);
 }
 
-.p2p-share-history-group-toggle {
+.peer-share-history-group-toggle {
   width: 16px;
   height: 16px;
   display: flex;
@@ -924,25 +924,25 @@
   justify-content: center;
 }
 
-.p2p-share-history-group-toggle svg {
+.peer-share-history-group-toggle svg {
   width: 14px;
   height: 14px;
 }
 
-.p2p-share-history-group-label {
+.peer-share-history-group-label {
   flex: 1;
 }
 
-.p2p-share-history-group-count {
+.peer-share-history-group-count {
   color: var(--text-faint);
 }
 
-.p2p-share-history-group-entries {
+.peer-share-history-group-entries {
   border-bottom: 1px solid var(--background-modifier-border);
 }
 
 /* History Entry */
-.p2p-share-history-entry {
+.peer-share-history-entry {
   display: flex;
   gap: 0.75rem;
   padding: 0.75rem 1rem;
@@ -951,15 +951,15 @@
   /* cursor: pointer; */
 }
 
-.p2p-share-history-entry:hover {
+.peer-share-history-entry:hover {
   background-color: var(--background-modifier-hover);
 }
 
-.p2p-share-history-entry:last-child {
+.peer-share-history-entry:last-child {
   border-bottom: none;
 }
 
-.p2p-share-history-entry-icon {
+.peer-share-history-entry-icon {
   width: 32px;
   height: 32px;
   min-width: 32px;
@@ -970,35 +970,35 @@
   background-color: var(--background-modifier-border);
 }
 
-.p2p-share-history-entry-icon svg {
+.peer-share-history-entry-icon svg {
   width: 16px;
   height: 16px;
   color: var(--text-muted);
 }
 
 /* Status-specific icons */
-.p2p-share-history-entry.status-completed .p2p-share-history-entry-icon {
+.peer-share-history-entry.status-completed .peer-share-history-entry-icon {
   background-color: var(--interactive-accent);
 }
 
-.p2p-share-history-entry.status-completed .p2p-share-history-entry-icon svg {
+.peer-share-history-entry.status-completed .peer-share-history-entry-icon svg {
   color: var(--text-on-accent);
 }
 
-.p2p-share-history-entry.status-failed .p2p-share-history-entry-icon svg {
+.peer-share-history-entry.status-failed .peer-share-history-entry-icon svg {
   color: var(--text-error);
 }
 
-.p2p-share-history-entry.status-cancelled .p2p-share-history-entry-icon {
+.peer-share-history-entry.status-cancelled .peer-share-history-entry-icon {
   background-color: var(--background-modifier-warning);
 }
 
-.p2p-share-history-entry.status-cancelled .p2p-share-history-entry-icon svg {
+.peer-share-history-entry.status-cancelled .peer-share-history-entry-icon svg {
   color: var(--text-warning);
 }
 
 /* Entry Content */
-.p2p-share-history-entry-content {
+.peer-share-history-entry-content {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -1006,7 +1006,7 @@
   gap: 0.25rem;
 }
 
-.p2p-share-history-entry-first-line {
+.peer-share-history-entry-first-line {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -1014,40 +1014,40 @@
   font-size: 0.875rem;
 }
 
-.p2p-share-history-entry-direction-text {
+.peer-share-history-entry-direction-text {
   color: var(--text-muted);
 }
 
-.p2p-share-history-entry-peer-name {
+.peer-share-history-entry-peer-name {
   font-weight: 500;
   color: var(--text-normal);
 }
 
-.p2p-share-history-entry-peer-info {
+.peer-share-history-entry-peer-info {
   color: var(--text-faint);
   font-size: 0.8125rem;
 }
 
-.p2p-share-history-entry-status {
+.peer-share-history-entry-status {
   display: inline-flex;
   align-items: center;
   margin-left: 0.25rem;
 }
 
-.p2p-share-history-entry-status svg {
+.peer-share-history-entry-status svg {
   width: 14px;
   height: 14px;
 }
 
-.p2p-share-history-entry-status.failed svg {
+.peer-share-history-entry-status.failed svg {
   color: var(--text-error);
 }
 
-.p2p-share-history-entry-status.cancelled svg {
+.peer-share-history-entry-status.cancelled svg {
   color: var(--text-warning);
 }
 
-.p2p-share-history-entry-second-line {
+.peer-share-history-entry-second-line {
   font-size: 0.8125rem;
   color: var(--text-muted);
   word-wrap: break-word;
@@ -1055,67 +1055,67 @@
   overflow-wrap: break-word;
 }
 
-.p2p-share-history-entry-file-name {
+.peer-share-history-entry-file-name {
   font-family: var(--font-monospace);
   word-wrap: break-word;
   word-break: break-word;
   overflow-wrap: break-word;
 }
 
-.p2p-share-history-entry-file-size {
+.peer-share-history-entry-file-size {
   color: var(--text-faint);
 }
 
-.p2p-share-history-entry-files-summary {
+.peer-share-history-entry-files-summary {
   color: var(--text-accent);
 }
 
-.p2p-share-history-entry-files-summary:hover {
+.peer-share-history-entry-files-summary:hover {
   text-decoration: underline;
 }
 
-.p2p-share-history-entry-files-summary.clickable {
+.peer-share-history-entry-files-summary.clickable {
   cursor: pointer;
 }
 
-.p2p-share-history-entry-files-summary:focus-visible {
+.peer-share-history-entry-files-summary:focus-visible {
   outline: 2px solid var(--background-modifier-border-focus);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
-.p2p-share-history-entry-files-list {
+.peer-share-history-entry-files-list {
   margin-top: 0.5rem;
   padding-left: 0.5rem;
   border-left: 2px solid var(--background-modifier-border);
 }
 
-.p2p-share-history-entry-file-item {
+.peer-share-history-entry-file-item {
   padding: 0.25rem 0;
   font-size: 0.8125rem;
 }
 
-.p2p-share-history-entry-third-line {
+.peer-share-history-entry-third-line {
   font-size: 0.75rem;
   color: var(--text-faint);
 }
 
-.p2p-share-history-entry-time {
+.peer-share-history-entry-time {
   font-family: var(--font-monospace);
 }
 
-.p2p-share-history-entry-duration {
+.peer-share-history-entry-duration {
   color: var(--text-faint);
 }
 
-.p2p-share-history-filter-indicator {
+.peer-share-history-filter-indicator {
   color: var(--text-accent);
   font-weight: 500;
   font-size: 0.9rem;
 }
 
 /* Menu checkmark with accent color */
-.menu-item.p2p-share-menu-checked .menu-item-icon svg {
+.menu-item.peer-share-menu-checked .menu-item-icon svg {
   color: var(--interactive-accent);
 }
 
@@ -1123,21 +1123,21 @@
    Statistics Modal
    ============================================================================ */
 
-.p2p-share-statistics-modal {
+.peer-share-statistics-modal {
   min-width: 450px;
   padding: 1.5rem;
 }
 
-.p2p-share-statistics-modal h2 {
+.peer-share-statistics-modal h2 {
   margin: 0 0 1.5rem 0;
   font-size: 1.25rem;
 }
 
-.p2p-share-stats-section {
+.peer-share-stats-section {
   margin-bottom: 1.5rem;
 }
 
-.p2p-share-stats-section h3 {
+.peer-share-stats-section h3 {
   margin: 0 0 0.75rem 0;
   font-size: 1rem;
   font-weight: 600;
@@ -1147,13 +1147,13 @@
   font-size: 0.85rem;
 }
 
-.p2p-share-stats-grid {
+.peer-share-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
-.p2p-share-stat-item {
+.peer-share-stat-item {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -1163,25 +1163,25 @@
   border: 1px solid var(--background-modifier-border);
 }
 
-.p2p-share-stat-label {
+.peer-share-stat-label {
   font-size: 0.8125rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
-.p2p-share-stat-value {
+.peer-share-stat-value {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-normal);
 }
 
-.p2p-share-stats-peers {
+.peer-share-stats-peers {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.p2p-share-stats-peer-item {
+.peer-share-stats-peer-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1191,12 +1191,12 @@
   border: 1px solid var(--background-modifier-border);
 }
 
-.p2p-share-stats-peer-name {
+.peer-share-stats-peer-name {
   font-weight: 500;
   color: var(--text-normal);
 }
 
-.p2p-share-stats-peer-count {
+.peer-share-stats-peer-count {
   font-size: 0.875rem;
   color: var(--text-muted);
 }

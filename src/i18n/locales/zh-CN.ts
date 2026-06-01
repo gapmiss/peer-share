@@ -11,7 +11,7 @@ export const zhCN = {
 	'common.offline': '离线',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': '显示可用设备',
@@ -22,8 +22,8 @@ export const zhCN = {
 	'command.toggle-connection': '切换连接状态',
 
 	// Context menu
-	'context-menu.share-file': '通过 P2P Share 分享',
-	'context-menu.share-folder': '通过 P2P Share 分享文件夹',
+	'context-menu.share-file': '通过 Peer Share 分享',
+	'context-menu.share-folder': '通过 Peer Share 分享文件夹',
 
 	// Status bar
 	'status-bar.peers': '{0} 个设备{1}',
@@ -33,23 +33,23 @@ export const zhCN = {
 	'status-bar.menu.pair-device': '配对设备',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: 已连接',
-	'notice.disconnected': 'P2P Share: 已断开连接',
-	'notice.configure-server': 'P2P Share: 请在设置中配置服务器 URL',
-	'notice.failed-to-connect': 'P2P Share: 无法连接到服务器。请检查 URL 并确保服务器接受外部连接。',
-	'notice.transfer-rejected': 'P2P Share: 传输被拒绝',
-	'notice.transfer-cancelled': 'P2P Share: 传输已取消',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: 发送方已取消传输',
-	'notice.no-files': 'P2P Share: 没有要发送的文件',
-	'notice.error-sending': 'P2P Share: 发送文件时出错 - {0}',
-	'notice.device-paired': 'P2P Share: 设备配对成功！',
-	'notice.device-removed': 'P2P Share: 已移除一个已配对的设备',
-	'notice.not-connected': 'P2P Share: 未连接到服务器。请先重新连接。',
-	'notice.transfer-declined': 'P2P Share: 传输被拒绝',
-	'notice.auto-accepting': 'P2P Share: 自动接受来自 {0} 的传输',
+	'notice.connected': 'Peer Share: 已连接',
+	'notice.disconnected': 'Peer Share: 已断开连接',
+	'notice.configure-server': 'Peer Share: 请在设置中配置服务器 URL',
+	'notice.failed-to-connect': 'Peer Share: 无法连接到服务器。请检查 URL 并确保服务器接受外部连接。',
+	'notice.transfer-rejected': 'Peer Share: 传输被拒绝',
+	'notice.transfer-cancelled': 'Peer Share: 传输已取消',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: 发送方已取消传输',
+	'notice.no-files': 'Peer Share: 没有要发送的文件',
+	'notice.error-sending': 'Peer Share: 发送文件时出错 - {0}',
+	'notice.device-paired': 'Peer Share: 设备配对成功！',
+	'notice.device-removed': 'Peer Share: 已移除一个已配对的设备',
+	'notice.not-connected': 'Peer Share: 未连接到服务器。请先重新连接。',
+	'notice.transfer-declined': 'Peer Share: 传输被拒绝',
+	'notice.auto-accepting': 'Peer Share: 自动接受来自 {0} 的传输',
 
 	// Peer Modal
 	'peer-modal.title': '选择设备',
@@ -58,8 +58,8 @@ export const zhCN = {
 	'peer-modal.disconnected.hint': '连接以发现网络中的设备。',
 	'peer-modal.empty.title': '在您的网络中未发现设备。',
 	'peer-modal.empty.hint': '请确保其他设备已连接到相同的 PairDrop 服务器。',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': '支持点对点直连',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': '支持点对点直连',
 	'peer-modal.paired-tooltip': '已配对设备',
 	'peer-modal.share-with': '分享给 {0}',
 
@@ -127,7 +127,7 @@ export const zhCN = {
 	'confirm-modal.remove': '移除',
 
 	// Settings
-	'settings.title': 'P2P Share 设置',
+	'settings.title': 'Peer Share 设置',
 	'settings.server.title': '服务器配置',
 	'settings.server.url.name': '信令服务器 URL',
 	'settings.server.url.desc': '自托管 PairDrop 服务器的 WebSocket URL (例如: wss://your-server.com 或 ws://localhost:3000)',
@@ -136,7 +136,7 @@ export const zhCN = {
 	'settings.files.title': '文件设置',
 	'settings.files.location.name': '保存位置',
 	'settings.files.location.desc': '接收到的文件将保存到仓库中的此文件夹',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': '发现设置',
 	'settings.discovery.mode.name': '发现模式',

@@ -11,7 +11,7 @@ export const ko = {
 	'common.offline': '오프라인',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': '사용 가능한 기기 표시',
@@ -22,8 +22,8 @@ export const ko = {
 	'command.toggle-connection': '연결 전환',
 
 	// Context menu
-	'context-menu.share-file': 'P2P Share로 공유',
-	'context-menu.share-folder': 'P2P Share로 폴더 공유',
+	'context-menu.share-file': 'Peer Share로 공유',
+	'context-menu.share-folder': 'Peer Share로 폴더 공유',
 
 	// Status bar
 	'status-bar.peers': '{0}개 기기',
@@ -33,23 +33,23 @@ export const ko = {
 	'status-bar.menu.pair-device': '기기 페어링',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: 연결됨',
-	'notice.disconnected': 'P2P Share: 연결 끊김',
-	'notice.configure-server': 'P2P Share: 설정에서 서버 URL을 구성하세요',
-	'notice.failed-to-connect': 'P2P Share: 서버 연결에 실패했습니다. URL을 확인하고 서버가 외부 연결을 허용하는지 확인하세요.',
-	'notice.transfer-rejected': 'P2P Share: 전송이 거부됨',
-	'notice.transfer-cancelled': 'P2P Share: 전송이 취소됨',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: 발신자가 전송을 취소했습니다',
-	'notice.no-files': 'P2P Share: 전송할 파일이 없습니다',
-	'notice.error-sending': 'P2P Share: 파일 전송 오류 - {0}',
-	'notice.device-paired': 'P2P Share: 기기가 성공적으로 페어링되었습니다!',
-	'notice.device-removed': 'P2P Share: 페어링된 기기가 제거되었습니다',
-	'notice.not-connected': 'P2P Share: 서버에 연결되지 않았습니다. 먼저 재연결하세요.',
-	'notice.transfer-declined': 'P2P Share: 전송이 거부됨',
-	'notice.auto-accepting': 'P2P Share: {0}의 전송을 자동으로 수락하는 중',
+	'notice.connected': 'Peer Share: 연결됨',
+	'notice.disconnected': 'Peer Share: 연결 끊김',
+	'notice.configure-server': 'Peer Share: 설정에서 서버 URL을 구성하세요',
+	'notice.failed-to-connect': 'Peer Share: 서버 연결에 실패했습니다. URL을 확인하고 서버가 외부 연결을 허용하는지 확인하세요.',
+	'notice.transfer-rejected': 'Peer Share: 전송이 거부됨',
+	'notice.transfer-cancelled': 'Peer Share: 전송이 취소됨',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: 발신자가 전송을 취소했습니다',
+	'notice.no-files': 'Peer Share: 전송할 파일이 없습니다',
+	'notice.error-sending': 'Peer Share: 파일 전송 오류 - {0}',
+	'notice.device-paired': 'Peer Share: 기기가 성공적으로 페어링되었습니다!',
+	'notice.device-removed': 'Peer Share: 페어링된 기기가 제거되었습니다',
+	'notice.not-connected': 'Peer Share: 서버에 연결되지 않았습니다. 먼저 재연결하세요.',
+	'notice.transfer-declined': 'Peer Share: 전송이 거부됨',
+	'notice.auto-accepting': 'Peer Share: {0}의 전송을 자동으로 수락하는 중',
 
 	// Peer Modal
 	'peer-modal.title': '기기 선택',
@@ -58,8 +58,8 @@ export const ko = {
 	'peer-modal.disconnected.hint': '네트워크에서 기기를 검색하려면 연결하세요.',
 	'peer-modal.empty.title': '네트워크에서 기기를 찾을 수 없습니다.',
 	'peer-modal.empty.hint': '다른 기기가 동일한 PairDrop 서버에 연결되어 있는지 확인하세요.',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': '직접 P2P 연결 지원',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': '직접 P2P 연결 지원',
 	'peer-modal.paired-tooltip': '페어링된 기기',
 	'peer-modal.share-with': '{0}와 공유',
 
@@ -127,7 +127,7 @@ export const ko = {
 	'confirm-modal.remove': '제거',
 
 	// Settings
-	'settings.title': 'P2P Share 설정',
+	'settings.title': 'Peer Share 설정',
 	'settings.server.title': '서버 구성',
 	'settings.server.url.name': '시그널링 서버 URL',
 	'settings.server.url.desc': '자체 호스팅한 PairDrop 서버의 WebSocket URL (예: wss://your-server.com 또는 ws://localhost:3000)',
@@ -136,7 +136,7 @@ export const ko = {
 	'settings.files.title': '파일 설정',
 	'settings.files.location.name': '저장 위치',
 	'settings.files.location.desc': '수신한 파일을 저장할 볼트 내 폴더',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': '검색 설정',
 	'settings.discovery.mode.name': '검색 모드',

@@ -1,4 +1,4 @@
-// P2P Share Types
+// Peer Share Types
 
 import type { LogLevel } from './logger';
 
@@ -16,7 +16,7 @@ export interface PairedDevice {
   autoAccept: boolean;
 }
 
-export interface P2PShareSettings {
+export interface PeerShareSettings {
   serverUrl: string;
   saveLocation: string;
   discoveryMode: 'auto' | 'paired-only';
@@ -32,9 +32,9 @@ export interface P2PShareSettings {
   history: ShareHistorySettings;
 }
 
-export const DEFAULT_SETTINGS: P2PShareSettings = {
+export const DEFAULT_SETTINGS: PeerShareSettings = {
   serverUrl: 'wss://pairdrop.net',
-  saveLocation: 'P2P Share',
+  saveLocation: 'Peer Share',
   discoveryMode: 'auto',
   pairedDevices: [],
   logLevel: 'error',

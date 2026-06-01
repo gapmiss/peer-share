@@ -1,16 +1,16 @@
 import { Menu, Notice, Platform, Plugin, TFile, TFolder, addIcon, setIcon } from 'obsidian';
-import { P2PShareSettingTab } from './settings';
+import { PeerShareSettingTab } from './settings';
 import { PeerManager } from './peer-manager';
 import { PeerModal, FilePickerModal, TransferModal, IncomingTransferModal, PairingModal } from './modals';
-import type { P2PShareSettings, FileMetadata, TransferProgress, PairedDevice } from './types';
+import type { PeerShareSettings, FileMetadata, TransferProgress, PairedDevice } from './types';
 import { DEFAULT_SETTINGS } from './types';
 import { logger } from './logger';
 import { t, tp } from './i18n';
 import { ShareHistory } from './share-history';
 import { ShareHistoryView, SHARE_HISTORY_VIEW_TYPE } from './views/share-history-view';
 
-// Custom P2P Share icon
-const P2P_SHARE_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+// Custom Peer Share icon
+const PEER_SHARE_ICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
   <circle cx="30" cy="30" r="12"/>
   <circle cx="70" cy="30" r="12"/>
   <circle cx="30" cy="70" r="12"/>
@@ -35,8 +35,8 @@ interface ActiveTransfer {
   startTime: number;
 }
 
-export default class P2PSharePlugin extends Plugin {
-  settings: P2PShareSettings = DEFAULT_SETTINGS;
+export default class PeerSharePlugin extends Plugin {
+  settings: PeerShareSettings = DEFAULT_SETTINGS;
   peerManager: PeerManager | null = null;
   shareHistory: ShareHistory | null = null;
   private statusBarItem: HTMLElement | null = null;
@@ -53,7 +53,7 @@ export default class P2PSharePlugin extends Plugin {
       logger.setLevel(this.settings.logLevel);
 
       // Register custom icon
-      addIcon('p2p-share', P2P_SHARE_ICON);
+      addIcon('peer-share', PEER_SHARE_ICON);
 
       // Initialize peer manager
       this.peerManager = new PeerManager(this.app.vault, this.settings);
@@ -77,19 +77,19 @@ export default class P2PSharePlugin extends Plugin {
         callback: () => void this.activateHistoryView(),
       });
     } catch (error) {
-      console.error('[P2P Share] Fatal error during plugin load:', error);
-      new Notice('P2P Share: Failed to load plugin - ' + (error as Error).message);
+      console.error('[Peer Share] Fatal error during plugin load:', error);
+      new Notice('Peer Share: Failed to load plugin - ' + (error as Error).message);
       throw error;
     }
 
     // Add ribbon icon
-    this.addRibbonIcon('p2p-share', t('ribbon.tooltip'), () => {
+    this.addRibbonIcon('peer-share', t('ribbon.tooltip'), () => {
       this.showPeerModal();
     });
 
     // Add status bar item with menu on click
     this.statusBarItem = this.addStatusBarItem();
-    this.statusBarItem.addClass('p2p-share-status-bar');
+    this.statusBarItem.addClass('peer-share-status-bar');
     this.statusBarItem.onclick = (e) => this.showStatusBarContextMenu(e);
     this.statusBarItem.oncontextmenu = (e) => {
       e.preventDefault();
@@ -150,14 +150,14 @@ export default class P2PSharePlugin extends Plugin {
           menu.addItem((item) => {
             item
               .setTitle(t('context-menu.share-file'))
-              .setIcon('p2p-share')
+              .setIcon('peer-share')
               .onClick(() => this.shareFiles([file]));
           });
         } else if (file instanceof TFolder) {
           menu.addItem((item) => {
             item
               .setTitle(t('context-menu.share-folder'))
-              .setIcon('p2p-share')
+              .setIcon('peer-share')
               .onClick(() => this.shareFolder(file));
           });
         }
@@ -165,7 +165,7 @@ export default class P2PSharePlugin extends Plugin {
     );
 
     // Add settings tab
-    this.addSettingTab(new P2PShareSettingTab(this.app, this));
+    this.addSettingTab(new PeerShareSettingTab(this.app, this));
 
     // Connect to server if auto-connect is enabled
     if (this.settings.autoConnect) {
@@ -182,7 +182,7 @@ export default class P2PSharePlugin extends Plugin {
 
     this.peerManager.on('server-connected', () => {
       this.updateStatusBar();
-      // new Notice('P2P Share: Connected to server');
+      // new Notice('Peer Share: Connected to server');
     });
 
     this.peerManager.on('server-disconnected', () => {
@@ -228,7 +228,7 @@ export default class P2PSharePlugin extends Plugin {
     });
 
     this.peerManager.on('transfer-rejected', () => {
-      this.activeTransferModal?.setError(t('notice.transfer-rejected').replace('P2P Share: ', ''));
+      this.activeTransferModal?.setError(t('notice.transfer-rejected').replace('Peer Share: ', ''));
       new Notice(t('notice.transfer-rejected'));
     });
 
@@ -350,17 +350,17 @@ export default class P2PSharePlugin extends Plugin {
 
     // Clear existing content
     this.statusBarItem.empty();
-    this.statusBarItem.removeClass('p2p-share-disconnected');
+    this.statusBarItem.removeClass('peer-share-disconnected');
 
     // Add icon (link for connected, unlink for disconnected)
-    const iconContainer = this.statusBarItem.createSpan({ cls: 'p2p-share-status-icon' });
+    const iconContainer = this.statusBarItem.createSpan({ cls: 'peer-share-status-icon' });
     setIcon(iconContainer, isConnected ? 'link' : 'unlink');
 
     // Set icon color based on connection status
     if (isConnected) {
-      iconContainer.addClass('p2p-share-status-connected');
+      iconContainer.addClass('peer-share-status-connected');
     } else {
-      iconContainer.addClass('p2p-share-status-disconnected');
+      iconContainer.addClass('peer-share-status-disconnected');
     }
 
     // Add peer count text
@@ -447,7 +447,7 @@ export default class P2PSharePlugin extends Plugin {
     // Notify if files were skipped
     if (skippedCount > 0) {
       const fileWord = skippedCount === 1 ? 'file' : 'files';
-      new Notice(`P2P Share: Skipped ${skippedCount} empty ${fileWord} (0 bytes)`);
+      new Notice(`Peer Share: Skipped ${skippedCount} empty ${fileWord} (0 bytes)`);
     }
 
     // Check if we have any files left to send
@@ -623,9 +623,9 @@ export default class P2PSharePlugin extends Plugin {
       const body = tp('incoming-modal.files-summary', fileCount, totalSize);
       const notification = new Notification(t('incoming-modal.title'), {
         body: `${t('incoming-modal.from')}${peerName}\n${body}`,
-        tag: `p2p-transfer-${Date.now()}`,
+        tag: `peer-transfer-${Date.now()}`,
         requireInteraction: true,
-        icon: 'data:image/svg+xml;base64,' + btoa(P2P_SHARE_ICON),
+        icon: 'data:image/svg+xml;base64,' + btoa(PEER_SHARE_ICON),
       });
 
       // Handle clicks on the system notification
@@ -818,13 +818,13 @@ export default class P2PSharePlugin extends Plugin {
     );
 
     // Add custom class to scope CSS styling
-    (menu as Menu & { dom: HTMLElement }).dom.addClass('p2p-share-status-bar-menu');
+    (menu as Menu & { dom: HTMLElement }).dom.addClass('peer-share-status-bar-menu');
 
     menu.showAtMouseEvent(e);
   }
 
   async loadSettings(): Promise<void> {
-    const loaded = await this.loadData() as Partial<P2PShareSettings> | null;
+    const loaded = await this.loadData() as Partial<PeerShareSettings> | null;
     this.settings = Object.assign({}, DEFAULT_SETTINGS, loaded ?? {});
 
     // Migration: Add autoAccept field to existing paired devices

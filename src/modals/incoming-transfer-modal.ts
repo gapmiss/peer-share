@@ -35,27 +35,27 @@ export class IncomingTransferModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-incoming-modal');
+    contentEl.addClass('peer-share-incoming-modal');
 
     // Header with icon
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
-    const iconContainer = header.createDiv({ cls: 'p2p-share-incoming-icon' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
+    const iconContainer = header.createDiv({ cls: 'peer-share-incoming-icon' });
     setIcon(iconContainer, 'download');
     header.createEl('h2', { text: t('incoming-modal.title') });
 
     // From peer
-    const peerInfo = contentEl.createDiv({ cls: 'p2p-share-incoming-peer' });
+    const peerInfo = contentEl.createDiv({ cls: 'peer-share-incoming-peer' });
     peerInfo.createSpan({ text: t('incoming-modal.from') });
-    peerInfo.createSpan({ text: this.peerName, cls: 'p2p-share-peer-name-highlight' });
+    peerInfo.createSpan({ text: this.peerName, cls: 'peer-share-peer-name-highlight' });
 
     // File summary
-    const summary = contentEl.createDiv({ cls: 'p2p-share-incoming-summary' });
+    const summary = contentEl.createDiv({ cls: 'peer-share-incoming-summary' });
     summary.createEl('p', {
       text: tp('incoming-modal.files-summary', this.files.length, this.formatSize(this.totalSize)),
     });
 
     // File list
-    const fileList = contentEl.createDiv({ cls: 'p2p-share-incoming-file-list' });
+    const fileList = contentEl.createDiv({ cls: 'peer-share-incoming-file-list' });
     const maxDisplay = 5;
     let showingAll = false;
 
@@ -64,16 +64,16 @@ export class IncomingTransferModal extends Modal {
       const displayFiles = showingAll ? this.files : this.files.slice(0, maxDisplay);
 
       for (const file of displayFiles) {
-        const item = fileList.createDiv({ cls: 'p2p-share-incoming-file-item' });
-        const icon = item.createDiv({ cls: 'p2p-share-file-icon' });
+        const item = fileList.createDiv({ cls: 'peer-share-incoming-file-item' });
+        const icon = item.createDiv({ cls: 'peer-share-file-icon' });
         setIcon(icon, this.getFileIcon(file.name));
-        item.createDiv({ cls: 'p2p-share-file-name', text: file.name });
-        item.createDiv({ cls: 'p2p-share-file-size', text: this.formatSize(file.size) });
+        item.createDiv({ cls: 'peer-share-file-name', text: file.name });
+        item.createDiv({ cls: 'peer-share-file-size', text: this.formatSize(file.size) });
       }
 
       if (!showingAll && this.files.length > maxDisplay) {
         const moreButton = fileList.createDiv({
-          cls: 'p2p-share-incoming-more clickable',
+          cls: 'peer-share-incoming-more clickable',
           text: t('incoming-modal.more-files', this.files.length - maxDisplay),
         });
         moreButton.onclick = () => {
@@ -88,17 +88,17 @@ export class IncomingTransferModal extends Modal {
     // Auto-accept checkbox (only show if this is a paired device)
     let autoAcceptCheckbox: HTMLInputElement | null = null;
     if (this.roomSecret) {
-      const autoAcceptContainer = contentEl.createDiv({ cls: 'p2p-share-auto-accept-container' });
-      const label = autoAcceptContainer.createEl('label', { cls: 'p2p-share-auto-accept-label' });
+      const autoAcceptContainer = contentEl.createDiv({ cls: 'peer-share-auto-accept-container' });
+      const label = autoAcceptContainer.createEl('label', { cls: 'peer-share-auto-accept-label' });
       autoAcceptCheckbox = label.createEl('input', { type: 'checkbox' });
       autoAcceptCheckbox.checked = this.currentAutoAccept;
       label.createSpan({ text: t('incoming-modal.auto-accept', this.peerName) });
     }
 
     // Action buttons
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer p2p-share-incoming-actions' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer peer-share-incoming-actions' });
 
-    const rejectBtn = footer.createEl('button', { text: t('incoming-modal.decline'), cls: 'p2p-share-btn-reject' });
+    const rejectBtn = footer.createEl('button', { text: t('incoming-modal.decline'), cls: 'peer-share-btn-reject' });
     rejectBtn.onclick = () => {
       this.resolved = true;
       this.onReject();
@@ -144,13 +144,13 @@ export class IncomingTransferModal extends Modal {
     this.peerName = newName;
 
     // Update peer name display
-    const peerEl = this.contentEl.querySelector('.p2p-share-peer-name-highlight');
+    const peerEl = this.contentEl.querySelector('.peer-share-peer-name-highlight');
     if (peerEl) {
       peerEl.textContent = newName;
     }
 
     // Update auto-accept checkbox label if it exists
-    const autoAcceptLabel = this.contentEl.querySelector('.p2p-share-auto-accept-label');
+    const autoAcceptLabel = this.contentEl.querySelector('.peer-share-auto-accept-label');
     if (autoAcceptLabel) {
       // Find the text span and update it
       const textSpan = autoAcceptLabel.querySelector('span');

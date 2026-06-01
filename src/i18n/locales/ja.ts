@@ -11,7 +11,7 @@ export const ja = {
 	'common.offline': 'オフライン',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': '利用可能なデバイスを表示',
@@ -22,8 +22,8 @@ export const ja = {
 	'command.toggle-connection': '接続を切り替え',
 
 	// Context menu
-	'context-menu.share-file': 'P2P Shareで共有',
-	'context-menu.share-folder': 'P2P Shareでフォルダを共有',
+	'context-menu.share-file': 'Peer Shareで共有',
+	'context-menu.share-folder': 'Peer Shareでフォルダを共有',
 
 	// Status bar
 	'status-bar.peers': '{0}台のデバイス',
@@ -33,23 +33,23 @@ export const ja = {
 	'status-bar.menu.pair-device': 'デバイスをペアリング',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: 接続しました',
-	'notice.disconnected': 'P2P Share: 切断しました',
-	'notice.configure-server': 'P2P Share: 設定でサーバーURLを設定してください',
-	'notice.failed-to-connect': 'P2P Share: サーバーへの接続に失敗しました。URLを確認し、サーバーが外部接続を受け付けることを確認してください。',
-	'notice.transfer-rejected': 'P2P Share: 転送が拒否されました',
-	'notice.transfer-cancelled': 'P2P Share: 転送がキャンセルされました',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: 送信者によって転送がキャンセルされました',
-	'notice.no-files': 'P2P Share: 送信するファイルがありません',
-	'notice.error-sending': 'P2P Share: ファイル送信エラー - {0}',
-	'notice.device-paired': 'P2P Share: デバイスのペアリングに成功しました！',
-	'notice.device-removed': 'P2P Share: ペアリング済みデバイスが削除されました',
-	'notice.not-connected': 'P2P Share: サーバーに接続されていません。まず再接続してください。',
-	'notice.transfer-declined': 'P2P Share: 転送が拒否されました',
-	'notice.auto-accepting': 'P2P Share: {0}からの転送を自動承認しています',
+	'notice.connected': 'Peer Share: 接続しました',
+	'notice.disconnected': 'Peer Share: 切断しました',
+	'notice.configure-server': 'Peer Share: 設定でサーバーURLを設定してください',
+	'notice.failed-to-connect': 'Peer Share: サーバーへの接続に失敗しました。URLを確認し、サーバーが外部接続を受け付けることを確認してください。',
+	'notice.transfer-rejected': 'Peer Share: 転送が拒否されました',
+	'notice.transfer-cancelled': 'Peer Share: 転送がキャンセルされました',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: 送信者によって転送がキャンセルされました',
+	'notice.no-files': 'Peer Share: 送信するファイルがありません',
+	'notice.error-sending': 'Peer Share: ファイル送信エラー - {0}',
+	'notice.device-paired': 'Peer Share: デバイスのペアリングに成功しました！',
+	'notice.device-removed': 'Peer Share: ペアリング済みデバイスが削除されました',
+	'notice.not-connected': 'Peer Share: サーバーに接続されていません。まず再接続してください。',
+	'notice.transfer-declined': 'Peer Share: 転送が拒否されました',
+	'notice.auto-accepting': 'Peer Share: {0}からの転送を自動承認しています',
 
 	// Peer Modal
 	'peer-modal.title': 'デバイスを選択',
@@ -58,8 +58,8 @@ export const ja = {
 	'peer-modal.disconnected.hint': '接続してネットワーク上のデバイスを検出します。',
 	'peer-modal.empty.title': 'ネットワーク上にデバイスが見つかりませんでした。',
 	'peer-modal.empty.hint': '他のデバイスが同じPairDropサーバーに接続していることを確認してください。',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': 'ダイレクトP2P接続に対応',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': 'ダイレクトP2P接続に対応',
 	'peer-modal.paired-tooltip': 'ペアリング済みデバイス',
 	'peer-modal.share-with': '{0}と共有',
 
@@ -127,7 +127,7 @@ export const ja = {
 	'confirm-modal.remove': '削除',
 
 	// Settings
-	'settings.title': 'P2P Share設定',
+	'settings.title': 'Peer Share設定',
 	'settings.server.title': 'サーバー設定',
 	'settings.server.url.name': 'シグナリングサーバーURL',
 	'settings.server.url.desc': '自己ホストしたPairDropサーバーのWebSocket URL（例: wss://your-server.com または ws://localhost:3000）',
@@ -136,7 +136,7 @@ export const ja = {
 	'settings.files.title': 'ファイル設定',
 	'settings.files.location.name': '保存場所',
 	'settings.files.location.desc': '受信したファイルを保存するボルト内のフォルダ',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': '検出設定',
 	'settings.discovery.mode.name': '検出モード',

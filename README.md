@@ -1,4 +1,4 @@
-# P2P Share
+# Peer Share
 
 Share files between Obsidian vaults using WebRTC peer-to-peer connections, powered by [PairDrop](https://github.com/schlagmichdoch/pairdrop).
 
@@ -21,7 +21,7 @@ Share files between Obsidian vaults using WebRTC peer-to-peer connections, power
 ### Manual Installation
 
 1. Download the latest release (`main.js`, `manifest.json`, `styles.css`)
-2. Create a folder called `p2p-share` in your vault's `.obsidian/plugins/` directory
+2. Create a folder called `peer-share` in your vault's `.obsidian/plugins/` directory
 3. Copy the downloaded files into the folder
 4. Enable the plugin in Obsidian Settings > Community Plugins
 
@@ -29,33 +29,33 @@ Share files between Obsidian vaults using WebRTC peer-to-peer connections, power
 
 1. Ensure the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin is installed
 2. Trigger the command Obsidian42 - BRAT: Add a beta plugin for testing
-3. Enter this repository, gapmiss/p2p-share
-4. Enable the "P2P Share" plugin in the community plugin list
+3. Enter this repository, gapmiss/peer-share
+4. Enable the "Peer Share" plugin in the community plugin list
 
 ### From Source
 
 ```bash
-git clone https://github.com/gapmiss/p2p-share.git
-cd p2p-share
+git clone https://github.com/gapmiss/peer-share.git
+cd peer-share
 npm install
 npm run build
 ```
 
-Then copy `main.js`, `manifest.json`, and `styles.css` to your vault's plugins folder (e.g. `.obsidian/plugins/p2p-share`).
+Then copy `main.js`, `manifest.json`, and `styles.css` to your vault's plugins folder (e.g. `.obsidian/plugins/peer-share`).
 
 ## Usage
 
 ### Sharing Files
 
-1. Click the P2P Share icon in the ribbon (left sidebar)
+1. Click the Peer Share icon in the ribbon (left sidebar)
 2. Select a peer from the list of discovered devices
 3. Choose files or folders to share
 4. Monitor transfer progress
 
 ### Alternative Methods
 
-- **Context Menu**: Right-click any file/folder and select "Share via P2P Share"
-- **Command Palette**: Use `Ctrl/Cmd + P` and search for "P2P Share"
+- **Context Menu**: Right-click any file/folder and select "Share via Peer Share"
+- **Command Palette**: Use `Ctrl/Cmd + P` and search for "Peer Share"
   - `Show available peers` - Open peer selection
   - `Share current file` - Share the currently open file
   - `Share files...` - Open file picker
@@ -71,25 +71,25 @@ When someone sends you files:
 1. An incoming transfer dialog will appear
 2. Review the files being sent
 3. Click "Accept" to receive or "Decline" to reject
-4. Files are saved to your configured save location (default: `P2P Share/`)
+4. Files are saved to your configured save location (default: `Peer Share/`)
 
 ### Device Pairing
 
 Pair devices to share files across different networks:
 
-1. Run command `P2P Share: Pair with device`
+1. Run command `Peer Share: Pair with device`
 2. Choose "Show pairing code" on one device
 3. Enter the 6-digit code on the other device
 4. Devices are now paired and can discover each other from anywhere
 
-Manage paired devices in Settings > P2P Share > Paired Devices.
+Manage paired devices in Settings > Peer Share > Paired Devices.
 
 ### Share History
 
 View all your sent and received file transfers in the Share History sidebar:
 
-1. Open via command palette: "P2P Share: Open share history"
-2. Or from Settings > P2P Share > Share History > "Open History"
+1. Open via command palette: "Peer Share: Open share history"
+2. Or from Settings > Peer Share > Share History > "Open History"
 3. Browse transfers grouped by time (Today, Yesterday, This Week, etc.)
 4. Search by filename, peer name, OS, or browser
 5. Filter by direction (sent/received) and status (completed/failed/cancelled)
@@ -101,7 +101,7 @@ View all your sent and received file transfers in the Share History sidebar:
 | Setting | Description |
 |---------|-------------|
 | **Signaling Server URL** | WebSocket URL for peer discovery (default: `wss://pairdrop.net`) |
-| **Save Location** | Folder where received files are saved (default: `P2P Share/`) |
+| **Save Location** | Folder where received files are saved (default: `Peer Share/`) |
 | **Discovery Mode** | `Auto-discover` (local network + paired devices) or `Paired devices only` |
 | **Log Level** | Console logging verbosity (Silent, Error, Warning, Info, Debug) |
 | **Auto-connect on startup** | Automatically connect to server when Obsidian loads (default: enabled) |
@@ -132,7 +132,7 @@ Data flows directly between peers - the signaling server only facilitates the in
 
 ## Security
 
-P2P Share uses **WebRTC's built-in encryption** (DTLS + SRTP) for secure peer-to-peer file transfers:
+Peer Share uses **WebRTC's built-in encryption** (DTLS + SRTP) for secure peer-to-peer file transfers:
 
 - ✅ **All file data is encrypted** during transfer (same encryption as Zoom/Google Meet)
 - ✅ **Signaling uses WSS (WebSocket Secure)** - encrypted with TLS like HTTPS

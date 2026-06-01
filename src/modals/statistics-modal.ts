@@ -27,16 +27,16 @@ export class StatisticsModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-statistics-modal');
+    contentEl.addClass('peer-share-statistics-modal');
 
     // Header
     contentEl.createEl('h2', { text: 'Transfer statistics' });
 
     // Overall stats
-    const overallSection = contentEl.createDiv({ cls: 'p2p-share-stats-section' });
+    const overallSection = contentEl.createDiv({ cls: 'peer-share-stats-section' });
     overallSection.createEl('h3', { text: 'Overview' });
 
-    const overallStats = overallSection.createDiv({ cls: 'p2p-share-stats-grid' });
+    const overallStats = overallSection.createDiv({ cls: 'peer-share-stats-grid' });
 
     this.createStatItem(overallStats, 'Total Transfers', this.stats.totalTransfers.toString());
     this.createStatItem(overallStats, 'Sent', `${this.stats.totalSent} (${this.formatFileSize(this.stats.totalBytesSent)})`);
@@ -45,30 +45,30 @@ export class StatisticsModal extends Modal {
 
     // Top peers
     if (this.stats.topPeers.length > 0) {
-      const peersSection = contentEl.createDiv({ cls: 'p2p-share-stats-section' });
+      const peersSection = contentEl.createDiv({ cls: 'peer-share-stats-section' });
       peersSection.createEl('h3', { text: 'Top peers' });
 
-      const peersList = peersSection.createDiv({ cls: 'p2p-share-stats-peers' });
+      const peersList = peersSection.createDiv({ cls: 'peer-share-stats-peers' });
       for (const peer of this.stats.topPeers) {
-        const peerItem = peersList.createDiv({ cls: 'p2p-share-stats-peer-item' });
-        peerItem.createSpan({ text: peer.name, cls: 'p2p-share-stats-peer-name' });
+        const peerItem = peersList.createDiv({ cls: 'peer-share-stats-peer-item' });
+        peerItem.createSpan({ text: peer.name, cls: 'peer-share-stats-peer-name' });
         peerItem.createSpan({
           text: `${peer.count} transfer${peer.count !== 1 ? 's' : ''}`,
-          cls: 'p2p-share-stats-peer-count'
+          cls: 'peer-share-stats-peer-count'
         });
       }
     }
 
     // Footer
-    const footer = contentEl.createDiv({ cls: 'p2p-share-modal-footer' });
+    const footer = contentEl.createDiv({ cls: 'peer-share-modal-footer' });
     const closeBtn = footer.createEl('button', { text: 'Close' });
     closeBtn.onclick = () => this.close();
   }
 
   private createStatItem(container: HTMLElement, label: string, value: string): void {
-    const item = container.createDiv({ cls: 'p2p-share-stat-item' });
-    item.createDiv({ text: label, cls: 'p2p-share-stat-label' });
-    item.createDiv({ text: value, cls: 'p2p-share-stat-value' });
+    const item = container.createDiv({ cls: 'peer-share-stat-item' });
+    item.createDiv({ text: label, cls: 'peer-share-stat-label' });
+    item.createDiv({ text: value, cls: 'peer-share-stat-value' });
   }
 
   onClose(): void {

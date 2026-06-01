@@ -11,7 +11,7 @@ export const de = {
 	'common.offline': 'Offline',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': 'Verfügbare Geräte anzeigen',
@@ -22,8 +22,8 @@ export const de = {
 	'command.toggle-connection': 'Verbindung umschalten',
 
 	// Context menu
-	'context-menu.share-file': 'Über P2P Share teilen',
-	'context-menu.share-folder': 'Ordner über P2P Share teilen',
+	'context-menu.share-file': 'Über Peer Share teilen',
+	'context-menu.share-folder': 'Ordner über Peer Share teilen',
 
 	// Status bar
 	'status-bar.peers': '{0} Gerät{1}',
@@ -33,23 +33,23 @@ export const de = {
 	'status-bar.menu.pair-device': 'Mit Gerät koppeln',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: Verbunden',
-	'notice.disconnected': 'P2P Share: Getrennt',
-	'notice.configure-server': 'P2P Share: Bitte konfiguriere eine Server-URL in den Einstellungen',
-	'notice.failed-to-connect': 'P2P Share: Verbindung zum Server fehlgeschlagen. Überprüfe die URL und stelle sicher, dass der Server externe Verbindungen akzeptiert.',
-	'notice.transfer-rejected': 'P2P Share: Übertragung abgelehnt',
-	'notice.transfer-cancelled': 'P2P Share: Übertragung abgebrochen',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: Übertragung vom Absender abgebrochen',
-	'notice.no-files': 'P2P Share: Keine Dateien zum Senden',
-	'notice.error-sending': 'P2P Share: Fehler beim Senden der Dateien - {0}',
-	'notice.device-paired': 'P2P Share: Gerät erfolgreich gekoppelt!',
-	'notice.device-removed': 'P2P Share: Ein gekoppeltes Gerät wurde entfernt',
-	'notice.not-connected': 'P2P Share: Nicht mit Server verbunden. Bitte zuerst neu verbinden.',
-	'notice.transfer-declined': 'P2P Share: Übertragung abgelehnt',
-	'notice.auto-accepting': 'P2P Share: Übertragung von {0} wird automatisch akzeptiert',
+	'notice.connected': 'Peer Share: Verbunden',
+	'notice.disconnected': 'Peer Share: Getrennt',
+	'notice.configure-server': 'Peer Share: Bitte konfiguriere eine Server-URL in den Einstellungen',
+	'notice.failed-to-connect': 'Peer Share: Verbindung zum Server fehlgeschlagen. Überprüfe die URL und stelle sicher, dass der Server externe Verbindungen akzeptiert.',
+	'notice.transfer-rejected': 'Peer Share: Übertragung abgelehnt',
+	'notice.transfer-cancelled': 'Peer Share: Übertragung abgebrochen',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: Übertragung vom Absender abgebrochen',
+	'notice.no-files': 'Peer Share: Keine Dateien zum Senden',
+	'notice.error-sending': 'Peer Share: Fehler beim Senden der Dateien - {0}',
+	'notice.device-paired': 'Peer Share: Gerät erfolgreich gekoppelt!',
+	'notice.device-removed': 'Peer Share: Ein gekoppeltes Gerät wurde entfernt',
+	'notice.not-connected': 'Peer Share: Nicht mit Server verbunden. Bitte zuerst neu verbinden.',
+	'notice.transfer-declined': 'Peer Share: Übertragung abgelehnt',
+	'notice.auto-accepting': 'Peer Share: Übertragung von {0} wird automatisch akzeptiert',
 
 	// Peer Modal
 	'peer-modal.title': 'Gerät auswählen',
@@ -58,8 +58,8 @@ export const de = {
 	'peer-modal.disconnected.hint': 'Verbinde dich, um Geräte in deinem Netzwerk zu entdecken.',
 	'peer-modal.empty.title': 'Keine Geräte in deinem Netzwerk gefunden.',
 	'peer-modal.empty.hint': 'Stelle sicher, dass andere Geräte mit demselben PairDrop-Server verbunden sind.',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': 'Direkte Peer-to-Peer-Verbindung unterstützt',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': 'Direkte Peer-to-Peer-Verbindung unterstützt',
 	'peer-modal.paired-tooltip': 'Gekoppeltes Gerät',
 	'peer-modal.share-with': 'Teilen mit {0}',
 
@@ -127,7 +127,7 @@ export const de = {
 	'confirm-modal.remove': 'Entfernen',
 
 	// Settings
-	'settings.title': 'P2P Share Einstellungen',
+	'settings.title': 'Peer Share Einstellungen',
 	'settings.server.title': 'Server-Konfiguration',
 	'settings.server.url.name': 'Signalisierungsserver-URL',
 	'settings.server.url.desc': 'WebSocket-URL für deinen selbst gehosteten PairDrop-Server (z.B. wss://dein-server.com oder ws://localhost:3000)',
@@ -136,7 +136,7 @@ export const de = {
 	'settings.files.title': 'Datei-Einstellungen',
 	'settings.files.location.name': 'Speicherort',
 	'settings.files.location.desc': 'Ordner in deinem Tresor, in dem empfangene Dateien gespeichert werden',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': 'Entdeckungseinstellungen',
 	'settings.discovery.mode.name': 'Entdeckungsmodus',

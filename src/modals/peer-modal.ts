@@ -30,24 +30,24 @@ export class PeerModal extends Modal {
   onOpen(): void {
     const { contentEl } = this;
     contentEl.empty();
-    contentEl.addClass('p2p-share-modal');
+    contentEl.addClass('peer-share-modal');
 
     // Header
-    const header = contentEl.createDiv({ cls: 'p2p-share-modal-header' });
+    const header = contentEl.createDiv({ cls: 'peer-share-modal-header' });
     header.createEl('h2', { text: t('peer-modal.title') });
 
     // Our display name - store reference for updates
-    this.displayNameEl = header.createDiv({ cls: 'p2p-share-our-name' });
+    this.displayNameEl = header.createDiv({ cls: 'peer-share-our-name' });
     this.updateDisplayName();
 
     // Connection status with menu button
-    const statusContainer = header.createDiv({ cls: 'p2p-share-status-container' });
-    this.statusEl = statusContainer.createDiv({ cls: 'p2p-share-connection-status' });
+    const statusContainer = header.createDiv({ cls: 'peer-share-status-container' });
+    this.statusEl = statusContainer.createDiv({ cls: 'peer-share-connection-status' });
     this.updateConnectionStatus();
 
     // Menu button to the right of status
     const menuBtn = statusContainer.createDiv({
-      cls: 'p2p-share-menu-btn clickable-icon',
+      cls: 'peer-share-menu-btn clickable-icon',
       attr: { 'aria-label': 'Connection options' }
     });
     setIcon(menuBtn, 'ellipsis');
@@ -60,7 +60,7 @@ export class PeerModal extends Modal {
     };
 
     // Peers container
-    this.peersContainer = contentEl.createDiv({ cls: 'p2p-share-peers-container' });
+    this.peersContainer = contentEl.createDiv({ cls: 'peer-share-peers-container' });
     this.renderPeers();
 
     // Listen for peer updates (server sends these automatically)
@@ -109,7 +109,7 @@ export class PeerModal extends Modal {
     if (!this.statusEl) return;
     this.statusEl.empty();
     const isConnected = this.peerManager.isConnected();
-    this.statusEl.createSpan({ cls: `p2p-share-status-dot ${isConnected ? 'connected' : 'disconnected'}` });
+    this.statusEl.createSpan({ cls: `peer-share-status-dot ${isConnected ? 'connected' : 'disconnected'}` });
     this.statusEl.createSpan({ text: isConnected ? t('common.connected') : t('common.disconnected') });
   }
 
@@ -131,21 +131,21 @@ export class PeerModal extends Modal {
 
     // Don't show peers if not connected
     if (!isConnected) {
-      const emptyState = this.peersContainer.createDiv({ cls: 'p2p-share-empty-state' });
+      const emptyState = this.peersContainer.createDiv({ cls: 'peer-share-empty-state' });
       emptyState.createEl('p', { text: t('peer-modal.disconnected.title') });
       emptyState.createEl('p', {
         text: t('peer-modal.disconnected.hint'),
-        cls: 'p2p-share-hint',
+        cls: 'peer-share-hint',
       });
       return;
     }
 
     if (peers.length === 0) {
-      const emptyState = this.peersContainer.createDiv({ cls: 'p2p-share-empty-state' });
+      const emptyState = this.peersContainer.createDiv({ cls: 'peer-share-empty-state' });
       emptyState.createEl('p', { text: t('peer-modal.empty.title') });
       emptyState.createEl('p', {
         text: t('peer-modal.empty.hint'),
-        cls: 'p2p-share-hint',
+        cls: 'peer-share-hint',
       });
       return;
     }
@@ -164,7 +164,7 @@ export class PeerModal extends Modal {
     const isPaired = roomSecret !== null; // Peer is paired if it has a roomSecret
 
     const item = this.peersContainer.createDiv({
-      cls: 'p2p-share-peer-item',
+      cls: 'peer-share-peer-item',
       attr: {
         role: 'button',
         'aria-label': `Share with ${peerDisplayName}`
@@ -185,33 +185,33 @@ export class PeerModal extends Modal {
     };
 
     // Icon
-    const iconContainer = item.createDiv({ cls: 'p2p-share-peer-icon' });
+    const iconContainer = item.createDiv({ cls: 'peer-share-peer-icon' });
     const iconName = this.getDeviceIcon(peer.name.type);
     setIcon(iconContainer, iconName);
 
     // Info
-    const info = item.createDiv({ cls: 'p2p-share-peer-info' });
-    info.createDiv({ cls: 'p2p-share-peer-name', text: peerDisplayName });
+    const info = item.createDiv({ cls: 'peer-share-peer-info' });
+    info.createDiv({ cls: 'peer-share-peer-name', text: peerDisplayName });
     const details = [peer.name.os, peer.name.browser].filter(Boolean).join(' • ') || 'Unknown device';
     info.createDiv({
-      cls: 'p2p-share-peer-details',
+      cls: 'peer-share-peer-details',
       text: details,
     });
 
     // Badges container
-    const badges = item.createDiv({ cls: 'p2p-share-peer-badges' });
+    const badges = item.createDiv({ cls: 'peer-share-peer-badges' });
 
     // Paired indicator
     if (isPaired) {
-      const pairedBadge = badges.createDiv({ cls: 'p2p-share-paired-badge' });
+      const pairedBadge = badges.createDiv({ cls: 'peer-share-paired-badge' });
       setIcon(pairedBadge, 'link');
       pairedBadge.title = t('peer-modal.paired-tooltip');
     }
 
     // RTC indicator
     if (peer.rtcSupported) {
-      const rtcBadge = badges.createDiv({ cls: 'p2p-share-rtc-badge', text: t('peer-modal.p2p-badge') });
-      rtcBadge.title = t('peer-modal.p2p-tooltip');
+      const rtcBadge = badges.createDiv({ cls: 'peer-share-rtc-badge', text: t('peer-modal.rtc-badge') });
+      rtcBadge.title = t('peer-modal.rtc-tooltip');
     }
   }
 

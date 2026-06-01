@@ -11,7 +11,7 @@ export const en = {
 	'common.offline': 'Offline',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': 'Show available peers',
@@ -22,8 +22,8 @@ export const en = {
 	'command.toggle-connection': 'Toggle connection',
 
 	// Context menu
-	'context-menu.share-file': 'Share via P2P Share',
-	'context-menu.share-folder': 'Share folder via P2P Share',
+	'context-menu.share-file': 'Share via Peer Share',
+	'context-menu.share-folder': 'Share folder via Peer Share',
 
 	// Status bar
 	'status-bar.peers': '{0} peer{1}',
@@ -33,23 +33,23 @@ export const en = {
 	'status-bar.menu.pair-device': 'Pair with device',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: Connected',
-	'notice.disconnected': 'P2P Share: Disconnected',
-	'notice.configure-server': 'P2P Share: Please configure a server URL in settings',
-	'notice.failed-to-connect': 'P2P Share: Failed to connect to server. Check the URL and ensure the server accepts external connections.',
-	'notice.transfer-rejected': 'P2P Share: Transfer rejected',
-	'notice.transfer-cancelled': 'P2P Share: Transfer cancelled',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: Transfer cancelled by sender',
-	'notice.no-files': 'P2P Share: No files to send',
-	'notice.error-sending': 'P2P Share: Error sending files - {0}',
-	'notice.device-paired': 'P2P Share: Device paired successfully!',
-	'notice.device-removed': 'P2P Share: A paired device was removed',
-	'notice.not-connected': 'P2P Share: Not connected to server. Please reconnect first.',
-	'notice.transfer-declined': 'P2P Share: Transfer declined',
-	'notice.auto-accepting': 'P2P Share: Auto-accepting transfer from {0}',
+	'notice.connected': 'Peer Share: Connected',
+	'notice.disconnected': 'Peer Share: Disconnected',
+	'notice.configure-server': 'Peer Share: Please configure a server URL in settings',
+	'notice.failed-to-connect': 'Peer Share: Failed to connect to server. Check the URL and ensure the server accepts external connections.',
+	'notice.transfer-rejected': 'Peer Share: Transfer rejected',
+	'notice.transfer-cancelled': 'Peer Share: Transfer cancelled',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: Transfer cancelled by sender',
+	'notice.no-files': 'Peer Share: No files to send',
+	'notice.error-sending': 'Peer Share: Error sending files - {0}',
+	'notice.device-paired': 'Peer Share: Device paired successfully!',
+	'notice.device-removed': 'Peer Share: A paired device was removed',
+	'notice.not-connected': 'Peer Share: Not connected to server. Please reconnect first.',
+	'notice.transfer-declined': 'Peer Share: Transfer declined',
+	'notice.auto-accepting': 'Peer Share: Auto-accepting transfer from {0}',
 
 	// Peer Modal
 	'peer-modal.title': 'Select peer',
@@ -58,8 +58,8 @@ export const en = {
 	'peer-modal.disconnected.hint': 'Connect to discover peers on your network.',
 	'peer-modal.empty.title': 'No peers found on your network.',
 	'peer-modal.empty.hint': 'Make sure other devices are connected to the same PairDrop server.',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': 'Direct peer-to-peer connection supported',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': 'Direct peer-to-peer connection supported',
 	'peer-modal.paired-tooltip': 'Paired device',
 	'peer-modal.share-with': 'Share with {0}',
 
@@ -127,7 +127,7 @@ export const en = {
 	'confirm-modal.remove': 'Remove',
 
 	// Settings
-	'settings.title': 'P2P Share settings',
+	'settings.title': 'Peer Share settings',
 	'settings.server.title': 'Server configuration',
 	'settings.server.url.name': 'Signaling server URL',
 	'settings.server.url.desc': 'WebSocket URL for your self-hosted PairDrop server (e.g., wss://your-server.com or ws://localhost:3000)',
@@ -136,7 +136,7 @@ export const en = {
 	'settings.files.title': 'File settings',
 	'settings.files.location.name': 'Save location',
 	'settings.files.location.desc': 'Folder in your vault where received files will be saved',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': 'Discovery settings',
 	'settings.discovery.mode.name': 'Discovery mode',

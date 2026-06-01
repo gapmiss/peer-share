@@ -11,7 +11,7 @@ export const ru = {
 	'common.offline': 'Не в сети',
 
 	// Plugin name
-	'plugin.name': 'P2P Share',
+	'plugin.name': 'Peer Share',
 
 	// Commands
 	'command.show-peers': 'Показать доступные устройства',
@@ -22,8 +22,8 @@ export const ru = {
 	'command.toggle-connection': 'Переключить подключение',
 
 	// Context menu
-	'context-menu.share-file': 'Поделиться через P2P Share',
-	'context-menu.share-folder': 'Поделиться папкой через P2P Share',
+	'context-menu.share-file': 'Поделиться через Peer Share',
+	'context-menu.share-folder': 'Поделиться папкой через Peer Share',
 
 	// Status bar
 	'status-bar.peers': '{0} устройств{1}',
@@ -33,23 +33,23 @@ export const ru = {
 	'status-bar.menu.pair-device': 'Связать с устройством',
 
 	// Ribbon
-	'ribbon.tooltip': 'P2P Share',
+	'ribbon.tooltip': 'Peer Share',
 
 	// Notices
-	'notice.connected': 'P2P Share: Подключено',
-	'notice.disconnected': 'P2P Share: Отключено',
-	'notice.configure-server': 'P2P Share: Пожалуйста, настройте URL сервера в параметрах',
-	'notice.failed-to-connect': 'P2P Share: Не удалось подключиться к серверу. Проверьте URL и убедитесь, что сервер принимает внешние подключения.',
-	'notice.transfer-rejected': 'P2P Share: Передача отклонена',
-	'notice.transfer-cancelled': 'P2P Share: Передача отменена',
-	'notice.transfer-cancelled-by-sender': 'P2P Share: Передача отменена отправителем',
-	'notice.no-files': 'P2P Share: Нет файлов для отправки',
-	'notice.error-sending': 'P2P Share: Ошибка при отправке файлов - {0}',
-	'notice.device-paired': 'P2P Share: Устройство успешно связано!',
-	'notice.device-removed': 'P2P Share: Связанное устройство было удалено',
-	'notice.not-connected': 'P2P Share: Не подключено к серверу. Пожалуйста, сначала подключитесь.',
-	'notice.transfer-declined': 'P2P Share: Передача отклонена',
-	'notice.auto-accepting': 'P2P Share: Автоматическое принятие передачи от {0}',
+	'notice.connected': 'Peer Share: Подключено',
+	'notice.disconnected': 'Peer Share: Отключено',
+	'notice.configure-server': 'Peer Share: Пожалуйста, настройте URL сервера в параметрах',
+	'notice.failed-to-connect': 'Peer Share: Не удалось подключиться к серверу. Проверьте URL и убедитесь, что сервер принимает внешние подключения.',
+	'notice.transfer-rejected': 'Peer Share: Передача отклонена',
+	'notice.transfer-cancelled': 'Peer Share: Передача отменена',
+	'notice.transfer-cancelled-by-sender': 'Peer Share: Передача отменена отправителем',
+	'notice.no-files': 'Peer Share: Нет файлов для отправки',
+	'notice.error-sending': 'Peer Share: Ошибка при отправке файлов - {0}',
+	'notice.device-paired': 'Peer Share: Устройство успешно связано!',
+	'notice.device-removed': 'Peer Share: Связанное устройство было удалено',
+	'notice.not-connected': 'Peer Share: Не подключено к серверу. Пожалуйста, сначала подключитесь.',
+	'notice.transfer-declined': 'Peer Share: Передача отклонена',
+	'notice.auto-accepting': 'Peer Share: Автоматическое принятие передачи от {0}',
 
 	// Peer Modal
 	'peer-modal.title': 'Выберите устройство',
@@ -58,8 +58,8 @@ export const ru = {
 	'peer-modal.disconnected.hint': 'Подключитесь, чтобы обнаружить устройства в вашей сети.',
 	'peer-modal.empty.title': 'Устройства в вашей сети не найдены.',
 	'peer-modal.empty.hint': 'Убедитесь, что другие устройства подключены к тому же серверу PairDrop.',
-	'peer-modal.p2p-badge': 'P2P',
-	'peer-modal.p2p-tooltip': 'Поддерживается прямое peer-to-peer соединение',
+	'peer-modal.rtc-badge': 'P2P',
+	'peer-modal.rtc-tooltip': 'Поддерживается прямое peer-to-peer соединение',
 	'peer-modal.paired-tooltip': 'Связанное устройство',
 	'peer-modal.share-with': 'Поделиться с {0}',
 
@@ -127,7 +127,7 @@ export const ru = {
 	'confirm-modal.remove': 'Удалить',
 
 	// Settings
-	'settings.title': 'Настройки P2P Share',
+	'settings.title': 'Настройки Peer Share',
 	'settings.server.title': 'Конфигурация сервера',
 	'settings.server.url.name': 'URL сервера сигнализации',
 	'settings.server.url.desc': 'URL WebSocket для вашего самостоятельно размещённого сервера PairDrop (например, wss://your-server.com или ws://localhost:3000)',
@@ -136,7 +136,7 @@ export const ru = {
 	'settings.files.title': 'Настройки файлов',
 	'settings.files.location.name': 'Место сохранения',
 	'settings.files.location.desc': 'Папка в вашем хранилище, куда будут сохраняться полученные файлы',
-	'settings.files.location.placeholder': 'P2P Share',
+	'settings.files.location.placeholder': 'Peer Share',
 
 	'settings.discovery.title': 'Настройки обнаружения',
 	'settings.discovery.mode.name': 'Режим обнаружения',
