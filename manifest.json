@@ -3,8 +3,8 @@
 	"name": "Peer Share",
 	"version": "0.1.26",
 	"minAppVersion": "1.5.0",
-	"description": "Share files between vaults using WebRTC peer-to-peer connections",
+	"description": "Share files between vaults using WebRTC peer-to-peer connections.",
 	"author": "gapmiss",
-	"authorUrl": "https://github.com/gapmiss/peer-share",
+	"authorUrl": "https://github.com/gapmiss",
 	"isDesktopOnly": false
 }
