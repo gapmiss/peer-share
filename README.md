@@ -18,30 +18,28 @@ Share files between Obsidian vaults using WebRTC peer-to-peer connections, power
 
 ## Installation
 
-### Manual Installation
+[Install from community.obsidian.md](https://community.obsidian.md/plugins/peer-share)
 
-1. Download the latest release (`main.js`, `manifest.json`, `styles.css`)
-2. Create a folder called `peer-share` in your vault's `.obsidian/plugins/` directory
-3. Copy the downloaded files into the folder
-4. Enable the plugin in Obsidian Settings > Community Plugins
+From Obsidian's settings or preferences:
 
-### Via BRAT (Beta Reviewer's Auto-update Tool):
+1. Community Plugins > Browse
+2. Search for "Peer Share"
 
-1. Ensure the [BRAT](https://github.com/TfTHacker/obsidian42-brat) plugin is installed
-2. Trigger the command Obsidian42 - BRAT: Add a beta plugin for testing
-3. Enter this repository, gapmiss/peer-share
-4. Enable the "Peer Share" plugin in the community plugin list
+Manually:
 
-### From Source
+1. download the latest [release](https://github.com/gapmiss/peer-share/releases/latest) archive
+2. uncompress the downloaded archive
+3. move the `peer-share` folder to `/path/to/vault/.obsidian/plugins/` 
+4.  Settings > Community plugins > reload **Installed plugins**
+5.  enable plugin
 
-```bash
-git clone https://github.com/gapmiss/peer-share.git
-cd peer-share
-npm install
-npm run build
-```
+or:
 
-Then copy `main.js`, `manifest.json`, and `styles.css` to your vault's plugins folder (e.g. `.obsidian/plugins/peer-share`).
+1.  download `main.js`, `manifest.json` & `styles.css` from the latest [release](https://github.com/gapmiss/peer-share/releases/latest)
+2.  create a new folder `/path/to/vault/.obsidian/plugins/peer-share`
+3.  move all 3 files to `/path/to/vault/.obsidian/plugins/peer-share`
+4.  Settings > Community plugins > reload **Installed plugins**
+5.  enable plugin
 
 ## Usage
 
