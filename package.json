@@ -1,6 +1,6 @@
 {
 	"name": "peer-share",
-	"version": "0.1.29",
+	"version": "0.1.30",
 	"description": "Share files between Obsidian vaults using WebRTC peer-to-peer connections",
 	"main": "main.js",
 	"scripts": {
