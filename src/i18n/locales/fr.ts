@@ -136,7 +136,7 @@ export const fr = {
 	'settings.files.title': 'Paramètres des fichiers',
 	'settings.files.location.name': 'Emplacement de sauvegarde',
 	'settings.files.location.desc': 'Dossier dans votre coffre où les fichiers reçus seront enregistrés',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': 'Paramètres de découverte',
 	'settings.discovery.mode.name': 'Mode de découverte',
@@ -158,11 +158,13 @@ export const fr = {
 	'settings.behavior.system-notifications.desc': 'Afficher les notifications au niveau du système pour les transferts entrants (bureau uniquement)',
 
 	'settings.connection.title': 'État de la connexion',
+	'settings.connection.status.name': 'Statut',
 	'settings.connection.reconnect.name': 'Reconnecter',
 	'settings.connection.reconnect.desc': 'Reconnecter manuellement au serveur de signalisation',
 	'settings.connection.reconnect.button': 'Reconnecter',
 
 	'settings.paired-devices.title': 'Appareils associés',
+	'settings.paired-devices.list': 'Vos appareils associés',
 	'settings.paired-devices.empty': 'Aucun appareil associé. Utilisez la commande "Associer un appareil" pour associer des appareils sur différents réseaux.',
 	'settings.paired-devices.paired-at': 'Associé {0}',
 	'settings.paired-devices.auto-accept.name': 'Acceptation automatique',

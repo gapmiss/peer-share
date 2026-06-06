@@ -136,7 +136,7 @@ export const ko = {
 	'settings.files.title': '파일 설정',
 	'settings.files.location.name': '저장 위치',
 	'settings.files.location.desc': '수신한 파일을 저장할 볼트 내 폴더',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': '검색 설정',
 	'settings.discovery.mode.name': '검색 모드',
@@ -158,11 +158,13 @@ export const ko = {
 	'settings.behavior.system-notifications.desc': '수신 전송에 대한 OS 수준 알림 표시 (데스크톱만)',
 
 	'settings.connection.title': '연결 상태',
+	'settings.connection.status.name': '상태',
 	'settings.connection.reconnect.name': '재연결',
 	'settings.connection.reconnect.desc': '시그널링 서버에 수동으로 재연결',
 	'settings.connection.reconnect.button': '재연결',
 
 	'settings.paired-devices.title': '페어링된 기기',
+	'settings.paired-devices.list': '페어링된 기기 목록',
 	'settings.paired-devices.empty': '페어링된 기기가 없습니다. "기기 페어링" 명령을 사용하여 네트워크 간에 페어링하세요.',
 	'settings.paired-devices.paired-at': '{0}에 페어링됨',
 	'settings.paired-devices.auto-accept.name': '자동 수락',

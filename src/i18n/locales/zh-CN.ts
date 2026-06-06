@@ -136,7 +136,7 @@ export const zhCN = {
 	'settings.files.title': '文件设置',
 	'settings.files.location.name': '保存位置',
 	'settings.files.location.desc': '接收到的文件将保存到仓库中的此文件夹',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': '发现设置',
 	'settings.discovery.mode.name': '发现模式',
@@ -158,11 +158,13 @@ export const zhCN = {
 	'settings.behavior.system-notifications.desc': '为传入的传输显示操作系统级通知（仅限桌面端）',
 
 	'settings.connection.title': '连接状态',
+	'settings.connection.status.name': '状态',
 	'settings.connection.reconnect.name': '重新连接',
 	'settings.connection.reconnect.desc': '手动重新连接到信令服务器',
 	'settings.connection.reconnect.button': '重新连接',
 
 	'settings.paired-devices.title': '已配对设备',
+	'settings.paired-devices.list': '您的已配对设备',
 	'settings.paired-devices.empty': '没有已配对的设备。使用"配对设备"命令以跨网络配对。',
 	'settings.paired-devices.paired-at': '{0}配对',
 	'settings.paired-devices.auto-accept.name': '自动接受',

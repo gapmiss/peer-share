@@ -136,7 +136,7 @@ export const ja = {
 	'settings.files.title': 'ファイル設定',
 	'settings.files.location.name': '保存場所',
 	'settings.files.location.desc': '受信したファイルを保存するボルト内のフォルダ',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': '検出設定',
 	'settings.discovery.mode.name': '検出モード',
@@ -158,11 +158,13 @@ export const ja = {
 	'settings.behavior.system-notifications.desc': '着信転送のOS レベル通知を表示（デスクトップのみ）',
 
 	'settings.connection.title': '接続状態',
+	'settings.connection.status.name': 'ステータス',
 	'settings.connection.reconnect.name': '再接続',
 	'settings.connection.reconnect.desc': 'シグナリングサーバーに手動で再接続',
 	'settings.connection.reconnect.button': '再接続',
 
 	'settings.paired-devices.title': 'ペアリング済みデバイス',
+	'settings.paired-devices.list': 'ペアリング済みデバイス一覧',
 	'settings.paired-devices.empty': 'ペアリング済みデバイスがありません。「デバイスをペアリング」コマンドを使用してネットワーク間でペアリングしてください。',
 	'settings.paired-devices.paired-at': '{0}にペアリング',
 	'settings.paired-devices.auto-accept.name': '自動承認',

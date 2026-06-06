@@ -34,7 +34,7 @@ export interface PeerShareSettings {
 
 export const DEFAULT_SETTINGS: PeerShareSettings = {
   serverUrl: 'wss://pairdrop.net',
-  saveLocation: 'Peer Share',
+  saveLocation: 'peer-share',
   discoveryMode: 'auto',
   pairedDevices: [],
   logLevel: 'error',

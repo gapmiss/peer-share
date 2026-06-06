@@ -136,7 +136,7 @@ export const en = {
 	'settings.files.title': 'File settings',
 	'settings.files.location.name': 'Save location',
 	'settings.files.location.desc': 'Folder in your vault where received files will be saved',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': 'Discovery settings',
 	'settings.discovery.mode.name': 'Discovery mode',
@@ -158,11 +158,13 @@ export const en = {
 	'settings.behavior.system-notifications.desc': 'Show OS-level notifications for incoming transfers (desktop only)',
 
 	'settings.connection.title': 'Connection status',
+	'settings.connection.status.name': 'Status',
 	'settings.connection.reconnect.name': 'Reconnect',
 	'settings.connection.reconnect.desc': 'Manually reconnect to the signaling server',
 	'settings.connection.reconnect.button': 'Reconnect',
 
 	'settings.paired-devices.title': 'Paired devices',
+	'settings.paired-devices.list': 'Your paired devices',
 	'settings.paired-devices.empty': 'No paired devices.',
 	'settings.paired-devices.paired-at': 'Paired {0}',
 	'settings.paired-devices.auto-accept.name': 'Auto-accept',

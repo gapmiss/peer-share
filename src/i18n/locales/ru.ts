@@ -136,7 +136,7 @@ export const ru = {
 	'settings.files.title': 'Настройки файлов',
 	'settings.files.location.name': 'Место сохранения',
 	'settings.files.location.desc': 'Папка в вашем хранилище, куда будут сохраняться полученные файлы',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': 'Настройки обнаружения',
 	'settings.discovery.mode.name': 'Режим обнаружения',
@@ -158,11 +158,13 @@ export const ru = {
 	'settings.behavior.system-notifications.desc': 'Показывать системные уведомления для входящих передач (только для ПК)',
 
 	'settings.connection.title': 'Статус подключения',
+	'settings.connection.status.name': 'Статус',
 	'settings.connection.reconnect.name': 'Переподключение',
 	'settings.connection.reconnect.desc': 'Вручную переподключиться к серверу сигнализации',
 	'settings.connection.reconnect.button': 'Переподключиться',
 
 	'settings.paired-devices.title': 'Связанные устройства',
+	'settings.paired-devices.list': 'Ваши связанные устройства',
 	'settings.paired-devices.empty': 'Нет связанных устройств. Используйте команду "Связать с устройством" для связи через разные сети.',
 	'settings.paired-devices.paired-at': 'Связано {0}',
 	'settings.paired-devices.auto-accept.name': 'Автоматическое принятие',

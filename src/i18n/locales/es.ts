@@ -136,7 +136,7 @@ export const es = {
 	'settings.files.title': 'Ajustes de archivos',
 	'settings.files.location.name': 'Ubicación de guardado',
 	'settings.files.location.desc': 'Carpeta en tu bóveda donde se guardarán los archivos recibidos',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': 'Ajustes de descubrimiento',
 	'settings.discovery.mode.name': 'Modo de descubrimiento',
@@ -158,11 +158,13 @@ export const es = {
 	'settings.behavior.system-notifications.desc': 'Mostrar notificaciones a nivel del sistema operativo para transferencias entrantes (solo escritorio)',
 
 	'settings.connection.title': 'Estado de conexión',
+	'settings.connection.status.name': 'Estado',
 	'settings.connection.reconnect.name': 'Reconectar',
 	'settings.connection.reconnect.desc': 'Reconectar manualmente al servidor de señalización',
 	'settings.connection.reconnect.button': 'Reconectar',
 
 	'settings.paired-devices.title': 'Dispositivos emparejados',
+	'settings.paired-devices.list': 'Tus dispositivos emparejados',
 	'settings.paired-devices.empty': 'No hay dispositivos emparejados. Usa el comando "Emparejar con dispositivo" para emparejar a través de redes.',
 	'settings.paired-devices.paired-at': 'Emparejado {0}',
 	'settings.paired-devices.auto-accept.name': 'Aceptar automáticamente',

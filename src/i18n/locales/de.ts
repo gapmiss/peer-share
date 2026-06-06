@@ -136,7 +136,7 @@ export const de = {
 	'settings.files.title': 'Datei-Einstellungen',
 	'settings.files.location.name': 'Speicherort',
 	'settings.files.location.desc': 'Ordner in deinem Tresor, in dem empfangene Dateien gespeichert werden',
-	'settings.files.location.placeholder': 'Peer Share',
+	'settings.files.location.placeholder': 'peer-share',
 
 	'settings.discovery.title': 'Entdeckungseinstellungen',
 	'settings.discovery.mode.name': 'Entdeckungsmodus',
@@ -158,11 +158,13 @@ export const de = {
 	'settings.behavior.system-notifications.desc': 'Benachrichtigungen auf Betriebssystemebene für eingehende Übertragungen anzeigen (nur Desktop)',
 
 	'settings.connection.title': 'Verbindungsstatus',
+	'settings.connection.status.name': 'Status',
 	'settings.connection.reconnect.name': 'Neu verbinden',
 	'settings.connection.reconnect.desc': 'Manuell mit dem Signalisierungsserver neu verbinden',
 	'settings.connection.reconnect.button': 'Neu verbinden',
 
 	'settings.paired-devices.title': 'Gekoppelte Geräte',
+	'settings.paired-devices.list': 'Deine gekoppelten Geräte',
 	'settings.paired-devices.empty': 'Keine gekoppelten Geräte. Verwende den Befehl "Mit Gerät koppeln", um über Netzwerke hinweg zu koppeln.',
 	'settings.paired-devices.paired-at': 'Gekoppelt {0}',
 	'settings.paired-devices.auto-accept.name': 'Automatisch akzeptieren',
