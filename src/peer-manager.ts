@@ -58,7 +58,8 @@ export class PeerManager extends Events {
       this.trigger('peers-updated', []);
     });
 
-    this.signaling.on('peers', (data: { peers: PeerInfo[]; roomType: string; roomId: string }) => {
+    this.signaling.on('peers', (rawData) => {
+      const data = rawData as { peers: PeerInfo[]; roomType: string; roomId: string };
       // Add peers to our map (don't clear - we may be in multiple rooms)
       for (const peer of data.peers) {
         this.peers.set(peer.id, peer);
@@ -84,7 +85,8 @@ export class PeerManager extends Events {
       }
     });
 
-    this.signaling.on('peer-joined', (data: { peer: PeerInfo; roomType: string; roomId: string }) => {
+    this.signaling.on('peer-joined', (rawData) => {
+      const data = rawData as { peer: PeerInfo; roomType: string; roomId: string };
       this.peers.set(data.peer.id, data.peer);
 
       // Track room info for ALL peers (needed for correct signaling)
@@ -108,7 +110,8 @@ export class PeerManager extends Events {
       }
     });
 
-    this.signaling.on('peer-left', (peerId: string) => {
+    this.signaling.on('peer-left', (rawPeerId) => {
+      const peerId = rawPeerId as string;
       this.peers.delete(peerId);
       this.peerRooms.delete(peerId); // Clean up room info tracking
       this.peerRoomSecrets.delete(peerId); // Clean up roomSecret tracking
@@ -121,7 +124,8 @@ export class PeerManager extends Events {
       this.trigger('peers-updated', Array.from(this.peers.values()));
     });
 
-    this.signaling.on('signal', async (signal: { senderId: string; sdp?: RTCSessionDescriptionInit; ice?: RTCIceCandidateInit; [key: string]: unknown }) => {
+    this.signaling.on('signal', async (rawSignal) => {
+      const signal = rawSignal as { senderId: string; sdp?: RTCSessionDescriptionInit; ice?: RTCIceCandidateInit; [key: string]: unknown };
       const { senderId, ...rest } = signal;
 
       if (!senderId) {
@@ -143,11 +147,11 @@ export class PeerManager extends Events {
     });
 
     // Device pairing events
-    this.signaling.on('pair-device-initiated', (data: { pairKey: string; roomSecret: string }) => {
+    this.signaling.on('pair-device-initiated', (data) => {
       this.trigger('pair-device-initiated', data);
     });
 
-    this.signaling.on('pair-device-joined', (data: { roomSecret: string; peerId: string }) => {
+    this.signaling.on('pair-device-joined', (data) => {
       this.trigger('pair-device-joined', data);
     });
 
@@ -155,11 +159,11 @@ export class PeerManager extends Events {
       this.trigger('pair-device-join-key-invalid');
     });
 
-    this.signaling.on('pair-device-canceled', (pairKey: string) => {
+    this.signaling.on('pair-device-canceled', (pairKey) => {
       this.trigger('pair-device-canceled', pairKey);
     });
 
-    this.signaling.on('secret-room-deleted', (roomSecret: string) => {
+    this.signaling.on('secret-room-deleted', (roomSecret) => {
       this.trigger('secret-room-deleted', roomSecret);
     });
   }
@@ -173,24 +177,24 @@ export class PeerManager extends Events {
       this.trigger('peer-disconnected', peer.getPeerId());
     });
 
-    peer.on('transfer-request', (data: { files: FileMetadata[]; totalSize: number; peerId: string }) => {
+    peer.on('transfer-request', (data) => {
       this.trigger('transfer-request', data);
     });
 
-    peer.on('file-received', (data: { metadata: FileMetadata; data: ArrayBuffer }) => {
+    peer.on('file-received', (data) => {
       this.trigger('file-received', data);
     });
 
-    peer.on('transfer-complete', (data: { files: { metadata: FileMetadata; data: ArrayBuffer }[] }) => {
+    peer.on('transfer-complete', (data) => {
       this.trigger('transfer-complete', data);
     });
 
-    peer.on('send-progress', (progress: object) => {
-      this.trigger('send-progress', { peerId: peer.getPeerId(), ...progress });
+    peer.on('send-progress', (rawProgress) => {
+      this.trigger('send-progress', { peerId: peer.getPeerId(), ...(rawProgress as object) });
     });
 
-    peer.on('receive-progress', (progress: object) => {
-      this.trigger('receive-progress', { peerId: peer.getPeerId(), ...progress });
+    peer.on('receive-progress', (rawProgress) => {
+      this.trigger('receive-progress', { peerId: peer.getPeerId(), ...(rawProgress as object) });
     });
 
     peer.on('transfer-accepted', () => {
@@ -205,8 +209,8 @@ export class PeerManager extends Events {
       this.trigger('transfer-canceled', peer.getPeerId());
     });
 
-    peer.on('display-name-changed', (newDisplayName: string) => {
-      this.handlePeerNameChanged(peer.getPeerId(), newDisplayName);
+    peer.on('display-name-changed', (rawDisplayName) => {
+      this.handlePeerNameChanged(peer.getPeerId(), rawDisplayName as string);
     });
   }
 

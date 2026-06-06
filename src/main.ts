@@ -1,4 +1,4 @@
-import { Menu, Notice, Platform, Plugin, TFile, TFolder, addIcon, setIcon } from 'obsidian';
+import { Menu, Notice, Platform, Plugin, TFile, TFolder, WorkspaceLeaf, addIcon, setIcon } from 'obsidian';
 import { PeerShareSettingTab } from './settings';
 import { PeerManager } from './peer-manager';
 import { PeerModal, FilePickerModal, TransferModal, IncomingTransferModal, PairingModal } from './modals';
@@ -193,11 +193,12 @@ export default class PeerSharePlugin extends Plugin {
       this.updateStatusBar();
     });
 
-    this.peerManager.on('transfer-request', (data: { files: FileMetadata[]; totalSize: number; peerId: string }) => {
-      this.handleIncomingTransfer(data);
+    this.peerManager.on('transfer-request', (rawData) => {
+      this.handleIncomingTransfer(rawData as { files: FileMetadata[]; totalSize: number; peerId: string });
     });
 
-    this.peerManager.on('file-received', async (data: { metadata: FileMetadata; data: ArrayBuffer }) => {
+    this.peerManager.on('file-received', async (rawData) => {
+      const data = rawData as { metadata: FileMetadata; data: ArrayBuffer };
       try {
         await this.peerManager?.saveReceivedFile(data.metadata, data.data);
       } catch (error) {
@@ -219,12 +220,12 @@ export default class PeerSharePlugin extends Plugin {
       }
     });
 
-    this.peerManager.on('send-progress', (progress: TransferProgress) => {
-      this.activeTransferModal?.updateProgress(progress);
+    this.peerManager.on('send-progress', (rawProgress) => {
+      this.activeTransferModal?.updateProgress(rawProgress as TransferProgress);
     });
 
-    this.peerManager.on('receive-progress', (progress: TransferProgress) => {
-      this.activeTransferModal?.updateProgress(progress);
+    this.peerManager.on('receive-progress', (rawProgress) => {
+      this.activeTransferModal?.updateProgress(rawProgress as TransferProgress);
     });
 
     this.peerManager.on('transfer-rejected', () => {
@@ -233,11 +234,13 @@ export default class PeerSharePlugin extends Plugin {
     });
 
     // Device pairing events
-    this.peerManager.on('pair-device-initiated', (data: { pairKey: string; roomSecret: string }) => {
+    this.peerManager.on('pair-device-initiated', (rawData) => {
+      const data = rawData as { pairKey: string; roomSecret: string };
       this.activePairingModal?.setPairKey(data.pairKey, data.roomSecret);
     });
 
-    this.peerManager.on('pair-device-joined', (data: { roomSecret: string; peerId: string }) => {
+    this.peerManager.on('pair-device-joined', (rawData) => {
+      const data = rawData as { roomSecret: string; peerId: string };
       // Try to get the peer's display name, fall back to 'Paired device' if not available yet
       const peerInfo = this.peerManager?.getPeerInfo(data.peerId);
       const displayName = peerInfo?.name.displayName || peerInfo?.name.deviceName || 'Paired device';
@@ -257,13 +260,14 @@ export default class PeerSharePlugin extends Plugin {
       this.activePairingModal?.setPairingCanceled();
     });
 
-    this.peerManager.on('secret-room-deleted', (roomSecret: string) => {
+    this.peerManager.on('secret-room-deleted', (rawRoomSecret) => {
       // Other device unpaired - remove from our list
-      void this.removePairedDevice(roomSecret);
+      void this.removePairedDevice(rawRoomSecret as string);
       new Notice(t('notice.device-removed'));
     });
 
-    this.peerManager.on('paired-device-identified', (data: { roomSecret: string; displayName: string }) => {
+    this.peerManager.on('paired-device-identified', (rawData) => {
+      const data = rawData as { roomSecret: string; displayName: string };
       // Update the paired device name now that we know it
       void this.updatePairedDeviceName(data.roomSecret, data.displayName);
 
@@ -273,7 +277,8 @@ export default class PeerSharePlugin extends Plugin {
       }
     });
 
-    this.peerManager.on('peer-name-changed', (data: { peerId: string; displayName: string }) => {
+    this.peerManager.on('peer-name-changed', (rawData) => {
+      const data = rawData as { peerId: string; displayName: string };
       logger.debug('Peer name changed', data);
 
       // Update paired device name if applicable
@@ -284,13 +289,15 @@ export default class PeerSharePlugin extends Plugin {
       this.activePairingModal?.updatePeerDisplayName?.(data.displayName);
     });
 
-    this.peerManager.on('file-renamed', (data: { originalName: string; savedName: string }) => {
+    this.peerManager.on('file-renamed', (rawData) => {
+      const data = rawData as { originalName: string; savedName: string };
       logger.debug('File renamed on save', data);
       // Update the transfer modal to show the renamed file
       this.activeTransferModal?.markFileRenamed(data.originalName, data.savedName);
     });
 
-    this.peerManager.on('transfer-canceled', (peerId: string) => {
+    this.peerManager.on('transfer-canceled', (rawPeerId) => {
+      const peerId = rawPeerId as string;
       logger.debug('Transfer canceled by sender');
 
       // Close the incoming transfer modal (accept/decline) if it's open
@@ -403,7 +410,7 @@ export default class PeerSharePlugin extends Plugin {
       (peerId) => {
         void this.sendToPeer(peerId, files, folders);
       },
-      () => void this.toggleConnection(),
+      () => this.toggleConnection(),
       this.settings.pairedDevices
     ).open();
   }
@@ -417,7 +424,7 @@ export default class PeerSharePlugin extends Plugin {
       (peerId) => {
         void this.sendToPeer(peerId, [], [folder]);
       },
-      () => void this.toggleConnection(),
+      () => this.toggleConnection(),
       this.settings.pairedDevices
     ).open();
   }
@@ -850,12 +857,13 @@ export default class PeerSharePlugin extends Plugin {
   async activateHistoryView(): Promise<void> {
     const { workspace } = this.app;
 
-    let leaf = workspace.getLeavesOfType(SHARE_HISTORY_VIEW_TYPE)[0];
+    let leaf: WorkspaceLeaf | undefined = workspace.getLeavesOfType(SHARE_HISTORY_VIEW_TYPE)[0];
 
     if (!leaf) {
       // Create new leaf in right sidebar
-      leaf = workspace.getRightLeaf(false);
-      if (leaf) {
+      const newLeaf = workspace.getRightLeaf(false);
+      if (newLeaf) {
+        leaf = newLeaf;
         await leaf.setViewState({
           type: SHARE_HISTORY_VIEW_TYPE,
           active: true,

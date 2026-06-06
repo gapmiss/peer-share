@@ -234,7 +234,20 @@ export class ShareHistory extends Events {
         if (entry.id && entry.timestamp && entry.direction && entry.peerName && entry.files) {
           // Check for duplicates by ID
           if (!this.entries.find(e => e.id === entry.id)) {
-            this.entries.push(entry as ShareHistoryEntry);
+            const totalSize = entry.files.reduce((sum, f) => sum + (f.size || 0), 0);
+            this.entries.push({
+              id: entry.id,
+              timestamp: entry.timestamp,
+              direction: entry.direction,
+              peerName: entry.peerName,
+              files: entry.files,
+              isPaired: (entry as { isPaired?: boolean }).isPaired ?? false,
+              totalSize: (entry as { totalSize?: number }).totalSize ?? totalSize,
+              status: (entry as { status?: ShareHistoryStatus }).status ?? 'completed',
+              peerOs: (entry as { peerOs?: string }).peerOs,
+              peerApp: (entry as { peerApp?: string }).peerApp,
+              peerDeviceType: (entry as { peerDeviceType?: string }).peerDeviceType,
+            });
             imported++;
           }
         } else {

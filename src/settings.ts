@@ -139,12 +139,13 @@ export class PeerShareSettingTab extends PluginSettingTab {
           .addOption('auto', t('settings.discovery.mode.auto'))
           .addOption('paired-only', t('settings.discovery.mode.paired-only'))
           .setValue(this.plugin.settings.discoveryMode)
-          .onChange(async (value: 'auto' | 'paired-only') => {
-            this.plugin.settings.discoveryMode = value;
+          .onChange(async (value) => {
+            const mode = value as 'auto' | 'paired-only';
+            this.plugin.settings.discoveryMode = mode;
             await this.plugin.saveSettings();
             // Switch rooms by reconnecting if currently connected
             if (this.plugin.isConnected()) {
-              await this.plugin.peerManager?.switchDiscoveryMode(value);
+              await this.plugin.peerManager?.switchDiscoveryMode(mode);
             }
           })
       );
@@ -256,8 +257,8 @@ export class PeerShareSettingTab extends PluginSettingTab {
           .addOption('info', t('settings.behavior.log-level.info'))
           .addOption('debug', t('settings.behavior.log-level.debug'))
           .setValue(this.plugin.settings.logLevel)
-          .onChange(async (value: LogLevel) => {
-            this.plugin.settings.logLevel = value;
+          .onChange(async (value) => {
+            this.plugin.settings.logLevel = value as LogLevel;
             await this.plugin.saveSettings();
           })
       );
