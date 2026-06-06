@@ -13,16 +13,66 @@ export class PeerShareSettingTab extends PluginSettingTab {
   private statusIconEl: HTMLElement | null = null;
   private statusTextEl: HTMLElement | null = null;
   private connectionButton: HTMLButtonElement | null = null;
+  private pairedDevicesContentEl: HTMLElement | null = null;
 
   constructor(app: App, plugin: PeerSharePlugin) {
     super(app, plugin);
     this.plugin = plugin;
-    this.boundRefreshHandler = () => this.refreshDisplay();
+    this.boundRefreshHandler = () => this.refreshPairedDevicesSection();
     this.boundUpdateConnectionStatus = () => this.updateConnectionStatus();
   }
 
-  private refreshDisplay(): void {
-    this.display();
+  private refreshPairedDevicesSection(): void {
+    if (this.pairedDevicesContentEl) {
+      this.pairedDevicesContentEl.empty();
+      this.renderPairedDevicesContent(this.pairedDevicesContentEl);
+    }
+  }
+
+  private renderPairedDevicesContent(container: HTMLElement): void {
+    const pairedDevices = this.plugin.settings.pairedDevices;
+
+    if (pairedDevices.length === 0) {
+      const emptyState = container.createDiv({ cls: 'peer-share-paired-empty' });
+      emptyState.createEl('p', {
+        text: t('settings.paired-devices.empty'),
+        cls: 'peer-share-paired-empty-text',
+      });
+    } else {
+      const pairedList = container.createDiv({ cls: 'peer-share-paired-list' });
+
+      for (const device of pairedDevices) {
+        this.renderPairedDevice(pairedList, device);
+      }
+
+      // Add "Remove all" button if there are multiple devices
+      if (pairedDevices.length > 1) {
+        new Setting(container)
+          .setName(t('settings.paired-devices.remove-all.name'))
+          .setDesc(t('settings.paired-devices.remove-all.desc'))
+          .addButton((button) =>
+            button
+              .setButtonText(t('settings.paired-devices.remove-all.button'))
+              .setDestructive()
+              .onClick(() => {
+                new ConfirmModal(
+                  this.app,
+                  t('settings.paired-devices.remove-all-confirm.title'),
+                  t('settings.paired-devices.remove-all-confirm.message', pairedDevices.length),
+                  () => {
+                    void (async () => {
+                      for (const device of [...this.plugin.settings.pairedDevices]) {
+                        await this.plugin.removePairedDevice(device.roomSecret);
+                      }
+                      this.refreshPairedDevicesSection();
+                    })();
+                  },
+                  t('confirm-modal.remove')
+                ).open();
+              })
+          );
+      }
+    }
   }
 
   private updateConnectionStatus(): void {
@@ -169,49 +219,9 @@ export class PeerShareSettingTab extends PluginSettingTab {
           })
       );
 
-    const pairedDevices = this.plugin.settings.pairedDevices;
-
-    if (pairedDevices.length === 0) {
-      const emptyState = containerEl.createDiv({ cls: 'peer-share-paired-empty' });
-      emptyState.createEl('p', {
-        text: t('settings.paired-devices.empty'),
-        cls: 'peer-share-paired-empty-text',
-      });
-    } else {
-      const pairedList = containerEl.createDiv({ cls: 'peer-share-paired-list' });
-
-      for (const device of pairedDevices) {
-        this.renderPairedDevice(pairedList, device);
-      }
-
-      // Add "Remove all" button if there are multiple devices
-      if (pairedDevices.length > 1) {
-        new Setting(containerEl)
-          .setName(t('settings.paired-devices.remove-all.name'))
-          .setDesc(t('settings.paired-devices.remove-all.desc'))
-          .addButton((button) =>
-            button
-              .setButtonText(t('settings.paired-devices.remove-all.button'))
-              .setWarning()
-              .onClick(() => {
-                new ConfirmModal(
-                  this.app,
-                  t('settings.paired-devices.remove-all-confirm.title'),
-                  t('settings.paired-devices.remove-all-confirm.message', pairedDevices.length),
-                  () => {
-                    void (async () => {
-                      for (const device of [...this.plugin.settings.pairedDevices]) {
-                        await this.plugin.removePairedDevice(device.roomSecret);
-                      }
-                      this.display(); // Refresh
-                    })();
-                  },
-                  t('confirm-modal.remove')
-                ).open();
-              })
-          );
-      }
-    }
+    // Container for dynamic paired devices content
+    this.pairedDevicesContentEl = containerEl.createDiv({ cls: 'peer-share-paired-devices-content' });
+    this.renderPairedDevicesContent(this.pairedDevicesContentEl);
 
     // Files & Behavior
     new Setting(containerEl)
@@ -333,7 +343,7 @@ export class PeerShareSettingTab extends PluginSettingTab {
       .addButton((button) =>
         button
           .setButtonText('Clear history')
-          .setWarning()
+          .setDestructive()
           .onClick(() => {
             new ConfirmModal(
               this.app,
@@ -376,7 +386,6 @@ export class PeerShareSettingTab extends PluginSettingTab {
           .setValue(device.autoAccept)
           .onChange(async (value) => {
             await this.plugin.updatePairedDeviceAutoAccept(device.roomSecret, value);
-            this.display(); // Refresh
           })
       );
 
@@ -393,7 +402,7 @@ export class PeerShareSettingTab extends PluginSettingTab {
         () => {
           void (async () => {
             await this.plugin.removePairedDevice(device.roomSecret);
-            this.display(); // Refresh
+            this.refreshPairedDevicesSection();
           })();
         },
         t('confirm-modal.remove')
@@ -441,5 +450,6 @@ export class PeerShareSettingTab extends PluginSettingTab {
     this.statusIconEl = null;
     this.statusTextEl = null;
     this.connectionButton = null;
+    this.pairedDevicesContentEl = null;
   }
 }
